@@ -1,0 +1,108 @@
+test_content_types_and_cache_policy_distinguish_hashed_and_stable_files (test_cloud.FrontendPublishing) ... ok
+test_dry_run_describes_s3_plan_without_aws_or_manifest_writes (test_cloud.FrontendPublishing) ... ok
+test_env_files_and_symlinks_are_not_published (test_cloud.FrontendPublishing) ... ok
+test_hidden_credentials_rejected_and_public_well_known_allowed (test_cloud.FrontendPublishing) ... FAIL
+test_invalid_distribution_identifiers_are_rejected_without_aws_calls (test_cloud.FrontendPublishing) ... test_invalidation_failure_records_published_objects_for_recovery (test_cloud.FrontendPublishing) ... ok
+test_live_targets_are_verified_before_any_mutation (test_cloud.FrontendPublishing) ... test_missing_artifact_output_cannot_bypass_bucket_separation (test_cloud.FrontendPublishing) ... FAIL
+test_missing_index_is_rejected_before_cloud_calls (test_cloud.FrontendPublishing) ... ok
+test_old_amplify_outputs_are_rejected_before_any_cloud_calls (test_cloud.FrontendPublishing) ... ok
+test_records_real_object_versions_invalidation_and_release_history (test_cloud.FrontendPublishing) ... ok
+test_region_mismatch_and_artifact_bucket_reuse_fail_before_cloud_calls (test_cloud.FrontendPublishing) ... ok
+test_upload_failure_never_replaces_index_or_invalidates (test_cloud.FrontendPublishing) ... ok
+test_uploads_dependencies_then_html_and_invalidates_without_deleting (test_cloud.FrontendPublishing) ... FAIL
+
+======================================================================
+FAIL: test_hidden_credentials_rejected_and_public_well_known_allowed (test_cloud.FrontendPublishing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/scripts/tests/test_cloud.py", line 220, in test_hidden_credentials_rejected_and_public_well_known_allowed
+    self.invoke(live=False)
+AssertionError: SystemExit not raised
+
+======================================================================
+FAIL: test_invalid_distribution_identifiers_are_rejected_without_aws_calls (test_cloud.FrontendPublishing) (key='DistributionId')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/scripts/tests/test_cloud.py", line 235, in test_invalid_distribution_identifiers_are_rejected_without_aws_calls
+    self.invoke()
+AssertionError: SystemExit not raised
+
+======================================================================
+FAIL: test_invalid_distribution_identifiers_are_rejected_without_aws_calls (test_cloud.FrontendPublishing) (key='DistributionDomainName')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/scripts/tests/test_cloud.py", line 236, in test_invalid_distribution_identifiers_are_rejected_without_aws_calls
+    self.assertEqual(self.calls, [])
+AssertionError: Lists differ: [(['s3api', 'put-object', '--bucket', 'sya[1772 chars]rue)] != []
+
+First list contains 5 additional elements.
+First extra element 0:
+(['s3api', 'put-object', '--bucket', 'syas-frontend', '--key', 'assets/index-Ab12CD34.css', '--body', '/var/folders/bh/m55y8zrn0bq8pq8b7h0v0w7w0000gn/T/syas-frontend-lx82qhh2/assets/index-Ab12CD34.css', '--content-type', 'text/css; charset=utf-8', '--cache-control', 'public,max-age=31536000,immutable', '--server-side-encryption', 'AES256', '--metadata', 'sha256=ed35ee13568b5493d374637a383726012dd9e220cfa3d9cfdbd968c7388854d6'], True)
+
+Diff is 2184 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_invalid_distribution_identifiers_are_rejected_without_aws_calls (test_cloud.FrontendPublishing) (key='FrontendBucketName')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/scripts/tests/test_cloud.py", line 236, in test_invalid_distribution_identifiers_are_rejected_without_aws_calls
+    self.assertEqual(self.calls, [])
+AssertionError: Lists differ: [(['s3api', 'put-object', '--bucket', 'sya[1772 chars]rue)] != []
+
+First list contains 5 additional elements.
+First extra element 0:
+(['s3api', 'put-object', '--bucket', 'syas-frontend', '--key', 'assets/index-Ab12CD34.css', '--body', '/var/folders/bh/m55y8zrn0bq8pq8b7h0v0w7w0000gn/T/syas-frontend-lx82qhh2/assets/index-Ab12CD34.css', '--content-type', 'text/css; charset=utf-8', '--cache-control', 'public,max-age=31536000,immutable', '--server-side-encryption', 'AES256', '--metadata', 'sha256=ed35ee13568b5493d374637a383726012dd9e220cfa3d9cfdbd968c7388854d6'], True)
+
+Diff is 2184 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_live_targets_are_verified_before_any_mutation (test_cloud.FrontendPublishing) (field='versioning')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/scripts/tests/test_cloud.py", line 211, in test_live_targets_are_verified_before_any_mutation
+    self.invoke()
+AssertionError: SystemExit not raised
+
+======================================================================
+FAIL: test_live_targets_are_verified_before_any_mutation (test_cloud.FrontendPublishing) (field='live_domain')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/scripts/tests/test_cloud.py", line 211, in test_live_targets_are_verified_before_any_mutation
+    self.invoke()
+AssertionError: SystemExit not raised
+
+======================================================================
+FAIL: test_live_targets_are_verified_before_any_mutation (test_cloud.FrontendPublishing) (field='live_origin')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/scripts/tests/test_cloud.py", line 211, in test_live_targets_are_verified_before_any_mutation
+    self.invoke()
+AssertionError: SystemExit not raised
+
+======================================================================
+FAIL: test_missing_artifact_output_cannot_bypass_bucket_separation (test_cloud.FrontendPublishing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/scripts/tests/test_cloud.py", line 200, in test_missing_artifact_output_cannot_bypass_bucket_separation
+    self.invoke()
+AssertionError: SystemExit not raised
+
+======================================================================
+FAIL: test_uploads_dependencies_then_html_and_invalidates_without_deleting (test_cloud.FrontendPublishing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/scripts/tests/test_cloud.py", line 107, in test_uploads_dependencies_then_html_and_invalidates_without_deleting
+    self.assertEqual([cmd[:2] for cmd, mutate in self.calls if not mutate],
+AssertionError: Lists differ: [] != [['s3api', 'get-bucket-versioning'], ['cloudfront', 'get-distribution']]
+
+Second list contains 2 additional elements.
+First extra element 0:
+['s3api', 'get-bucket-versioning']
+
+- []
++ [['s3api', 'get-bucket-versioning'], ['cloudfront', 'get-distribution']]
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.107s
+
+FAILED (failures=9)

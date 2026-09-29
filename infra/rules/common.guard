@@ -1,0 +1,35 @@
+# Required infrastructure must exist; empty selectors must not skip checks.
+let buckets = Resources.*[ Type == 'AWS::S3::Bucket' ]
+rule private_encrypted_retained_buckets {
+  %buckets !empty
+  %buckets {
+    DeletionPolicy == 'Retain'
+    UpdateReplacePolicy == 'Retain'
+    Properties.PublicAccessBlockConfiguration {
+      BlockPublicAcls == true
+      BlockPublicPolicy == true
+      IgnorePublicAcls == true
+      RestrictPublicBuckets == true
+    }
+    Properties.VersioningConfiguration.Status == 'Enabled'
+    Properties.BucketEncryption.ServerSideEncryptionConfiguration[*].ServerSideEncryptionByDefault.SSEAlgorithm == 'AES256'
+  }
+}
+rule https_bucket_policy {
+  let policies = Resources.*[ Type == 'AWS::S3::BucketPolicy' ]
+  %policies !empty
+  %policies {
+    let tls = Properties.PolicyDocument.Statement[ Sid == 'RequireTLS' ]
+    %tls !empty
+    %tls {
+      Effect == 'Deny'
+      Principal == '*'
+      Action == 's3:*'
+      Condition.Bool.'aws:SecureTransport' == 'false'
+    }
+  }
+}
+rule environment_and_region_output {
+  Parameters.Environment.AllowedValues == ['dev', 'test', 'prod']
+  Outputs.Region.Value.Ref == 'AWS::Region'
+}

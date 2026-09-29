@@ -1,0 +1,69 @@
+{
+  "bookingRequest": {
+    "facilityId": "room-01",
+    "start": "2026-10-05T22:00:00Z",
+    "duration": 60,
+    "requestId": "demo-request-001"
+  },
+  "bookingResponse": {
+    "id": "booking-example",
+    "facilityId": "room-01",
+    "userId": "user-alex",
+    "start": "2026-10-05T22:00:00Z",
+    "end": "2026-10-05T23:00:00Z",
+    "status": "confirmed",
+    "requestId": "demo-request-001",
+    "createdAt": "2026-10-01T00:00:00Z"
+  },
+  "conflict": {
+    "code": "CONFLICT",
+    "message": "One or more requested slots are already reserved."
+  },
+  "publicGuide": {
+    "id": "version-swan-1",
+    "guideId": "guide-swan",
+    "facilityId": "toilet-01",
+    "title": "From the street to the door",
+    "steps": [
+      {
+        "id": "step-swan-1",
+        "caption": "Example entrance instructions.",
+        "image": "https://images.example.invalid/signed-image",
+        "alt": "The sample entrance"
+      }
+    ],
+    "confirmationCount": 3,
+    "publishedAt": "2026-09-28T01:00:00Z",
+    "entranceLocation": {
+      "lat": -37.82565,
+      "lng": 144.99372
+    }
+  },
+  "facility": {
+    "id": "room-01",
+    "countryCode": "AU",
+    "area": "cremorne",
+    "name": "The Green Room",
+    "type": "meeting_room",
+    "address": "Cremorne Street, Cremorne VIC",
+    "description": "A fictional room for trying the SYAS local demo; not a university listing.",
+    "location": {
+      "lat": -37.8282,
+      "lng": 144.9919
+    },
+    "entranceLocation": {
+      "lat": -37.82814,
+      "lng": 144.99165
+    },
+    "access": "Sample venue · check in at reception",
+    "floor": "Level 1 · Room 1.03",
+    "amenities": ["Accessible", "Wi-Fi", "Screen", "Whiteboard"],
+    "capacity": 6,
+    "hours": {
+      "open": 8,
+      "close": 18
+    },
+    "image": "/images/green-room.svg",
+    "sample": true
+  }
+}

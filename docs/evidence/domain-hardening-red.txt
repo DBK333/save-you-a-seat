@@ -1,0 +1,53 @@
+
+> save-you-a-seat@0.1.0 test
+> vitest run src/services/demo.test.ts
+
+
+ RUN  v4.1.11 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+ ❯ src/services/demo.test.ts (30 tests | 2 failed) 74ms
+     × normalizes large photos for browser storage after decoding 3ms
+     × does not let a second user attach an upload from somebody else’s draft 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/services/demo.test.ts > image uploads > normalizes large photos for browser storage after decoding
+AssertionError: expected "vi.fn()" to be called with arguments: [ Anything, +0, +0, 1600, 1200 ]
+
+Number of calls: 0
+
+ ❯ src/services/demo.test.ts:114:21
+    112|   vi.spyOn(HTMLCanvasElement.prototype, 'toDataURL').mockReturnValue('…
+    113|   const result = await service().upload(png());
+    114|   expect(drawImage).toHaveBeenCalledWith(expect.anything(), 0, 0, 1600…
+       |                     ^
+    115|   expect(result.image).toMatch(/^data:image\/webp;/); expect(result.mi…
+    116|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/services/demo.test.ts > guide authoring and community publication > does not let a second user attach an upload from somebody else’s draft
+AssertionError: expected [Function] to throw an error
+
+- Expected:
+null
+
++ Received:
+undefined
+
+ ❯ src/services/demo.test.ts:159:69
+    157|  it('does not let a second user attach an upload from somebody else’s …
+    158|   const s = service(); const draft = s.saveDraft(input()); s.login('us…
+    159|   expect(() => s.saveDraft({ ...input(), guideId: draft.guideId })).to…
+       |                                                                     ^
+    160|  });
+    161| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 28 passed (30)
+   Start at  17:27:15
+   Duration  523ms (transform 46ms, setup 90ms, import 50ms, tests 74ms, environment 243ms)
+

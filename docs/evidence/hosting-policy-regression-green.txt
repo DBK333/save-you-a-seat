@@ -1,0 +1,116 @@
+UTC: 2026-09-29T13:43:35.985886+00:00
+GREEN: frontend OAC does not permit application media grants; bucket policy attachments/resources are constrained.
+SHA256 infra/bootstrap.yaml: cd54d66168c93d4ce12962558814a6270e622edc18e386d43e6862ada582e4b0
+SHA256 infra/application.yaml: b670cb3184dc7b63585a88dee7e74c181783b9714f3b29825a38e82b7c98f2e2
+SHA256 infra/rules/bootstrap.guard: acf296ade154bcdc7c065b963e562b19db9ff6fae5b0f3d1aa7f4bb83ca6f595
+SHA256 infra/rules/application.guard: 77659ef3689757adaa138f5d8d66bef0025989038f9fd1aed4a236274048ea3f
+
+$ bash scripts/validate-infra.sh
+cfn-lint 1.48.0
+cfn-guard 3.2.0
+Test Case #1
+Name: private bucket passes
+  No Test expectation was set for Rule environment_and_region_output
+  No Test expectation was set for Rule https_bucket_policy
+  PASS Rules:
+    private_encrypted_retained_buckets: Expected = PASS
+
+Test Case #2
+Name: public bucket fails
+  No Test expectation was set for Rule environment_and_region_output
+  No Test expectation was set for Rule https_bucket_policy
+  PASS Rules:
+    private_encrypted_retained_buckets: Expected = FAIL
+
+Test Case #3
+Name: missing resources fail instead of skipping
+  PASS Rules:
+    https_bucket_policy: Expected = FAIL
+    environment_and_region_output: Expected = FAIL
+    private_encrypted_retained_buckets: Expected = FAIL
+
+Test Case #4
+Name: TLS denial may coexist with scoped origin access
+  No Test expectation was set for Rule private_encrypted_retained_buckets
+  No Test expectation was set for Rule environment_and_region_output
+  PASS Rules:
+    https_bucket_policy: Expected = PASS
+
+Test Case #5
+Name: one compliant bucket policy cannot cover another without TLS denial
+  No Test expectation was set for Rule private_encrypted_retained_buckets
+  No Test expectation was set for Rule environment_and_region_output
+  PASS Rules:
+    https_bucket_policy: Expected = FAIL
+
+/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml Status = PASS
+PASS rules
+common.guard/private_encrypted_retained_buckets    PASS
+common.guard/https_bucket_policy                   PASS
+common.guard/environment_and_region_output         PASS
+---
+/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml Status = PASS
+PASS rules
+bootstrap.guard/bootstrap_resources_exist            PASS
+bootstrap.guard/restricted_frontend_origin_access    PASS
+bootstrap.guard/cache_control_and_https              PASS
+---
+/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml Status = PASS
+PASS rules
+common.guard/private_encrypted_retained_buckets    PASS
+common.guard/https_bucket_policy                   PASS
+common.guard/environment_and_region_output         PASS
+---
+/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml Status = PASS
+PASS rules
+application.guard/application_resources_exist     PASS
+application.guard/durable_tables                  PASS
+application.guard/account_safety                  PASS
+application.guard/routes_protected                PASS
+application.guard/known_routes_present            PASS
+application.guard/scoped_execution_permissions    PASS
+application.guard/restricted_cors                 PASS
+application.guard/immutable_python_package        PASS
+application.guard/private_images_bucket_policy    PASS
+---
+test_artifact_policy_cannot_target_frontend_bucket_instead (test_bucket_policy_scopes.BucketPolicyScopes.test_artifact_policy_cannot_target_frontend_bucket_instead) ... ok
+test_images_policy_cannot_be_missing_or_have_the_wrong_type (test_bucket_policy_scopes.BucketPolicyScopes.test_images_policy_cannot_be_missing_or_have_the_wrong_type) ... ok
+test_images_policy_must_attach_to_images_bucket_and_cover_all_objects (test_bucket_policy_scopes.BucketPolicyScopes.test_images_policy_must_attach_to_images_bucket_and_cover_all_objects) ... ok
+test_images_policy_rejects_a_specific_unrelated_account_grant (test_bucket_policy_scopes.BucketPolicyScopes.test_images_policy_rejects_a_specific_unrelated_account_grant) ... ok
+test_extra_policy_cannot_open_an_origin (test_hosting.HostingPolicies.test_extra_policy_cannot_open_an_origin) ... ok
+test_only_distribution_scoped_read_is_allowed (test_hosting.HostingPolicies.test_only_distribution_scoped_read_is_allowed) ... ok
+test_origin_and_cache_regressions_fail (test_hosting.HostingPolicies.test_origin_and_cache_regressions_fail) ... ok
+test_required_hosting_resources_and_outputs (test_hosting.HostingPolicies.test_required_hosting_resources_and_outputs) ... ok
+test_tls_denial_must_cover_frontend_bucket_and_objects (test_hosting.HostingPolicies.test_tls_denial_must_cover_frontend_bucket_and_objects) ... ok
+test_tls_required_separately_on_each_bucket_policy (test_hosting.HostingPolicies.test_tls_required_separately_on_each_bucket_policy) ... ok
+test_embedded_function_rewrites_only_app_routes (test_hosting.SpaRouting.test_embedded_function_rewrites_only_app_routes) ... ok
+test_complete_templates_pass (test_policies.Policies.test_complete_templates_pass) ... ok
+test_contract_routes_match_infrastructure (test_policies.Policies.test_contract_routes_match_infrastructure) ... ok
+test_empty_resources_fail_instead_of_skip (test_policies.Policies.test_empty_resources_fail_instead_of_skip) ... ok
+test_every_required_resource_is_required (test_policies.Policies.test_every_required_resource_is_required) ... ok
+test_native_guard_unit_fixtures (test_policies.Policies.test_native_guard_unit_fixtures) ... ok
+test_only_discovery_routes_are_public (test_policies.Policies.test_only_discovery_routes_are_public) ... ok
+test_required_outputs_do_not_disappear (test_policies.Policies.test_required_outputs_do_not_disappear) ... ok
+test_security_regressions_fail (test_policies.Policies.test_security_regressions_fail) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 2.234s
+
+OK
+test_content_types_and_cache_policy_distinguish_hashed_and_stable_files (test_cloud.FrontendPublishing.test_content_types_and_cache_policy_distinguish_hashed_and_stable_files) ... ok
+test_dry_run_describes_s3_plan_without_aws_or_manifest_writes (test_cloud.FrontendPublishing.test_dry_run_describes_s3_plan_without_aws_or_manifest_writes) ... ok
+test_env_files_and_symlinks_are_not_published (test_cloud.FrontendPublishing.test_env_files_and_symlinks_are_not_published) ... ok
+test_invalidation_failure_records_published_objects_for_recovery (test_cloud.FrontendPublishing.test_invalidation_failure_records_published_objects_for_recovery) ... ok
+test_missing_index_is_rejected_before_cloud_calls (test_cloud.FrontendPublishing.test_missing_index_is_rejected_before_cloud_calls) ... ok
+test_old_amplify_outputs_are_rejected_before_any_cloud_calls (test_cloud.FrontendPublishing.test_old_amplify_outputs_are_rejected_before_any_cloud_calls) ... ok
+test_records_real_object_versions_invalidation_and_release_history (test_cloud.FrontendPublishing.test_records_real_object_versions_invalidation_and_release_history) ... ok
+test_region_mismatch_and_artifact_bucket_reuse_fail_before_cloud_calls (test_cloud.FrontendPublishing.test_region_mismatch_and_artifact_bucket_reuse_fail_before_cloud_calls) ... ok
+test_upload_failure_never_replaces_index_or_invalidates (test_cloud.FrontendPublishing.test_upload_failure_never_replaces_index_or_invalidates) ... ok
+test_uploads_dependencies_then_html_and_invalidates_without_deleting (test_cloud.FrontendPublishing.test_uploads_dependencies_then_html_and_invalidates_without_deleting) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.043s
+
+OK
+
+Exit: 0

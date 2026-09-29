@@ -1,0 +1,1545 @@
+
+> save-you-a-seat@0.1.0 test
+> vitest run --run tests/coverage-ui.test.tsx
+
+
+ RUN  v4.1.11 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+(node:9864) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ❯ tests/coverage-ui.test.tsx (4 tests | 4 failed) 224ms
+   × rejects a starting point outside the supported Australian focus and offers map selection 97ms
+   × gives guests access to room status and booking sites from Explore 111ms
+   × shows remaining demo half-hour blocks and refreshes after booking and cancellation 12ms
+   × links UniMelb rooms to official booking services without inventing live slots or local reservations 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/coverage-ui.test.tsx > rejects a starting point outside the supported Australian focus and offers map selection
+TestingLibraryElementError: Unable to find an element with the text: /outside our Melbourne coverage/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"desktop-notice"[39m
+    [36m>[39m
+      [36m<span[39m
+        [33mclass[39m=[32m"brand-mark"[39m
+      [36m>[39m
+        [36m<svg[39m
+          [33maria-hidden[39m=[32m"true"[39m
+          [33mclass[39m=[32m"lucide lucide-armchair"[39m
+          [33mfill[39m=[32m"none"[39m
+          [33mheight[39m=[32m"25"[39m
+          [33mstroke[39m=[32m"currentColor"[39m
+          [33mstroke-linecap[39m=[32m"round"[39m
+          [33mstroke-linejoin[39m=[32m"round"[39m
+          [33mstroke-width[39m=[32m"2"[39m
+          [33mviewBox[39m=[32m"0 0 24 24"[39m
+          [33mwidth[39m=[32m"25"[39m
+          [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+        [36m>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"[39m
+          [36m/>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"[39m
+          [36m/>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M5 18v2"[39m
+          [36m/>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M19 18v2"[39m
+          [36m/>[39m
+        [36m</svg>[39m
+      [36m</span>[39m
+      [36m<svg[39m
+        [33maria-hidden[39m=[32m"true"[39m
+        [33mclass[39m=[32m"lucide lucide-monitor"[39m
+        [33mfill[39m=[32m"none"[39m
+        [33mheight[39m=[32m"40"[39m
+        [33mstroke[39m=[32m"currentColor"[39m
+        [33mstroke-linecap[39m=[32m"round"[39m
+        [33mstroke-linejoin[39m=[32m"round"[39m
+        [33mstroke-width[39m=[32m"2"[39m
+        [33mviewBox[39m=[32m"0 0 24 24"[39m
+        [33mwidth[39m=[32m"40"[39m
+        [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+      [36m>[39m
+        [36m<rect[39m
+          [33mheight[39m=[32m"14"[39m
+          [33mrx[39m=[32m"2"[39m
+          [33mwidth[39m=[32m"20"[39m
+          [33mx[39m=[32m"2"[39m
+          [33my[39m=[32m"3"[39m
+        [36m/>[39m
+        [36m<line[39m
+          [33mx1[39m=[32m"8"[39m
+          [33mx2[39m=[32m"16"[39m
+          [33my1[39m=[32m"21"[39m
+          [33my2[39m=[32m"21"[39m
+        [36m/>[39m
+        [36m<line[39m
+          [33mx1[39m=[32m"12"[39m
+          [33mx2[39m=[32m"12"[39m
+          [33my1[39m=[32m"17"[39m
+          [33my2[39m=[32m"21"[39m
+        [36m/>[39m
+      [36m</svg>[39m
+      [36m<h1>[39m
+        [0mA little more room, please.[0m
+      [36m</h1>[39m
+      [36m<p>[39m
+        [0mSYAS is a desktop web experience for now. Open it in a window at least 1,000 pixels wide.[0m
+      [36m</p>[39m
+    [36m</div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"app-shell"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"site-header"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"SYAS home"[39m
+          [33mclass[39m=[32m"brand"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"brand-mark"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-armchair"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"23"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"23"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M5 18v2"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M19 18v2"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</span>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"brand-wordmark"[39m
+          [36m>[39m
+            [0msyas[0m
+            [36m<span>[39m
+              [0msave you a seat[0m
+            [36m</span>[39m
+          [36m</span>[39m
+        [36m</a>[39m
+        [36m<nav[39m
+          [33maria-label[39m=[32m"Main navigation"[39m
+          [33mclass[39m=[32m"main-nav"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33maria-current[39m=[32m"page"[39m
+            [33mclass[39m=[32m"active"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [0mExplore[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m""[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/bookings"[39m
+          [36m>[39m
+            [0mMy bookings[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m""[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/community"[39m
+          [36m>[39m
+            [0mCommunity confirmations[0m
+            [36m<span[39m
+              [33mclass[39m=[32m"nav-count"[39m
+            [36m>[39m
+              [0m1[0m
+            [36m</span>[39m
+          [36m</a>[39m
+        [36m</nav>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"header-account"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"header-login"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/login"[39m
+          [36m>[39m
+            [0mLog in[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"button primary header-signup"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/register"[39m
+          [36m>[39m
+            [0mSign up[0m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-arrow-up-right"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"15"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"rou...
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ tests/coverage-ui.test.tsx:23:17
+     21|   show();
+     22|   fireEvent.click(screen.getByRole("button", { name: "Find nearest toi…
+     23|   expect(screen.getByText(/outside our Melbourne coverage/i)).toBeVisi…
+       |                 ^
+     24|   expect(screen.getByRole("button", { name: "Change starting point" })…
+     25|   expect(screen.queryByRole("heading", { name: "Swan Street amenities"…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/coverage-ui.test.tsx > gives guests access to room status and booking sites from Explore
+TestingLibraryElementError: Unable to find an accessible element with the role "link" and name `/Room availability & booking sites/i`
+
+Here are the accessible roles:
+
+  heading:
+
+  Name "A little more room, please.":
+  [36m<h1 />[39m
+
+  Name "Find your kind of space .":
+  [36m<h1 />[39m
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p />[39m
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  [36m<header[39m
+    [33mclass[39m=[32m"site-header"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  link:
+
+  Name "SYAS home":
+  [36m<a[39m
+    [33maria-label[39m=[32m"SYAS home"[39m
+    [33mclass[39m=[32m"brand"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/"[39m
+  [36m/>[39m
+
+  Name "Explore":
+  [36m<a[39m
+    [33maria-current[39m=[32m"page"[39m
+    [33mclass[39m=[32m"active"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/"[39m
+  [36m/>[39m
+
+  Name "My bookings":
+  [36m<a[39m
+    [33mclass[39m=[32m""[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/bookings"[39m
+  [36m/>[39m
+
+  Name "Community confirmations 1":
+  [36m<a[39m
+    [33mclass[39m=[32m""[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/community"[39m
+  [36m/>[39m
+
+  Name "Log in":
+  [36m<a[39m
+    [33mclass[39m=[32m"header-login"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/login"[39m
+  [36m/>[39m
+
+  Name "Sign up":
+  [36m<a[39m
+    [33mclass[39m=[32m"button primary header-signup"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/register"[39m
+  [36m/>[39m
+
+  Name "Open area in Google Maps":
+  [36m<a[39m
+    [33mclass[39m=[32m"map-open-link"[39m
+    [33mhref[39m=[32m"https://www.google.com/maps/search/?api=1&query=Cremorne%2C+Victoria%2C+Australia"[39m
+    [33mrel[39m=[32m"noopener noreferrer"[39m
+    [33mtarget[39m=[32m"_blank"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Main navigation":
+  [36m<nav[39m
+    [33maria-label[39m=[32m"Main navigation"[39m
+    [33mclass[39m=[32m"main-nav"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  [36m<main[39m
+    [33mclass[39m=[32m"explore-layout"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  complementary:
+
+  Name "":
+  [36m<aside[39m
+    [33mclass[39m=[32m"results-panel"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  button:
+
+  Name "All places":
+  [36m<button[39m
+    [33maria-pressed[39m=[32m"true"[39m
+    [33mclass[39m=[32m"active"[39m
+  [36m/>[39m
+
+  Name "Rooms":
+  [36m<button[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m""[39m
+  [36m/>[39m
+
+  Name "Toilets":
+  [36m<button[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m""[39m
+  [36m/>[39m
+
+  Name "Accessible":
+  [36m<button[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"filter-chip "[39m
+  [36m/>[39m
+
+  Name "Open now":
+  [36m<button[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"filter-chip "[39m
+  [36m/>[39m
+
+  Name "Clear extra filters":
+  [36m<button[39m
+    [33mclass[39m=[32m"text-button"[39m
+  [36m/>[39m
+
+  Name "Find nearest toilet":
+  [36m<button[39m
+    [33mclass[39m=[32m"nearest-toilet-button"[39m
+  [36m/>[39m
+
+  Name "Near me":
+  [36m<button[39m
+    [33mclass[39m=[32m"location-button"[39m
+  [36m/>[39m
+
+  Name "View Swan Street amenities":
+  [36m<button[39m
+    [33maria-label[39m=[32m"View Swan Street amenities"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"place-card "[39m
+  [36m/>[39m
+
+  Name "View The Green Room":
+  [36m<button[39m
+    [33maria-label[39m=[32m"View The Green Room"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"place-card "[39m
+  [36m/>[39m
+
+  Name "View Cremorne Corner facilities":
+  [36m<button[39m
+    [33maria-label[39m=[32m"View Cremorne Corner facilities"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"place-card "[39m
+  [36m/>[39m
+
+  Name "View Studio 12":
+  [36m<button[39m
+    [33maria-label[39m=[32m"View Studio 12"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"place-card "[39m
+  [36m/>[39m
+
+  Name "View Riverside amenities":
+  [36m<button[39m
+    [33maria-label[39m=[32m"View Riverside amenities"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"place-card "[39m
+  [36m/>[39m
+
+  Name "View The Little Boardroom":
+  [36m<button[39m
+    [33maria-label[39m=[32m"View The Little Boardroom"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"place-card "[39m
+  [36m/>[39m
+
+  Name "View Gwynne Street facilities":
+  [36m<button[39m
+    [33maria-label[39m=[32m"View Gwynne Street facilities"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"place-card "[39m
+  [36m/>[39m
+
+  Name "View The Workshop":
+  [36m<button[39m
+    [33maria-label[39m=[32m"View The Workshop"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"place-card "[39m
+  [36m/>[39m
+
+  Name "Show Swan Street amenities":
+  [36m<button[39m
+    [33maria-label[39m=[32m"Show Swan Street amenities"[39m
+    [33mclass[39m=[32m"preview-pin toilet "[39m
+    [33mstyle[39m=[32m"left: 38.21656050953223%; top: 18.51851851848197%;"[39m
+  [36m/>[39m
+
+  Name "Show The Green Room":
+  [36m<button[39m
+    [33maria-label[39m=[32m"Show The Green Room"[39m
+    [33mclass[39m=[32m"preview-pin room "[39m
+    [33mstyle[39m=[32m"left: 26.114649681474468%; top: 43.518518518531316%;"[39m
+  [36m/>[39m
+
+  Name "Show Cremorne Corner facilities":
+  [36m<button[39m
+    [33maria-label[39m=[32m"Show Cremorne Corner facilities"[39m
+    [33mclass[39m=[32m"preview-pin toilet "[39m
+    [33mstyle[39m=[32m"left: 35.6687898089933%; top: 64.81481481481846%;"[39m
+  [36m/>[39m
+
+  Name "Show Studio 12":
+  [36m<button[39m
+    [33maria-label[39m=[32m"Show Studio 12"[39m
+    [33mclass[39m=[32m"preview-pin room "[39m
+    [33mstyle[39m=[32m"left: 54.7770700636689%; top: 55.555555555577484%;"[39m
+  [36m/>[39m
+
+  Name "Show Riverside amenities":
+  [36m<button[39m
+    [33maria-label[39m=[32m"Show Riverside amenities"[39m
+    [33mclass[39m=[32m"preview-pin toilet "[39m
+    [33mstyle[39m=[32m"left: 65.6050955413667%; top: 79.62962962960405%;"[39m
+  [36m/>[39m
+
+  Name "Show The Little Boardroom":
+  [36m<button[39m
+    [33maria-label[39m=[32m"Show The Little Boardroom"[39m
+    [33mclass[39m=[32m"preview-pin room "[39m
+    [33mstyle[39m=[32m"left: 50.31847133759%; top: 37.03703703702973%;"[39m
+  [36m/>[39m
+
+  Name "Show Gwynne Street facilities":
+  [36m<button[39m
+    [33maria-label[39m=[32m"Show Gwynne Street facilities"[39m
+    [33mclass[39m=[32m"preview-pin toilet "[39m
+    [33mstyle[39m=[32m"left: 47.13375796187107%; top: 50.9259259259241%;"[39m
+  [36m/>[39m
+
+  Name "Show The Workshop":
+  [36m<button[39m
+    [33maria-label[39m=[32m"Show The Workshop"[39m
+    [33mclass[39m=[32m"preview-pin room "[39m
+    [33mstyle[39m=[32m"left: 75.15923566870448%; top: 33.33333333333333%;"[39m
+  [36m/>[39m
+
+  Name "Zoom in":
+  [36m<button[39m
+    [33maria-label[39m=[32m"Zoom in"[39m
+  [36m/>[39m
+
+  Name "Zoom out":
+  [36m<button[39m
+    [33maria-label[39m=[32m"Zoom out"[39m
+  [36m/>[39m
+
+  Name "Recenter on Cremorne":
+  [36m<button[39m
+    [33maria-label[39m=[32m"Recenter on Cremorne"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  textbox:
+
+  Name "Search places":
+  [36m<input[39m
+    [33mplaceholder[39m=[32m"Search places, streets…"[39m
+    [33mvalue[39m=[32m""[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  group:
+
+  Name "":
+  [36m<details[39m
+    [33mclass[39m=[32m"filters-popover"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Minimum room capacity":
+  [36m<select />[39m
+
+  Name "Room equipment":
+  [36m<select />[39m
+
+  --------------------------------------------------
+  option:
+
+  Name "Any size":
+  [36m<option[39m
+    [33mvalue[39m=[32m""[39m
+  [36m/>[39m
+
+  Name "2+ people":
+  [36m<option[39m
+    [33mvalue[39m=[32m"2"[39m
+  [36m/>[39m
+
+  Name "4+ people":
+  [36m<option[39m
+    [33mvalue[39m=[32m"4"[39m
+  [36m/>[39m
+
+  Name "6+ people":
+  [36m<option[39m
+    [33mvalue[39m=[32m"6"[39m
+  [36m/>[39m
+
+  Name "8+ people":
+  [36m<option[39m
+    [33mvalue[39m=[32m"8"[39m
+  [36m/>[39m
+
+  Name "12+ people":
+  [36m<option[39m
+    [33mvalue[39m=[32m"12"[39m
+  [36m/>[39m
+
+  Name "Any equipment":
+  [36m<option[39m
+    [33mvalue[39m=[32m""[39m
+  [36m/>[39m
+
+  Name "Wi-Fi":
+  [36m<option />[39m
+
+  Name "Screen":
+  [36m<option />[39m
+
+  Name "Whiteboard":
+  [36m<option />[39m
+
+  --------------------------------------------------
+  strong:
+
+  Name "":
+  [36m<strong />[39m
+
+  Name "":
+  [36m<strong />[39m
+
+  Name "":
+  [36m<strong />[39m
+
+  Name "":
+  [36m<strong />[39m
+
+  Name "":
+  [36m<strong />[39m
+
+  Name "":
+  [36m<strong />[39m
+
+  Name "":
+  [36m<strong />[39m
+
+  Name "":
+  [36m<strong />[39m
+
+  Name "":
+  [36m<strong />[39m
+
+  Name "":
+  [36m<strong />[39m
+
+  --------------------------------------------------
+  presentation:
+
+  Name "":
+  [36m<img[39m
+    [33malt[39m=[32m""[39m
+    [33msrc[39m=[32m"/images/amenities.svg"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<img[39m
+    [33malt[39m=[32m""[39m
+    [33msrc[39m=[32m"/images/green-room.svg"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<img[39m
+    [33malt[39m=[32m""[39m
+    [33msrc[39m=[32m"/images/courtyard.svg"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<img[39m
+    [33malt[39m=[32m""[39m
+    [33msrc[39m=[32m"/images/studio.svg"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<img[39m
+    [33malt[39m=[32m""[39m
+    [33msrc[39m=[32m"/images/amenities.svg"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<img[39m
+    [33malt[39m=[32m""[39m
+    [33msrc[39m=[32m"/images/boardroom.svg"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<img[39m
+    [33malt[39m=[32m""[39m
+    [33msrc[39m=[32m"/images/courtyard.svg"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<img[39m
+    [33malt[39m=[32m""[39m
+    [33msrc[39m=[32m"/images/studio.svg"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  region:
+
+  Name "Cremorne places map":
+  [36m<section[39m
+    [33maria-label[39m=[32m"Cremorne places map"[39m
+    [33mclass[39m=[32m"map-stage"[39m
+  [36m/>[39m
+
+  Name "Location map":
+  [36m<section[39m
+    [33maria-label[39m=[32m"Location map"[39m
+    [33mclass[39m=[32m"map-canvas "[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"desktop-notice"[39m
+    [36m>[39m
+      [36m<span[39m
+        [33mclass[39m=[32m"brand-mark"[39m
+      [36m>[39m
+        [36m<svg[39m
+          [33maria-hidden[39m=[32m"true"[39m
+          [33mclass[39m=[32m"lucide lucide-armchair"[39m
+          [33mfill[39m=[32m"none"[39m
+          [33mheight[39m=[32m"25"[39m
+          [33mstroke[39m=[32m"currentColor"[39m
+          [33mstroke-linecap[39m=[32m"round"[39m
+          [33mstroke-linejoin[39m=[32m"round"[39m
+          [33mstroke-width[39m=[32m"2"[39m
+          [33mviewBox[39m=[32m"0 0 24 24"[39m
+          [33mwidth[39m=[32m"25"[39m
+          [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+        [36m>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"[39m
+          [36m/>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"[39m
+          [36m/>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M5 18v2"[39m
+          [36m/>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M19 18v2"[39m
+          [36m/>[39m
+        [36m</svg>[39m
+      [36m</span>[39m
+      [36m<svg[39m
+        [33maria-hidden[39m=[32m"true"[39m
+        [33mclass[39m=[32m"lucide lucide-monitor"[39m
+        [33mfill[39m=[32m"none"[39m
+        [33mheight[39m=[32m"40"[39m
+        [33mstroke[39m=[32m"currentColor"[39m
+        [33mstroke-linecap[39m=[32m"round"[39m
+        [33mstroke-linejoin[39m=[32m"round"[39m
+        [33mstroke-width[39m=[32m"2"[39m
+        [33mviewBox[39m=[32m"0 0 24 24"[39m
+        [33mwidth[39m=[32m"40"[39m
+        [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+      [36m>[39m
+        [36m<rect[39m
+          [33mheight[39m=[32m"14"[39m
+          [33mrx[39m=[32m"2"[39m
+          [33mwidth[39m=[32m"20"[39m
+          [33mx[39m=[32m"2"[39m
+          [33my[39m=[32m"3"[39m
+        [36m/>[39m
+        [36m<line[39m
+          [33mx1[39m=[32m"8"[39m
+          [33mx2[39m=[32m"16"[39m
+          [33my1[39m=[32m"21"[39m
+          [33my2[39m=[32m"21"[39m
+        [36m/>[39m
+        [36m<line[39m
+          [33mx1[39m=[32m"12"[39m
+          [33mx2[39m=[32m"12"[39m
+          [33my1[39m=[32m"17"[39m
+          [33my2[39m=[32m"21"[39m
+        [36m/>[39m
+      [36m</svg>[39m
+      [36m<h1>[39m
+        [0mA little more room, please.[0m
+      [36m</h1>[39m
+      [36m<p>[39m
+        [0mSYAS is a desktop web experience for now. Open it in a window at least 1,000 pixels wide.[0m
+      [36m</p>[39m
+    [36m</div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"app-shell"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"site-header"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"SYAS home"[39m
+          [33mclass[39m=[32m"brand"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"brand-mark"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-armchair"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"23"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"23"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M5 18v2"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M19 18v2"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</span>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"brand-wordmark"[39m
+          [36m>[39m
+            [0msyas[0m
+            [36m<span>[39m
+              [0msave you a seat[0m
+            [36m</span>[39m
+          [36m</span>[39m
+        [36m</a>[39m
+        [36m<nav[39m
+          [33maria-label[39m=[32m"Main navigation"[39m
+          [33mclass[39m=[32m"main-nav"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33maria-current[39m=[32m"page"[39m
+            [33mclass[39m=[32m"active"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [0mExplore[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m""[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/bookings"[39m
+          [36m>[39m
+            [0mMy bookings[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m""[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/community"[39m
+          [36m>[39m
+            [0mCommunity confirmations[0m
+            [36m<span[39m
+              [33mclass[39m=[32m"nav-count"[39m
+            [36m>[39m
+              [0m1[0m
+            [36m</span>[39m
+          [36m</a>[39m
+        [36m</nav>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"header-account"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"header-login"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/login"[39m
+          [36m>[39m
+            [0mLog in[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"button primary header-signup"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/register"[39m
+          [36m>[39m
+            [0mSign up[0m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-arrow-up-right"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"15"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"rou...
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ tests/coverage-ui.test.tsx:33:26
+     31| it("gives guests access to room status and booking sites from Explore"…
+     32|   show();
+     33|   fireEvent.click(screen.getByRole("link", { name: /Room availability …
+       |                          ^
+     34|   expect(screen.getByRole("heading", { name: /Room availability/i })).…
+     35|   expect(screen.getByRole("button", { name: "University of Melbourne",…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/coverage-ui.test.tsx > shows remaining demo half-hour blocks and refreshes after booking and cancellation
+TestingLibraryElementError: Unable to find an accessible element with the role "article" and name "The Green Room"
+
+Here are the accessible roles:
+
+  heading:
+
+  Name "A little more room, please.":
+  [36m<h1 />[39m
+
+  Name "This place isn’t on our map.":
+  [36m<h1 />[39m
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"muted"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  [36m<header[39m
+    [33mclass[39m=[32m"site-header"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  link:
+
+  Name "SYAS home":
+  [36m<a[39m
+    [33maria-label[39m=[32m"SYAS home"[39m
+    [33mclass[39m=[32m"brand"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/"[39m
+  [36m/>[39m
+
+  Name "Explore":
+  [36m<a[39m
+    [33mclass[39m=[32m""[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/"[39m
+  [36m/>[39m
+
+  Name "My bookings":
+  [36m<a[39m
+    [33mclass[39m=[32m""[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/bookings"[39m
+  [36m/>[39m
+
+  Name "Community confirmations 1":
+  [36m<a[39m
+    [33mclass[39m=[32m""[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/community"[39m
+  [36m/>[39m
+
+  Name "Log in":
+  [36m<a[39m
+    [33mclass[39m=[32m"header-login"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/login"[39m
+  [36m/>[39m
+
+  Name "Sign up":
+  [36m<a[39m
+    [33mclass[39m=[32m"button primary header-signup"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/register"[39m
+  [36m/>[39m
+
+  Name "Back to Explore":
+  [36m<a[39m
+    [33mclass[39m=[32m"button primary"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Main navigation":
+  [36m<nav[39m
+    [33maria-label[39m=[32m"Main navigation"[39m
+    [33mclass[39m=[32m"main-nav"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  [36m<main[39m
+    [33mclass[39m=[32m"page narrow"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"desktop-notice"[39m
+    [36m>[39m
+      [36m<span[39m
+        [33mclass[39m=[32m"brand-mark"[39m
+      [36m>[39m
+        [36m<svg[39m
+          [33maria-hidden[39m=[32m"true"[39m
+          [33mclass[39m=[32m"lucide lucide-armchair"[39m
+          [33mfill[39m=[32m"none"[39m
+          [33mheight[39m=[32m"25"[39m
+          [33mstroke[39m=[32m"currentColor"[39m
+          [33mstroke-linecap[39m=[32m"round"[39m
+          [33mstroke-linejoin[39m=[32m"round"[39m
+          [33mstroke-width[39m=[32m"2"[39m
+          [33mviewBox[39m=[32m"0 0 24 24"[39m
+          [33mwidth[39m=[32m"25"[39m
+          [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+        [36m>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"[39m
+          [36m/>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"[39m
+          [36m/>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M5 18v2"[39m
+          [36m/>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M19 18v2"[39m
+          [36m/>[39m
+        [36m</svg>[39m
+      [36m</span>[39m
+      [36m<svg[39m
+        [33maria-hidden[39m=[32m"true"[39m
+        [33mclass[39m=[32m"lucide lucide-monitor"[39m
+        [33mfill[39m=[32m"none"[39m
+        [33mheight[39m=[32m"40"[39m
+        [33mstroke[39m=[32m"currentColor"[39m
+        [33mstroke-linecap[39m=[32m"round"[39m
+        [33mstroke-linejoin[39m=[32m"round"[39m
+        [33mstroke-width[39m=[32m"2"[39m
+        [33mviewBox[39m=[32m"0 0 24 24"[39m
+        [33mwidth[39m=[32m"40"[39m
+        [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+      [36m>[39m
+        [36m<rect[39m
+          [33mheight[39m=[32m"14"[39m
+          [33mrx[39m=[32m"2"[39m
+          [33mwidth[39m=[32m"20"[39m
+          [33mx[39m=[32m"2"[39m
+          [33my[39m=[32m"3"[39m
+        [36m/>[39m
+        [36m<line[39m
+          [33mx1[39m=[32m"8"[39m
+          [33mx2[39m=[32m"16"[39m
+          [33my1[39m=[32m"21"[39m
+          [33my2[39m=[32m"21"[39m
+        [36m/>[39m
+        [36m<line[39m
+          [33mx1[39m=[32m"12"[39m
+          [33mx2[39m=[32m"12"[39m
+          [33my1[39m=[32m"17"[39m
+          [33my2[39m=[32m"21"[39m
+        [36m/>[39m
+      [36m</svg>[39m
+      [36m<h1>[39m
+        [0mA little more room, please.[0m
+      [36m</h1>[39m
+      [36m<p>[39m
+        [0mSYAS is a desktop web experience for now. Open it in a window at least 1,000 pixels wide.[0m
+      [36m</p>[39m
+    [36m</div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"app-shell"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"site-header"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"SYAS home"[39m
+          [33mclass[39m=[32m"brand"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"brand-mark"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-armchair"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"23"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"23"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M5 18v2"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M19 18v2"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</span>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"brand-wordmark"[39m
+          [36m>[39m
+            [0msyas[0m
+            [36m<span>[39m
+              [0msave you a seat[0m
+            [36m</span>[39m
+          [36m</span>[39m
+        [36m</a>[39m
+        [36m<nav[39m
+          [33maria-label[39m=[32m"Main navigation"[39m
+          [33mclass[39m=[32m"main-nav"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m""[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [0mExplore[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m""[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/bookings"[39m
+          [36m>[39m
+            [0mMy bookings[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m""[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/community"[39m
+          [36m>[39m
+            [0mCommunity confirmations[0m
+            [36m<span[39m
+              [33mclass[39m=[32m"nav-count"[39m
+            [36m>[39m
+              [0m1[0m
+            [36m</span>[39m
+          [36m</a>[39m
+        [36m</nav>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"header-account"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"header-login"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/login"[39m
+          [36m>[39m
+            [0mLog in[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"button primary header-signup"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/register"[39m
+          [36m>[39m
+            [0mSign up[0m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-arrow-up-right"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"15"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"15"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M7 7h10v10"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M7 17 17 7"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</a>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"demo-banner"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"demo-tag"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"lucide lucide-sparkles"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"11"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"11"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M20 2v4"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M22 4h-4"[39m
+            [36m/>[39m
+            [36m<circle[39m
+              [33mcx[39m=[32m"4"[39m
+              [33mcy[39m=[32m"20"[39m
+              [33mr[39m=[32m"2"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+          [0mDEMO[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mDemonstration · Sample places, accounts and bookings. Nothing here reserves a real venue.[0m
+        [36m</span>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"banner-local"[39m
+        [36m>[39m
+          [0mMADE FOR CREMORNE[0m
+        [36m</span>[39m
+      [36m</div>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"page narrow"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mThis place isn’t on our map.[0m
+        [36m</h1>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"muted"[39m
+        [36m>[39m
+          [0mLet’s take you back to somewhere familiar.[0m
+        [36m</p>[39m
+        [36m<a[39m
+          [33mclass[39m=[32m"button primary"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mBack to Explore[0m
+        [36m</a>[39m
+      [36m</main>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ tests/coverage-ui.test.tsx:40:23
+     38| it("shows remaining demo half-hour blocks and refreshes after booking …
+     39|   show("/rooms");
+     40|   const room = screen.getByRole("article", { name: "The Green Room" });
+       |                       ^
+     41|   expect(within(room).getByText("20 available blocks")).toBeVisible();
+     42|   expect(screen.getByText(/Browser-local demo availability/i)).toBeVis…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/coverage-ui.test.tsx > links UniMelb rooms to official booking services without inventing live slots or local reservations
+TestingLibraryElementError: Unable to find an element with the text: /Live availability is not connected/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"desktop-notice"[39m
+    [36m>[39m
+      [36m<span[39m
+        [33mclass[39m=[32m"brand-mark"[39m
+      [36m>[39m
+        [36m<svg[39m
+          [33maria-hidden[39m=[32m"true"[39m
+          [33mclass[39m=[32m"lucide lucide-armchair"[39m
+          [33mfill[39m=[32m"none"[39m
+          [33mheight[39m=[32m"25"[39m
+          [33mstroke[39m=[32m"currentColor"[39m
+          [33mstroke-linecap[39m=[32m"round"[39m
+          [33mstroke-linejoin[39m=[32m"round"[39m
+          [33mstroke-width[39m=[32m"2"[39m
+          [33mviewBox[39m=[32m"0 0 24 24"[39m
+          [33mwidth[39m=[32m"25"[39m
+          [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+        [36m>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"[39m
+          [36m/>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"[39m
+          [36m/>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M5 18v2"[39m
+          [36m/>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M19 18v2"[39m
+          [36m/>[39m
+        [36m</svg>[39m
+      [36m</span>[39m
+      [36m<svg[39m
+        [33maria-hidden[39m=[32m"true"[39m
+        [33mclass[39m=[32m"lucide lucide-monitor"[39m
+        [33mfill[39m=[32m"none"[39m
+        [33mheight[39m=[32m"40"[39m
+        [33mstroke[39m=[32m"currentColor"[39m
+        [33mstroke-linecap[39m=[32m"round"[39m
+        [33mstroke-linejoin[39m=[32m"round"[39m
+        [33mstroke-width[39m=[32m"2"[39m
+        [33mviewBox[39m=[32m"0 0 24 24"[39m
+        [33mwidth[39m=[32m"40"[39m
+        [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+      [36m>[39m
+        [36m<rect[39m
+          [33mheight[39m=[32m"14"[39m
+          [33mrx[39m=[32m"2"[39m
+          [33mwidth[39m=[32m"20"[39m
+          [33mx[39m=[32m"2"[39m
+          [33my[39m=[32m"3"[39m
+        [36m/>[39m
+        [36m<line[39m
+          [33mx1[39m=[32m"8"[39m
+          [33mx2[39m=[32m"16"[39m
+          [33my1[39m=[32m"21"[39m
+          [33my2[39m=[32m"21"[39m
+        [36m/>[39m
+        [36m<line[39m
+          [33mx1[39m=[32m"12"[39m
+          [33mx2[39m=[32m"12"[39m
+          [33my1[39m=[32m"17"[39m
+          [33my2[39m=[32m"21"[39m
+        [36m/>[39m
+      [36m</svg>[39m
+      [36m<h1>[39m
+        [0mA little more room, please.[0m
+      [36m</h1>[39m
+      [36m<p>[39m
+        [0mSYAS is a desktop web experience for now. Open it in a window at least 1,000 pixels wide.[0m
+      [36m</p>[39m
+    [36m</div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"app-shell"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"site-header"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"SYAS home"[39m
+          [33mclass[39m=[32m"brand"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"brand-mark"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-armchair"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"23"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"23"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M5 18v2"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M19 18v2"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</span>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"brand-wordmark"[39m
+          [36m>[39m
+            [0msyas[0m
+            [36m<span>[39m
+              [0msave you a seat[0m
+            [36m</span>[39m
+          [36m</span>[39m
+        [36m</a>[39m
+        [36m<nav[39m
+          [33maria-label[39m=[32m"Main navigation"[39m
+          [33mclass[39m=[32m"main-nav"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m""[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [0mExplore[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m""[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/bookings"[39m
+          [36m>[39m
+            [0mMy bookings[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m""[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/community"[39m
+          [36m>[39m
+            [0mCommunity confirmations[0m
+            [36m<span[39m
+              [33mclass[39m=[32m"nav-count"[39m
+            [36m>[39m
+              [0m1[0m
+            [36m</span>[39m
+          [36m</a>[39m
+        [36m</nav>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"header-account"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"header-login"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/login"[39m
+          [36m>[39m
+            [0mLog in[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"button primary header-signup"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/register"[39m
+          [36m>[39m
+            [0mSign up[0m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-arrow-up-right"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"15"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"15"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M7 7h10v10"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M7 17 17 7"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</a>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"demo-banner"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"demo-tag"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"lucide lucide-sparkles"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"11"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"11"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M20 2v4"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M22 4h-4"[39m
+            [36m/>[39m
+            [36m<circle[39m
+              [33mcx[39m=[32m"4"[39m
+              [33mcy[39m=[32m"20"[39m
+              [33mr[39m=[32m"2"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+          [0mDEMO[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mDemonstration · Sample places, accounts and bookings. Nothing here reserves a real venue.[0m
+        [36m</span>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"banner-local"[39m
+        [36m>[39m
+          [0mMADE FOR CREMORNE[0m
+        [36m</span>[39m
+      [36m</div>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"page narrow"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mThis place isn’t on our map.[0m
+        [36m</h1>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"muted"[39m
+        [36m>[39m
+          [0mLet’s take you back to somewhere familiar.[0m
+        [36m</p>[39m
+        [36m<a[39m
+          [33mclass[39m=[32m"button primary"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mBack to Explore[0m
+        [36m</a>[39m
+      [36m</main>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ tests/coverage-ui.test.tsx:56:17
+     54| it("links UniMelb rooms to official booking services without inventing…
+     55|   show("/rooms?area=unimelb");
+     56|   expect(screen.getByText(/Live availability is not connected/i)).toBe…
+       |                 ^
+     57|   const dibs = screen.getByRole("link", { name: /Open DiBS/i });
+     58|   expect(dibs).toHaveAttribute("target", "_blank");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed (4)
+   Start at  00:04:09
+   Duration  792ms (transform 134ms, setup 78ms, import 220ms, tests 224ms, environment 202ms)
+

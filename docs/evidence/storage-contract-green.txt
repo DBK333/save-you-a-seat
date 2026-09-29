@@ -1,0 +1,13 @@
+
+> save-you-a-seat@0.1.0 test
+> vitest run tests/storage-boundary.test.ts tests/contract.test.ts
+
+
+ RUN  v4.1.11 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+   Start at  17:29:06
+   Duration  478ms (transform 60ms, setup 171ms, import 57ms, tests 87ms, environment 469ms)
+

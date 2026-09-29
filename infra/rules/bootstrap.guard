@@ -1,0 +1,84 @@
+rule bootstrap_resources_exist {
+  Resources.ArtifactsBucket.Type == 'AWS::S3::Bucket'
+  Resources.ArtifactsBucketPolicy.Type == 'AWS::S3::BucketPolicy'
+  Resources.FrontendBucket.Type == 'AWS::S3::Bucket'
+  Resources.FrontendBucketPolicy.Type == 'AWS::S3::BucketPolicy'
+  Resources.FrontendOriginAccessControl.Type == 'AWS::CloudFront::OriginAccessControl'
+  Resources.FrontendCachePolicy.Type == 'AWS::CloudFront::CachePolicy'
+  Resources.SpaRewriteFunction.Type == 'AWS::CloudFront::Function'
+  Resources.FrontendDistribution.Type == 'AWS::CloudFront::Distribution'
+  let amplify = Resources.*[ Type IN ['AWS::Amplify::App', 'AWS::Amplify::Branch'] ]
+  %amplify empty
+  Outputs.ArtifactsBucketName.Value.Ref == 'ArtifactsBucket'
+  Outputs.FrontendBucketName.Value.Ref == 'FrontendBucket'
+  Outputs.DistributionId.Value.Ref == 'FrontendDistribution'
+  Outputs.DistributionDomainName.Value.'Fn::GetAtt' == ['FrontendDistribution', 'DomainName']
+  Outputs.FrontendUrl.Value.'Fn::Sub' == 'https://${FrontendDistribution.DomainName}'
+}
+rule restricted_frontend_origin_access {
+  Resources.ArtifactsBucketPolicy.Properties.Bucket.Ref == 'ArtifactsBucket'
+  Resources.ArtifactsBucketPolicy.Properties.PolicyDocument.Statement[*].Effect == 'Deny'
+  Resources.FrontendBucketPolicy.Properties.Bucket.Ref == 'FrontendBucket'
+  Resources.ArtifactsBucketPolicy.Properties.PolicyDocument.Statement[ Sid == 'RequireTLS' ].Resource == [
+    { 'Fn::GetAtt': ['ArtifactsBucket', 'Arn'] }, { 'Fn::Sub': '${ArtifactsBucket.Arn}/*' }
+  ]
+  Resources.FrontendBucketPolicy.Properties.PolicyDocument.Statement[ Sid == 'RequireTLS' ].Resource == [
+    { 'Fn::GetAtt': ['FrontendBucket', 'Arn'] }, { 'Fn::Sub': '${FrontendBucket.Arn}/*' }
+  ]
+  let allows = Resources.*[ Type == 'AWS::S3::BucketPolicy' ].Properties.PolicyDocument.Statement[ Effect == 'Allow' ]
+  %allows !empty
+  %allows {
+    Principal == { 'Service': 'cloudfront.amazonaws.com' }
+    Action == 's3:GetObject'
+    Resource == { 'Fn::Sub': '${FrontendBucket.Arn}/*' }
+    Condition == { 'StringEquals': { 'AWS:SourceArn': { 'Fn::Sub': 'arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:distribution/${FrontendDistribution}' } } }
+  }
+  Resources.FrontendOriginAccessControl.Properties.OriginAccessControlConfig {
+    OriginAccessControlOriginType == 's3'
+    SigningBehavior == 'always'
+    SigningProtocol == 'sigv4'
+  }
+  Resources.FrontendBucket.Properties.WebsiteConfiguration !exists
+  Resources.FrontendDistribution.Properties.DistributionConfig.Origins == [
+    {
+      'Id': 'FrontendS3',
+      'DomainName': { 'Fn::GetAtt': ['FrontendBucket', 'RegionalDomainName'] },
+      'OriginAccessControlId': { 'Ref': 'FrontendOriginAccessControl' },
+      'S3OriginConfig': { 'OriginAccessIdentity': '' }
+    }
+  ]
+}
+rule cache_control_and_https {
+  Resources.FrontendDistribution.Properties.DistributionConfig {
+    Enabled == true
+    DefaultRootObject == 'index.html'
+    CustomErrorResponses !exists
+    ViewerCertificate.CloudFrontDefaultCertificate == true
+    DefaultCacheBehavior {
+      TargetOriginId == 'FrontendS3'
+      ViewerProtocolPolicy == 'redirect-to-https'
+      AllowedMethods == ['GET', 'HEAD']
+      CachedMethods == ['GET', 'HEAD']
+      Compress == true
+      CachePolicyId.Ref == 'FrontendCachePolicy'
+      FunctionAssociations == [{ 'EventType': 'viewer-request', 'FunctionARN': { 'Fn::GetAtt': ['SpaRewriteFunction', 'FunctionARN'] } }]
+    }
+  }
+  Resources.FrontendCachePolicy.Properties.CachePolicyConfig {
+    MinTTL == 0
+    DefaultTTL == 0
+    MaxTTL.Ref == 'FrontendMaxTTL'
+    ParametersInCacheKeyAndForwardedToOrigin {
+      EnableAcceptEncodingBrotli == true
+      EnableAcceptEncodingGzip == true
+      CookiesConfig.CookieBehavior == 'none'
+      HeadersConfig.HeaderBehavior == 'none'
+      QueryStringsConfig.QueryStringBehavior == 'none'
+    }
+  }
+  Parameters.FrontendMaxTTL.Default >= 31536000
+  Parameters.FrontendMaxTTL.MinValue >= 31536000
+  Resources.SpaRewriteFunction.Properties.AutoPublish == true
+  Resources.SpaRewriteFunction.Properties.FunctionConfig.Runtime == 'cloudfront-js-2.0'
+  Resources.SpaRewriteFunction.Properties.FunctionCode !empty
+}

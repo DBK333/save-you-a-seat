@@ -1,0 +1,338 @@
+.map-canvas {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-width: 0;
+  height: 100%;
+  background: #212629;
+}
+.google-map-layer,
+.map-preview,
+.preview-cartography {
+  position: absolute;
+  inset: 0;
+}
+.map-preview {
+  overflow: hidden;
+}
+.preview-cartography {
+  transition: transform 0.3s;
+  transform-origin: center;
+}
+.preview-cartography svg {
+  width: 100%;
+  height: 100%;
+  opacity: 0.86;
+}
+.map-preview:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 45%, transparent 25%, #14171a55);
+  pointer-events: none;
+}
+.street {
+  position: absolute;
+  color: #a0a19c;
+  font-size: 9px;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+.swan {
+  top: 10%;
+  left: 36%;
+  transform: rotate(-7deg);
+}
+.balmain {
+  top: 48%;
+  left: 33%;
+  transform: rotate(-8deg);
+}
+.cremorne {
+  top: 42%;
+  left: 19%;
+  transform: rotate(78deg);
+}
+.church {
+  top: 36%;
+  right: 11%;
+  transform: rotate(-80deg);
+}
+.area-label {
+  position: absolute;
+  top: 34%;
+  left: 41%;
+  font-size: 19px;
+  letter-spacing: 6px;
+  color: #a8acab66;
+  font-weight: 600;
+}
+.area-label span {
+  display: block;
+  text-align: center;
+  font-size: 9px;
+  letter-spacing: 4px;
+  margin-top: 8px;
+}
+.river-label {
+  position: absolute;
+  bottom: 9%;
+  right: 29%;
+  color: #7c9ba4;
+  font-size: 15px;
+  font-style: italic;
+  letter-spacing: 1px;
+  transform: rotate(6deg);
+}
+.map-location-label {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #26272aee;
+  border: 1px solid #454447;
+  padding: 12px 15px;
+  border-radius: 11px;
+  color: #eae9e6;
+  box-shadow: 0 4px 15px #0002;
+  font-size: 12px;
+}
+.location-dot {
+  height: 7px;
+  width: 7px;
+  background: #b6c7ac;
+  border-radius: 50%;
+}
+.map-location-tag {
+  padding-left: 10px;
+  border-left: 1px solid #555;
+  font-size: 10px;
+  color: #a4a29f;
+  letter-spacing: 0.7px;
+}
+.preview-pin {
+  position: absolute;
+  z-index: 3;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.preview-pin > span:first-child,
+.syas-map-marker {
+  width: 37px;
+  height: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f19c90;
+  border: 3px solid #f6c5b9;
+  border-radius: 50% 50% 50% 6px;
+  transform: rotate(-45deg);
+  box-shadow: 0 5px 15px #0006;
+  color: #322c29;
+  font-size: 11px;
+  font-weight: 800;
+}
+.preview-pin > span:first-child {
+  font-size: 0;
+}
+.preview-pin > span:first-child:after {
+  content: "WC";
+  font-size: 10px;
+  transform: rotate(45deg);
+}
+.preview-pin.room > span:first-child:after {
+  content: "▦";
+  font-size: 20px;
+}
+.preview-pin.room > span:first-child,
+.syas-map-marker.room {
+  background: #b8caae;
+  border-color: #d7e4ce;
+}
+.preview-pin.selected > span:first-child {
+  outline: 7px solid #f19c9030;
+  box-shadow: 0 5px 20px #0008;
+}
+.preview-pin:hover > span:first-child {
+  outline: 5px solid #ffffff22;
+}
+.pin-label {
+  position: absolute;
+  top: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: #222327;
+  padding: 8px 12px;
+  border: 1px solid #67605a;
+  border-radius: 8px;
+  color: #f1ede7;
+  font-size: 12px;
+  box-shadow: 0 5px 15px #0005;
+}
+.map-connection-note {
+  position: absolute;
+  bottom: 76px;
+  left: 24px;
+  right: 85px;
+  max-width: 520px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid #4b4c4a;
+  background: #232729ed;
+  padding: 15px 17px;
+  border-radius: 13px;
+  z-index: 5;
+  box-shadow: 0 6px 30px #0003;
+}
+.map-connection-note strong {
+  font-size: 13px;
+  color: #eeeae4;
+  display: block;
+}
+.map-connection-note p {
+  font-size: 11px;
+  line-height: 1.7;
+  color: #aaa9a6;
+  margin: 3px 0 0;
+}
+.map-note-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #e7b4a7;
+  background: #534039;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+}
+.preview-badge {
+  margin-left: auto;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #d9cbb6;
+  border: 1px solid #766a57;
+  border-radius: 5px;
+  padding: 4px 6px;
+  white-space: nowrap;
+}
+.map-controls {
+  position: absolute;
+  bottom: 78px;
+  right: 24px;
+  display: grid;
+  background: #292b2c;
+  border: 1px solid #505151;
+  border-radius: 11px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px #0003;
+}
+.map-controls button {
+  border: 0;
+  color: #e4e3df;
+  background: transparent;
+  width: 39px;
+  height: 39px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.map-controls button + button {
+  border-top: 1px solid #424546;
+}
+.map-controls button:hover {
+  background: #424546;
+}
+.map-legend {
+  position: absolute;
+  left: 24px;
+  bottom: 27px;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  background: #23272ae8;
+  padding: 10px 13px;
+  border: 1px solid #43474a;
+  border-radius: 8px;
+  font-size: 10px;
+  color: #c9c9c4;
+}
+.map-legend > span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.legend-dot {
+  width: 7px;
+  height: 7px;
+  display: inline-block;
+  border-radius: 50%;
+}
+.legend-dot.toilet {
+  background: #f19c90;
+}
+.legend-dot.room {
+  background: #b8caae;
+}
+.map-open-link {
+  position: absolute;
+  bottom: 31px;
+  right: 24px;
+  color: #c1c2bc;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  text-decoration: none;
+}
+.origin-marker {
+  width: 15px;
+  height: 15px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: #75a3da;
+  box-shadow: 0 0 0 10px #75a3da33;
+}
+.preview-origin {
+  position: absolute;
+  z-index: 5;
+  transform: translate(-50%, -50%);
+}
+.map-pick-hint {
+  position: absolute;
+  top: 82px;
+  left: 24px;
+  background: #f19c90;
+  color: #282524;
+  border-radius: 9px;
+  padding: 12px 15px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  z-index: 8;
+}
+.picking .map-preview {
+  cursor: crosshair;
+}
+.syas-map-marker {
+  transform: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.syas-map-marker.selected {
+  outline: 6px solid #f19c9040;
+}
+@media (prefers-reduced-motion: reduce) {
+  .preview-cartography {
+    transition: none;
+  }
+}

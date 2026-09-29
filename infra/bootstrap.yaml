@@ -1,0 +1,170 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: SYAS artifact storage and private S3 frontend with CloudFront hosting (no backend deployment).
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+    AllowedValues: [dev, test, prod]
+  FrontendMaxTTL:
+    Type: Number
+    Default: 31536000
+    MinValue: 31536000
+    MaxValue: 315360000
+    Description: Maximum edge cache lifetime in seconds; object Cache-Control decides actual freshness.
+Resources:
+  ArtifactsBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      OwnershipControls:
+        Rules: [{ObjectOwnership: BucketOwnerEnforced}]
+      VersioningConfiguration: {Status: Enabled}
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault: {SSEAlgorithm: AES256}
+  ArtifactsBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: {Ref: ArtifactsBucket}
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: RequireTLS
+            Effect: Deny
+            Principal: '*'
+            Action: 's3:*'
+            Resource:
+              - {Fn::GetAtt: [ArtifactsBucket, Arn]}
+              - {Fn::Sub: '${ArtifactsBucket.Arn}/*'}
+            Condition:
+              Bool: {'aws:SecureTransport': 'false'}
+  FrontendBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      OwnershipControls:
+        Rules: [{ObjectOwnership: BucketOwnerEnforced}]
+      VersioningConfiguration: {Status: Enabled}
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault: {SSEAlgorithm: AES256}
+  FrontendBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: {Ref: FrontendBucket}
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: RequireTLS
+            Effect: Deny
+            Principal: '*'
+            Action: 's3:*'
+            Resource:
+              - {Fn::GetAtt: [FrontendBucket, Arn]}
+              - {Fn::Sub: '${FrontendBucket.Arn}/*'}
+            Condition:
+              Bool: {'aws:SecureTransport': 'false'}
+          - Sid: AllowDistributionRead
+            Effect: Allow
+            Principal: {Service: cloudfront.amazonaws.com}
+            Action: s3:GetObject
+            Resource: {Fn::Sub: '${FrontendBucket.Arn}/*'}
+            Condition:
+              StringEquals:
+                'AWS:SourceArn': {Fn::Sub: 'arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:distribution/${FrontendDistribution}'}
+  FrontendOriginAccessControl:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        Name: {Fn::Sub: '${AWS::StackName}-frontend'}
+        Description: Signed read-only access to the private SYAS frontend origin.
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
+  FrontendCachePolicy:
+    Type: AWS::CloudFront::CachePolicy
+    Properties:
+      CachePolicyConfig:
+        Name: {Fn::Sub: '${AWS::StackName}-frontend'}
+        Comment: Honor origin Cache-Control; do not impose a minimum cache age on HTML.
+        MinTTL: 0
+        DefaultTTL: 0
+        MaxTTL: {Ref: FrontendMaxTTL}
+        ParametersInCacheKeyAndForwardedToOrigin:
+          EnableAcceptEncodingBrotli: true
+          EnableAcceptEncodingGzip: true
+          CookiesConfig: {CookieBehavior: none}
+          HeadersConfig: {HeaderBehavior: none}
+          QueryStringsConfig: {QueryStringBehavior: none}
+  SpaRewriteFunction:
+    Type: AWS::CloudFront::Function
+    Properties:
+      Name: {Fn::Sub: '${AWS::StackName}-spa'}
+      AutoPublish: true
+      FunctionConfig:
+        Comment: Rewrite extensionless browser routes without masking missing assets or API errors.
+        Runtime: cloudfront-js-2.0
+      FunctionCode: |
+        function handler(event) {
+          var request = event.request;
+          if (request.method !== 'GET' && request.method !== 'HEAD') return request;
+          var path;
+          try { path = decodeURIComponent(request.uri); }
+          catch (error) { return request; }
+          if (/^\/(api|assets|images|\.well-known)(\/|$)/.test(path)) return request;
+          var tail = path.substring(path.lastIndexOf('/') + 1);
+          if (tail.indexOf('.') !== -1) return request;
+          request.uri = '/index.html';
+          return request;
+        }
+  FrontendDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        Comment: {Fn::Sub: 'SYAS ${Environment} desktop frontend'}
+        DefaultRootObject: index.html
+        HttpVersion: http2and3
+        IPV6Enabled: true
+        PriceClass: PriceClass_All
+        ViewerCertificate: {CloudFrontDefaultCertificate: true}
+        Origins:
+          - Id: FrontendS3
+            DomainName: {Fn::GetAtt: [FrontendBucket, RegionalDomainName]}
+            OriginAccessControlId: {Ref: FrontendOriginAccessControl}
+            S3OriginConfig: {OriginAccessIdentity: ''}
+        DefaultCacheBehavior:
+          TargetOriginId: FrontendS3
+          ViewerProtocolPolicy: redirect-to-https
+          AllowedMethods: [GET, HEAD]
+          CachedMethods: [GET, HEAD]
+          Compress: true
+          CachePolicyId: {Ref: FrontendCachePolicy}
+          FunctionAssociations:
+            - EventType: viewer-request
+              FunctionARN: {Fn::GetAtt: [SpaRewriteFunction, FunctionARN]}
+Outputs:
+  Region:
+    Value: {Ref: 'AWS::Region'}
+  ArtifactsBucketName:
+    Value: {Ref: ArtifactsBucket}
+  FrontendBucketName:
+    Value: {Ref: FrontendBucket}
+  DistributionId:
+    Value: {Ref: FrontendDistribution}
+  DistributionDomainName:
+    Value: {Fn::GetAtt: [FrontendDistribution, DomainName]}
+  FrontendUrl:
+    Value: {Fn::Sub: 'https://${FrontendDistribution.DomainName}'}

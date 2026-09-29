@@ -1,0 +1,474 @@
+{
+  "recordedAt": "2026-09-29T14:15:53.111698+00:00",
+  "change": "Australia-focused discovery, Cremorne demo slot status, official UniMelb booking links",
+  "applicationVersion": "0.1.0",
+  "contractVersion": "1.1.0",
+  "gitCommit": null,
+  "environment": {
+    "kind": "local-browser-demo",
+    "deployedStack": null
+  },
+  "checks": {
+    "typeScriptAndViteBuild": "passed",
+    "frontendDomainContractTests": 117,
+    "chromiumJourneys": 10,
+    "desktopViewports": [
+      "1280x800",
+      "1440x900",
+      "1920x1080"
+    ],
+    "infrastructureUnchangedFromHostingManifest": true,
+    "liveGoogleMaps": "not run; no key",
+    "liveProviderAvailability": "not connected",
+    "externalBookings": "none",
+    "awsDeployment": "not run"
+  },
+  "treeDigestAlgorithm": "SHA256 of newline-joined SHA256 + two spaces + relative path, sorted by path; no trailing newline",
+  "sourceTreeSha256": "d7c1ce6150d10f9578dd6bf70bc762c1d2f164ddfcb582f6a8348d066f01af54",
+  "bundleTreeSha256": "1c3f5bc01fd52ee781ab2ba4c9be81d71627745304af3a745ee020329bfac278",
+  "sourceInputs": [
+    {
+      "path": ".env.example",
+      "sha256": "2e03673e7c7c23c292e1814536a4041cf1c2c1f053c3af8fc963f1f41255ce94",
+      "bytes": 323
+    },
+    {
+      "path": "contracts/examples/requests-responses.json",
+      "sha256": "10b7365c0c98a470921f73cd79bb4b838a9f9cff190b0e4bf32ae13f4e9fd273",
+      "bytes": 1816
+    },
+    {
+      "path": "contracts/openapi.json",
+      "sha256": "30fa0cab0c080ac5268b852eb60893ae25ae345d24bf309201007eb9b7790bf8",
+      "bytes": 57309
+    },
+    {
+      "path": "index.html",
+      "sha256": "d25a08b137cfb837006c99c597ce68de5be4f660dbc91fff4e312e189514902e",
+      "bytes": 875
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "159585215b3874018b1783959b27fda254f37870458ded54bc0aaf89f8d6b1ca",
+      "bytes": 115833
+    },
+    {
+      "path": "package.json",
+      "sha256": "2315a85352654aff0be48aac8b495435c9d8b8df131870e8b68bed7877d96c52",
+      "bytes": 1204
+    },
+    {
+      "path": "playwright.config.ts",
+      "sha256": "dfc3893744c6e192dc2f5cf8535ef6ccc73cb574a22f29bfc801753b394f2b03",
+      "bytes": 647
+    },
+    {
+      "path": "src/App.tsx",
+      "sha256": "8c75b8f546b3524a6562ba4232b5678332a6315613f58bc75fb17256492087fb",
+      "bytes": 7172
+    },
+    {
+      "path": "src/components/Auth.tsx",
+      "sha256": "79375906dcf1e1729f7e4147e36e3654322c1f2d3603cc3ca791587a054a0055",
+      "bytes": 12618
+    },
+    {
+      "path": "src/components/Bookings.tsx",
+      "sha256": "acd7984c46712f6130d86a43033cc3051af1bf1580213c44b1394bbbd047181c",
+      "bytes": 11795
+    },
+    {
+      "path": "src/components/Community.tsx",
+      "sha256": "c89ef3236104d07500126bf172d5660522c45743328aeb3934e6c1223bf4584e",
+      "bytes": 27163
+    },
+    {
+      "path": "src/components/Explore.tsx",
+      "sha256": "7c5a31e6827199106596c6a8749e13e658b59205714c195b6e73a2cf1d7cd941",
+      "bytes": 26847
+    },
+    {
+      "path": "src/components/MapCanvas.tsx",
+      "sha256": "552cd8671980c68f86415ff32b2b685247f1f36a77398301a2fcfb286012c00b",
+      "bytes": 13595
+    },
+    {
+      "path": "src/components/RoomAvailability.tsx",
+      "sha256": "9c9c074d5801e1610da38d4956ee2c95ba9654c7be75b49314f7715d8ea68b47",
+      "bytes": 8900
+    },
+    {
+      "path": "src/components/map.css",
+      "sha256": "d661a8ec69ed6ad30a135d9245c6540ddd816b6ee60fd9bc0b6834cb0de25574",
+      "bytes": 6170
+    },
+    {
+      "path": "src/components/rooms.css",
+      "sha256": "5271f67546c362b31e62bd71743fecddd9d6fb19d671b0e27e9d99fef05bbca4",
+      "bytes": 5424
+    },
+    {
+      "path": "src/components/ui.tsx",
+      "sha256": "0a0b60c8da92136824c2bba5878f8f699e913c6fb536b9eb1a3457655de152b4",
+      "bytes": 5224
+    },
+    {
+      "path": "src/config.ts",
+      "sha256": "0801f2de9a771ceafa95d5e2ddea702e82c4418b4890ee16067bf34368b4d710",
+      "bytes": 1044
+    },
+    {
+      "path": "src/data/booking-sites.ts",
+      "sha256": "06af640dc335efc0baba8005b70d2e1023bc8bb1abfea0a53ab7cc13aa56d2d1",
+      "bytes": 2291
+    },
+    {
+      "path": "src/data/fixtures.ts",
+      "sha256": "59e2ba5daf811ad8f4b1b1a80a178028fe527387a202ad98397d95a1ab825822",
+      "bytes": 7192
+    },
+    {
+      "path": "src/domain/coverage.test.ts",
+      "sha256": "9887789a41d551d3c8f07dba80062b0695b0987cb66f1742a12dd7661ca5eae6",
+      "bytes": 1745
+    },
+    {
+      "path": "src/domain/coverage.ts",
+      "sha256": "d7ce2616a0d88e5c70e8eae19a4657773a878db78da2363099bc3c750ef570eb",
+      "bytes": 1098
+    },
+    {
+      "path": "src/domain/rules.test.ts",
+      "sha256": "82d974350301a1dabb2a49b5301a4b1038ce619918e3c322cb11ce02cb3c1b9f",
+      "bytes": 9707
+    },
+    {
+      "path": "src/domain/rules.ts",
+      "sha256": "5360430e6be2122eb878a10feb86187c4943e8ea0949a8742a52b75124350d2f",
+      "bytes": 7573
+    },
+    {
+      "path": "src/domain/types.ts",
+      "sha256": "38c48640cd14fe8c3ae0c151d39e1dd727cd39a775581b7f926489953dec0e23",
+      "bytes": 3077
+    },
+    {
+      "path": "src/main.tsx",
+      "sha256": "b1ee4348ec2a15489cd985e94b32f6acf1f2360d2cddc9908123134b1938d318",
+      "bytes": 330
+    },
+    {
+      "path": "src/services/demo.test.ts",
+      "sha256": "218095654e13ac95693cd300752215e99fc7f8013aab526052ab25cc27e2b442",
+      "bytes": 20544
+    },
+    {
+      "path": "src/services/demo.ts",
+      "sha256": "40c08bf22f1386e9ac5ee17d70f31ece383729ac88e8795d24aa89f940edc14b",
+      "bytes": 25692
+    },
+    {
+      "path": "src/services/index.ts",
+      "sha256": "ea53d1e0eb020dfb249afd4ecabffa9d2b449ecbf0d2afd70ba90ff26fb7bdf7",
+      "bytes": 362
+    },
+    {
+      "path": "src/styles.css",
+      "sha256": "e5c8a6cf911c50f0e9069f8b722ee7231ca0ef1f48457e95ff43eb6ed93b0f4b",
+      "bytes": 44087
+    },
+    {
+      "path": "tests/app.test.tsx",
+      "sha256": "7900d9a915a9ebd00b39cecb70e626033670c93f803814162154825d60812b3a",
+      "bytes": 1664
+    },
+    {
+      "path": "tests/contract.test.ts",
+      "sha256": "c4fa2e6fba52fcc2aa6ffe5a783d46faa15ffa8a24455c7cad9124ab0b653358",
+      "bytes": 10377
+    },
+    {
+      "path": "tests/coverage-map.test.tsx",
+      "sha256": "630fca560cbcdcfa8564e503c76c9eff3f79015d35dd7fd86e771a21d7de7f02",
+      "bytes": 2588
+    },
+    {
+      "path": "tests/coverage-ui.test.tsx",
+      "sha256": "5db3291b284594bfbd84cf0eb46b53839519e3c77cb1d36e9d42fb95ec827644",
+      "bytes": 5524
+    },
+    {
+      "path": "tests/directions-integration.test.tsx",
+      "sha256": "d27bf0f166e72852f08e6aa571df9938fcc0960a958281ba5017f9bba5e7cc94",
+      "bytes": 4752
+    },
+    {
+      "path": "tests/e2e/coverage.spec.ts",
+      "sha256": "c018a421af7e9c7a7e073fcaddae276772a934fec15b1b612f00e47cd1867c9a",
+      "bytes": 3858
+    },
+    {
+      "path": "tests/e2e/journeys.spec.ts",
+      "sha256": "1c49ddd212f4a9b268e93a759eb047c580588607477336ce8a6da153aaa75ce7",
+      "bytes": 11378
+    },
+    {
+      "path": "tests/map.test.tsx",
+      "sha256": "36bcaccc0f3888e78db558b9b1562331329bb901f973b893f451f3e6a160e620",
+      "bytes": 1919
+    },
+    {
+      "path": "tests/setup.ts",
+      "sha256": "1c1f608698cea6a2bdf222d68ef48fb2a8f6bb99297afe3ed87151cb67739a99",
+      "bytes": 157
+    },
+    {
+      "path": "tests/storage-boundary.test.ts",
+      "sha256": "ebd3129ce207b57c39f5fb4db4b23139bfeaa0d4454dc0d4f06bed2ec2ba52a9",
+      "bytes": 390
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256": "eef64327fc895e31980dee0f0170720b3f406e7ca6e9e4bce46b9058e9a8617e",
+      "bytes": 647
+    },
+    {
+      "path": "vite.config.ts",
+      "sha256": "dedfdd8f75d02a453c37750a70a95575bffe4a3a2c46b4bcead84e3c45be5c90",
+      "bytes": 335
+    }
+  ],
+  "bundle": [
+    {
+      "path": "dist/assets/index-ClwxT8Yk.js",
+      "sha256": "e5207555277f192f477b13fa62a33c1529d0a994c369dffe5f0cb8d703844b05",
+      "bytes": 512947
+    },
+    {
+      "path": "dist/assets/index-DN3Eomjr.css",
+      "sha256": "b5a0cf77f79330ff9c720c2573e792b21efd77ddbef0ec21219f2f830a781fb4",
+      "bytes": 44668
+    },
+    {
+      "path": "dist/favicon.svg",
+      "sha256": "d29fdf9cbc68da0b4bd60ac44d2309427851f08ba8400f70cbdfa79de1b65a66",
+      "bytes": 273
+    },
+    {
+      "path": "dist/images/amenities.svg",
+      "sha256": "7ef732d6ff0555e60acf27d1c557cd247bd32c1d82b18cb8d870ae5d3ad7c738",
+      "bytes": 1211
+    },
+    {
+      "path": "dist/images/boardroom.svg",
+      "sha256": "de797af8e32f88432b657f65c3985140b6411ad1762295e01fe1a5f55f23c924",
+      "bytes": 1205
+    },
+    {
+      "path": "dist/images/corridor.svg",
+      "sha256": "c37be75c3cf52ff0856e9c77d77a9b78fa6c9b546a96c8a7d5b0744a234ca405",
+      "bytes": 649
+    },
+    {
+      "path": "dist/images/courtyard.svg",
+      "sha256": "357d041b68dfcd5b7904ccb4ce83c3e9c8188e414b79db4bd87c0ad91c8568d7",
+      "bytes": 1211
+    },
+    {
+      "path": "dist/images/entrance.svg",
+      "sha256": "7ef732d6ff0555e60acf27d1c557cd247bd32c1d82b18cb8d870ae5d3ad7c738",
+      "bytes": 1211
+    },
+    {
+      "path": "dist/images/green-room.svg",
+      "sha256": "e0104fc1561f0cbefac284a113e85ee2c051d9234cfec1cd2e411811d3546a2f",
+      "bytes": 1205
+    },
+    {
+      "path": "dist/images/studio.svg",
+      "sha256": "4736ee893eabe7e232de0d85ddc0f269ab9cf2f7c238f22d1465bdcb36268740",
+      "bytes": 1205
+    },
+    {
+      "path": "dist/index.html",
+      "sha256": "735467def6db330419ff80cc4d4e54ab9ca4e3b928fe0a6048ad6a3de3e4e9e7",
+      "bytes": 973
+    }
+  ],
+  "documentation": [
+    {
+      "path": "README.md",
+      "sha256": "46b5fde50228111c62254f7b25adbcb3b9c65903ac275d448a672cc3f44d129e",
+      "bytes": 7017
+    },
+    {
+      "path": "docs/delivery.md",
+      "sha256": "6879e6fd2fc09434446f25bda2f33bda9b409b3fd5f5c27fa9e63ed4667605cf",
+      "bytes": 18271
+    },
+    {
+      "path": "docs/design.md",
+      "sha256": "5fcfefa71bdf732395f3ff2cae7e41247e120ffddc3b5e5cd9b3fc8c06e3a38c",
+      "bytes": 3349
+    },
+    {
+      "path": "docs/domain-notes.md",
+      "sha256": "eb0626fe832c8eab862cb541f4390062c5dad2bf552c3bcac64d11abf0b20bb8",
+      "bytes": 11527
+    },
+    {
+      "path": "docs/infrastructure.md",
+      "sha256": "1ec32f005ec5766a552e9dcbc0af9e8fed577c83e508f06a2068f6f20575fce1",
+      "bytes": 28913
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/evidence/coverage-browser-green.txt",
+      "sha256": "ba5635f8671f5c5bcecfa4fb4f4f94796d6c53e9cd2d1a616fed0753e219f85b",
+      "bytes": 1911
+    },
+    {
+      "path": "docs/evidence/coverage-browser-progress.txt",
+      "sha256": "16f312030079d6a70700e0b6306711184221c67102170f54c4209a9052e4f0be",
+      "bytes": 1911
+    },
+    {
+      "path": "docs/evidence/coverage-checks-progress.txt",
+      "sha256": "3c79ed80315f0d713f3b993bd7d68885f4e215e86a9877842758b726e01e48e9",
+      "bytes": 1457
+    },
+    {
+      "path": "docs/evidence/coverage-directions-green.txt",
+      "sha256": "d85a34339a2c012a65a8db6c3d20f064b7f0e069bd42e54d1a37744eb0cbdc8f",
+      "bytes": 330
+    },
+    {
+      "path": "docs/evidence/coverage-directions-red.txt",
+      "sha256": "102fc96489ed09b6d4548d90211cb8c69c2f735bac52389738e8dcb8042e2ffb",
+      "bytes": 1315
+    },
+    {
+      "path": "docs/evidence/coverage-domain-green.txt",
+      "sha256": "fa6b58b061e38fc474ea1aa4f720fd9b1b53786f353b5423698202d2802a9ab6",
+      "bytes": 392
+    },
+    {
+      "path": "docs/evidence/coverage-domain-red.txt",
+      "sha256": "f2191b5c518527ea234f6a6a17b2972779bdf700363301fc53ed0ffa2d0045a0",
+      "bytes": 30126
+    },
+    {
+      "path": "docs/evidence/coverage-entrance-green.txt",
+      "sha256": "ce7a874c36801b63e75884aa2b6a86ae79a1170f542cab22691aba68bab0c6c8",
+      "bytes": 392
+    },
+    {
+      "path": "docs/evidence/coverage-entrance-red.txt",
+      "sha256": "378d9b08541a6d78d0b15653830014c9415c34afbce9a3d5945a555fd2abbf69",
+      "bytes": 4641
+    },
+    {
+      "path": "docs/evidence/coverage-final-checks.txt",
+      "sha256": "dda179cf1bf786f7ea480cd174dcd87a40023b8041bf4cc4dffd4322cb4e513f",
+      "bytes": 1457
+    },
+    {
+      "path": "docs/evidence/coverage-map-red.txt",
+      "sha256": "497e96c2e60c6840e82ab1ebc0bf7e8a54efcf0838aa9431350ba444f3c32eb3",
+      "bytes": 1403
+    },
+    {
+      "path": "docs/evidence/coverage-review-green.txt",
+      "sha256": "996bce41cd52c18d311ae69149a25dd2f5a2122405bb21bc8ba992d316e13385",
+      "bytes": 502
+    },
+    {
+      "path": "docs/evidence/coverage-review-red.txt",
+      "sha256": "31606c28d7a36416a5bb80a2aef95151d0a2629b03068e106db2b842222668b2",
+      "bytes": 2131
+    },
+    {
+      "path": "docs/evidence/coverage-ui-green.txt",
+      "sha256": "8f5fc827a707361e47e559f4ec678f4c5dff85f46272561f1a5b51f5995cb4f8",
+      "bytes": 530
+    },
+    {
+      "path": "docs/evidence/coverage-ui-progress.txt",
+      "sha256": "fce946f9bf1af50b0681b2995628084656faa528c8d170789df55cfd1ef16758",
+      "bytes": 16691
+    },
+    {
+      "path": "docs/evidence/coverage-ui-red.txt",
+      "sha256": "6e013fb4c80d7230c0cd63f09c66fa860868094c31218967a6ad3cf8176777f9",
+      "bytes": 53282
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "output/playwright/booking-receipt.png",
+      "sha256": "9e996d47087bc7d0329b79074c7e9eb689779376755db23709c54c88f7e6a4d7",
+      "bytes": 197927
+    },
+    {
+      "path": "output/playwright/coverage-cremorne-1280.png",
+      "sha256": "08938a62d7f3b7011f7c7c189fbccb659b9523907a99978dae5f005040c637dc",
+      "bytes": 150817
+    },
+    {
+      "path": "output/playwright/coverage-cremorne-1440.png",
+      "sha256": "819de3110417fc2a50b0dc8dd33a5cf33da26eca66f598ae744b96806e754f89",
+      "bytes": 152754
+    },
+    {
+      "path": "output/playwright/coverage-cremorne-1920.png",
+      "sha256": "9b852437e8ce4633f240f506c22bda70b6cbab94824015fa7f827a380a0ae1ff",
+      "bytes": 155455
+    },
+    {
+      "path": "output/playwright/coverage-unimelb-1280.png",
+      "sha256": "8b113430fc22e98a9c57a6430b9c4a241ec0e706e0b7ee576c93d91b2a283949",
+      "bytes": 158921
+    },
+    {
+      "path": "output/playwright/coverage-unimelb-1440.png",
+      "sha256": "78abc3baa3b65d1463db3ca8321906d9f8d852525f2edd2b09f5bc096046572f",
+      "bytes": 161122
+    },
+    {
+      "path": "output/playwright/coverage-unimelb-1920.png",
+      "sha256": "e15b2a3401d5eb213d615ff3f4b5728cc8d3f2a64f6bfe990dfefb741350e2d0",
+      "bytes": 165474
+    },
+    {
+      "path": "output/playwright/explore-1280.png",
+      "sha256": "235463bb2df0fdf40e7c813dd4ad50b1a302b29964e4867af31a23415c8174b4",
+      "bytes": 426123
+    },
+    {
+      "path": "output/playwright/explore-1440.png",
+      "sha256": "22bccf6179f03c73f956a12637ae74e57912b27edb2b94f5887b1f406e4d70c6",
+      "bytes": 524728
+    },
+    {
+      "path": "output/playwright/explore-1920.png",
+      "sha256": "a2a626db54870e9a999dbd1a6798476a3786b45fdee593647c9617dabdbcbe18",
+      "bytes": 733902
+    },
+    {
+      "path": "output/playwright/guide-editor.png",
+      "sha256": "3bd5786b281cce75c79bfea9da44a051db27453556d6309fe117776fad3e31cb",
+      "bytes": 180941
+    },
+    {
+      "path": "output/playwright/login-1440.png",
+      "sha256": "effd2f4d68c44065d86969567a51ad713e2ea8ee9d62a432de0b2fedda687f0f",
+      "bytes": 295323
+    },
+    {
+      "path": "output/playwright/staff-reports.png",
+      "sha256": "7d19eb768b3ffb18bf084d9156188db9fc40d077d48aac8db125736a30a39a8a",
+      "bytes": 67530
+    }
+  ]
+}

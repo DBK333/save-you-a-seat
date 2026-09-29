@@ -1,0 +1,87 @@
+
+> save-you-a-seat@0.1.0 test:e2e
+> playwright test
+
+
+Running 2 tests using 1 worker
+
+(node:46476) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [desktop-chromium] › tests/e2e/journeys.spec.ts:3:1 › guest can discover a place and open walking directions to its entrance (5.5s)
+(node:46487) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 [desktop-chromium] › tests/e2e/journeys.spec.ts:15:1 › ordinary user cannot enter staff moderation (30.1s)
+
+
+  1) [desktop-chromium] › tests/e2e/journeys.spec.ts:3:1 › guest can discover a place and open walking directions to its entrance 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: /find your/i })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: /find your/i }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: /find your/i })
+
+
+      3 | test('guest can discover a place and open walking directions to its entrance',async({page})=>{
+      4 |  await page.goto('/');
+    > 5 |  await expect(page.getByRole('heading',{name:/find your/i})).toBeVisible();
+        |                                                              ^
+      6 |  await page.getByRole('button',{name:/Swan Street amenities/i}).first().click();
+      7 |  const link=page.getByRole('link',{name:/Walk there in Google Maps/i});
+      8 |  await expect(link).toHaveAttribute('target','_blank');
+        at /Users/dorn/Desktop/local programming/Projects/FEITHack/tests/e2e/journeys.spec.ts:5:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/journeys-guest-can-discove-5407a--directions-to-its-entrance-desktop-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/journeys-guest-can-discove-5407a--directions-to-its-entrance-desktop-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/journeys-guest-can-discove-5407a--directions-to-its-entrance-desktop-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/journeys-guest-can-discove-5407a--directions-to-its-entrance-desktop-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [desktop-chromium] › tests/e2e/journeys.spec.ts:15:1 › ordinary user cannot enter staff moderation 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: /Alex Morgan/i })
+
+
+      15 | test('ordinary user cannot enter staff moderation',async({page})=>{
+      16 |  await page.goto('/login');
+    > 17 |  await page.getByRole('button',{name:/Alex Morgan/i}).click();
+         |                                                       ^
+      18 |  await page.goto('/staff/reports');
+      19 |  await expect(page.getByText(/staff access|staff sign.in|staff only/i).first()).toBeVisible();
+      20 | });
+        at /Users/dorn/Desktop/local programming/Projects/FEITHack/tests/e2e/journeys.spec.ts:17:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/journeys-ordinary-user-cannot-enter-staff-moderation-desktop-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/journeys-ordinary-user-cannot-enter-staff-moderation-desktop-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/journeys-ordinary-user-cannot-enter-staff-moderation-desktop-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/journeys-ordinary-user-cannot-enter-staff-moderation-desktop-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [desktop-chromium] › tests/e2e/journeys.spec.ts:3:1 › guest can discover a place and open walking directions to its entrance 
+    [desktop-chromium] › tests/e2e/journeys.spec.ts:15:1 › ordinary user cannot enter staff moderation 

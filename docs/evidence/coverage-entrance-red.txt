@@ -1,0 +1,98 @@
+
+> save-you-a-seat@0.1.0 test
+> vitest run src/services/demo.test.ts tests/contract.test.ts
+
+
+ RUN  v4.1.11 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+ ❯ src/services/demo.test.ts (37 tests | 6 failed) 75ms
+     × rejects an entrance outside supported Melbourne coverage: {"lat":-33.8688,"lng":151.2093} 2ms
+     × rejects an entrance outside supported Melbourne coverage: {"lat":51.5072,"lng":-0.1276} 0ms
+     × rejects an entrance outside supported Melbourne coverage: {"lat":-37.83,"lng":145.03} 0ms
+     × rejects an entrance outside supported Melbourne coverage: null 0ms
+     × revalidates an old persisted draft before submission 1ms
+     × cannot publish an old out-of-area pending guide through new confirmations 0ms
+ ❯ tests/contract.test.ts (14 tests | 1 failed) 179ms
+     × allows optional guide pins only within the supported Melbourne focus area 17ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/contract.test.ts > contract payload compatibility > allows optional guide pins only within the supported Melbourne focus area
+AssertionError: GuideInput: null: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ assertPayload tests/contract.test.ts:104:66
+    102|     diagnostics = error instanceof Error ? error.message : String(erro…
+    103|   }
+    104|   expect(valid, `${schemaName}: ${JSON.stringify(diagnostics)}`).toBe(…
+       |                                                                  ^
+    105|   expect(compiled, `${schemaName} must compile before payload validati…
+    106|     true,
+ ❯ tests/contract.test.ts:115:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  src/services/demo.test.ts > guide authoring and community publication > rejects an entrance outside supported Melbourne coverage: {"lat":-33.8688,"lng":151.2093}
+ FAIL  src/services/demo.test.ts > guide authoring and community publication > rejects an entrance outside supported Melbourne coverage: {"lat":51.5072,"lng":-0.1276}
+ FAIL  src/services/demo.test.ts > guide authoring and community publication > rejects an entrance outside supported Melbourne coverage: {"lat":-37.83,"lng":145.03}
+ FAIL  src/services/demo.test.ts > guide authoring and community publication > rejects an entrance outside supported Melbourne coverage: null
+AssertionError: expected function to throw an error, but it didn't
+ ❯ src/services/demo.test.ts:318:98
+    316|   ])("rejects an entrance outside supported Melbourne coverage: %j", (…
+    317|     const s = service();
+    318|     expect(() => s.saveDraft({ ...input(), entranceLocation: entranceL…
+       |                                                                                                  ^
+    319|       expect.objectContaining({ status: 422, code: "VALIDATION_ERROR",…
+    320|     );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  src/services/demo.test.ts > guide authoring and community publication > revalidates an old persisted draft before submission
+AssertionError: expected [Function] to throw an error
+
+- Expected:
+null
+
++ Received:
+undefined
+
+ ❯ src/services/demo.test.ts:334:43
+    332|     const draft = service().saveDraft(input());
+    333|     const s = service({ guides: [{ ...draft, entranceLocation: { lat: …
+    334|     expect(() => s.submitGuide(draft.id)).toThrow(/Melbourne.*coverage…
+       |                                           ^
+    335|     expect(s.getSnapshot().guides[0].status).toBe("draft");
+    336|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  src/services/demo.test.ts > guide authoring and community publication > cannot publish an old out-of-area pending guide through new confirmations
+AssertionError: expected [Function] to throw an error
+
+- Expected:
+null
+
++ Received:
+undefined
+
+ ❯ src/services/demo.test.ts:342:44
+    340|     const s = service({ guides: [{ ...guide, entranceLocation: { lat: …
+    341|     s.login("user-sam");
+    342|     expect(() => s.confirmGuide(guide.id)).toThrow(/Melbourne.*coverag…
+       |                                            ^
+    343|     expect(s.getSnapshot().guides[0].status).toBe("pending");
+    344|     expect(s.getSnapshot().guides[0].confirmations).toHaveLength(2);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  7 failed | 44 passed (51)
+   Start at  00:09:53
+   Duration  459ms (transform 73ms, setup 103ms, import 103ms, tests 254ms, environment 242ms)
+

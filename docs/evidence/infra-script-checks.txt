@@ -1,0 +1,35 @@
+$ python3 scripts/package-backend.py
+usage: package-backend.py [-h] [--source SOURCE] [--output OUTPUT]
+package-backend.py: error: /Users/dorn/Desktop/local programming/Projects/FEITHack/api/app.py is missing. Python backend implementation is a later stage; no placeholder artifact will be built.
+Exit status: 2
+$ python3 scripts/cloud.py bootstrap-change-set --stack syas-test-bootstrap --change-set initial --type CREATE --environment test
+{
+  "parameters": {
+    "Environment": "test"
+  },
+  "note": "Temporary parameters file is generated during a live run."
+}
+{
+  "dryRun": true,
+  "command": [
+    "aws",
+    "--region",
+    "ap-southeast-2",
+    "--no-cli-pager",
+    "cloudformation",
+    "create-change-set",
+    "--stack-name",
+    "syas-test-bootstrap",
+    "--change-set-name",
+    "initial",
+    "--change-set-type",
+    "CREATE",
+    "--template-body",
+    "file:///Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml",
+    "--parameters",
+    "file:///var/folders/bh/m55y8zrn0bq8pq8b7h0v0w7w0000gn/T/tmpz0h3axrm/parameters.json",
+    "--output",
+    "json"
+  ]
+}
+Exit status: 0

@@ -1,0 +1,113 @@
+
+> save-you-a-seat@0.1.0 test
+> vitest run tests/app.test.tsx
+
+
+ RUN  v3.2.7 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+ ❯ tests/app.test.tsx (3 tests | 3 failed) 33ms
+   × desktop app behavior > provides place discovery and personal booking navigation 29ms
+     → Unable to find an accessible element with the role "link" and name "Explore"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div />[39m
+[36m</body>[39m
+   × desktop app behavior > offers separate regular and staff sign-in experiences 2ms
+     → Unable to find an accessible element with the role "heading" and name `/welcome back/i`
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div />[39m
+[36m</body>[39m
+   × desktop app behavior > explains the unconnected demo recovery flow without requesting a stored password 1ms
+     → Unable to find an accessible element with the role "heading" and name `/reset your password/i`
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div />[39m
+[36m</body>[39m
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/app.test.tsx > desktop app behavior > provides place discovery and personal booking navigation
+TestingLibraryElementError: Unable to find an accessible element with the role "link" and name "Explore"
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div />[39m
+[36m</body>[39m
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ tests/app.test.tsx:11:19
+      9|   it('provides place discovery and personal booking navigation', () =>…
+     10|     show();
+     11|     expect(screen.getByRole('link', { name: 'Explore' })).toBeVisible(…
+       |                   ^
+     12|     expect(screen.getByRole('link', { name: 'My bookings' })).toBeVisi…
+     13|     expect(screen.getByText(/demonstration/i)).toBeVisible();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/app.test.tsx > desktop app behavior > offers separate regular and staff sign-in experiences
+TestingLibraryElementError: Unable to find an accessible element with the role "heading" and name `/welcome back/i`
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div />[39m
+[36m</body>[39m
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ tests/app.test.tsx:18:19
+     16|   it('offers separate regular and staff sign-in experiences', async ()…
+     17|     show('/login');
+     18|     expect(screen.getByRole('heading', { name: /welcome back/i })).toB…
+       |                   ^
+     19|     expect(screen.getByRole('button', { name: /continue as alex/i })).…
+     20|     await userEvent.click(screen.getByRole('link', { name: /staff sign…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/app.test.tsx > desktop app behavior > explains the unconnected demo recovery flow without requesting a stored password
+TestingLibraryElementError: Unable to find an accessible element with the role "heading" and name `/reset your password/i`
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div />[39m
+[36m</body>[39m
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ tests/app.test.tsx:27:19
+     25|   it('explains the unconnected demo recovery flow without requesting a…
+     26|     show('/forgot-password');
+     27|     expect(screen.getByRole('heading', { name: /reset your password/i …
+       |                   ^
+     28|     expect(screen.getByLabelText('Email address')).toHaveAttribute('ty…
+     29|     expect(screen.queryByLabelText(/^password$/i)).not.toBeInTheDocume…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  17:16:39
+   Duration  448ms (transform 20ms, setup 76ms, collect 40ms, tests 33ms, environment 154ms, prepare 34ms)
+

@@ -1,0 +1,106 @@
+UTC: 2026-09-29T07:15:07.304076+00:00
+Stage: RED before template implementation
+$ /tmp/syas-infra-tools/cfn-guard-v3-aarch64-macos-latest/cfn-guard validate --rules infra/rules/common.guard --rules infra/rules/bootstrap.guard --data infra/bootstrap.yaml --show-summary all
+/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml Status = FAIL
+FAILED rules
+common.guard/private_encrypted_retained_buckets    FAIL
+common.guard/https_bucket_policy                   FAIL
+common.guard/environment_and_region_output         FAIL
+---
+Evaluation of rules common.guard against data /Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml
+--
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml] is not compliant with [https_bucket_policy] due to retrieval error. Error Message [No more entries for value at path = /Resources[L:2,C:11] on type = map ]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml] is not compliant with [https_bucket_policy] due to retrieval error. Error Message [Query %policies[*].Properties.PolicyDocument.Statement[*] did not resolve to correct value, reason No more entries for value at path = /Resources[L:2,C:11] on type = map ]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml] is not compliant with [private_encrypted_retained_buckets] due to retrieval error. Error Message [No more entries for value at path = /Resources[L:2,C:11] on type = map ]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml] is not compliant with [private_encrypted_retained_buckets] due to retrieval error. Error Message [Query %buckets did not resolve to correct value, reason No more entries for value at path = /Resources[L:2,C:11] on type = map ]
+Property traversed until [] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml] is not compliant with [environment_and_region_output] due to retrieval error. Error Message [Could not find key Parameters inside struct at path [L:0,C:0]]
+Property traversed until [] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml] is not compliant with [environment_and_region_output] due to retrieval error. Error Message [Could not find key Outputs inside struct at path [L:0,C:0]]
+--
+/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml Status = FAIL
+FAILED rules
+bootstrap.guard/bootstrap_resources_exist    FAIL
+---
+Evaluation of rules bootstrap.guard against data /Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml
+--
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml] is not compliant with [bootstrap_resources_exist] due to retrieval error. Error Message [Could not find key ArtifactsBucket inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml] is not compliant with [bootstrap_resources_exist] due to retrieval error. Error Message [Could not find key WebApp inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml] is not compliant with [bootstrap_resources_exist] due to retrieval error. Error Message [Could not find key WebBranch inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml] is not compliant with [bootstrap_resources_exist] due to retrieval error. Error Message [Could not find key WebApp inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml] is not compliant with [bootstrap_resources_exist] due to retrieval error. Error Message [Could not find key WebBranch inside struct at path /Resources[L:2,C:11]]
+Property traversed until [] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml] is not compliant with [bootstrap_resources_exist] due to retrieval error. Error Message [Could not find key Outputs inside struct at path [L:0,C:0]]
+Property traversed until [] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml] is not compliant with [bootstrap_resources_exist] due to retrieval error. Error Message [Could not find key Outputs inside struct at path [L:0,C:0]]
+Property traversed until [] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml] is not compliant with [bootstrap_resources_exist] due to retrieval error. Error Message [Could not find key Outputs inside struct at path [L:0,C:0]]
+--
+Exit status: 19
+$ /tmp/syas-infra-tools/cfn-guard-v3-aarch64-macos-latest/cfn-guard validate --rules infra/rules/common.guard --rules infra/rules/application.guard --data infra/application.yaml --show-summary all
+/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml Status = FAIL
+FAILED rules
+common.guard/private_encrypted_retained_buckets    FAIL
+common.guard/https_bucket_policy                   FAIL
+common.guard/environment_and_region_output         FAIL
+---
+Evaluation of rules common.guard against data /Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml
+--
+Property traversed until [] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [environment_and_region_output] due to retrieval error. Error Message [Could not find key Parameters inside struct at path [L:0,C:0]]
+Property traversed until [] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [environment_and_region_output] due to retrieval error. Error Message [Could not find key Outputs inside struct at path [L:0,C:0]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [https_bucket_policy] due to retrieval error. Error Message [No more entries for value at path = /Resources[L:2,C:11] on type = map ]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [https_bucket_policy] due to retrieval error. Error Message [Query %policies[*].Properties.PolicyDocument.Statement[*] did not resolve to correct value, reason No more entries for value at path = /Resources[L:2,C:11] on type = map ]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [private_encrypted_retained_buckets] due to retrieval error. Error Message [No more entries for value at path = /Resources[L:2,C:11] on type = map ]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [private_encrypted_retained_buckets] due to retrieval error. Error Message [Query %buckets did not resolve to correct value, reason No more entries for value at path = /Resources[L:2,C:11] on type = map ]
+--
+/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml Status = FAIL
+FAILED rules
+application.guard/application_resources_exist     FAIL
+application.guard/durable_tables                  FAIL
+application.guard/account_safety                  FAIL
+application.guard/routes_protected                FAIL
+application.guard/known_routes_present            FAIL
+application.guard/scoped_execution_permissions    FAIL
+application.guard/restricted_cors                 FAIL
+application.guard/immutable_python_package        FAIL
+---
+Evaluation of rules application.guard against data /Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml
+--
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [routes_protected] due to retrieval error. Error Message [No more entries for value at path = /Resources[L:2,C:11] on type = map ]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [routes_protected] due to retrieval error. Error Message [Query %routes[*]. (filter-clauses) did not resolve to correct value, reason No more entries for value at path = /Resources[L:2,C:11] on type = map ]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [application_resources_exist] due to retrieval error. Error Message [Could not find key FacilitiesTable inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [application_resources_exist] due to retrieval error. Error Message [Could not find key BookingsTable inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [application_resources_exist] due to retrieval error. Error Message [Could not find key CommunityTable inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [application_resources_exist] due to retrieval error. Error Message [Could not find key UserPool inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [application_resources_exist] due to retrieval error. Error Message [Could not find key UserPoolClient inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [application_resources_exist] due to retrieval error. Error Message [Could not find key StaffGroup inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [application_resources_exist] due to retrieval error. Error Message [Could not find key ApiFunction inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [application_resources_exist] due to retrieval error. Error Message [Could not find key Api inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [application_resources_exist] due to retrieval error. Error Message [Could not find key JwtAuthorizer inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [application_resources_exist] due to retrieval error. Error Message [Could not find key ApiLogGroup inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [application_resources_exist] due to retrieval error. Error Message [Could not find key FunctionLogGroup inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [application_resources_exist] due to retrieval error. Error Message [Could not find key FunctionErrorsAlarm inside struct at path /Resources[L:2,C:11]]
+Property traversed until [] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [application_resources_exist] due to retrieval error. Error Message [Could not find key Outputs inside struct at path [L:0,C:0]]
+Property traversed until [] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [application_resources_exist] due to retrieval error. Error Message [Could not find key Outputs inside struct at path [L:0,C:0]]
+Property traversed until [] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [application_resources_exist] due to retrieval error. Error Message [Could not find key Outputs inside struct at path [L:0,C:0]]
+Property traversed until [] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [application_resources_exist] due to retrieval error. Error Message [Could not find key Outputs inside struct at path [L:0,C:0]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [immutable_python_package] due to retrieval error. Error Message [Could not find key ApiFunction inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [immutable_python_package] due to retrieval error. Error Message [Could not find key ApiFunction inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [immutable_python_package] due to retrieval error. Error Message [Could not find key ApiFunction inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [immutable_python_package] due to retrieval error. Error Message [Could not find key ApiFunction inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [immutable_python_package] due to retrieval error. Error Message [Could not find key ApiFunction inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [immutable_python_package] due to retrieval error. Error Message [Could not find key ApiFunction inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [immutable_python_package] due to retrieval error. Error Message [Could not find key ApiFunction inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [scoped_execution_permissions] due to retrieval error. Error Message [Query Resources.FunctionRole.Properties.Policies[*].PolicyDocument.Statement[*] did not resolve to correct value, reason Could not find key FunctionRole inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [durable_tables] due to retrieval error. Error Message [No more entries for value at path = /Resources[L:2,C:11] on type = map ]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [durable_tables] due to retrieval error. Error Message [Query %tables did not resolve to correct value, reason No more entries for value at path = /Resources[L:2,C:11] on type = map ]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [known_routes_present] due to retrieval error. Error Message [Could not find key CreateBookingRoute inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [known_routes_present] due to retrieval error. Error Message [Could not find key MyBookingsRoute inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [known_routes_present] due to retrieval error. Error Message [Could not find key CancelBookingRoute inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [known_routes_present] due to retrieval error. Error Message [Could not find key StaffReportsRoute inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [known_routes_present] due to retrieval error. Error Message [Could not find key StaffDecisionRoute inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [account_safety] due to retrieval error. Error Message [Could not find key UserPool inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [account_safety] due to retrieval error. Error Message [Could not find key UserPoolClient inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [account_safety] due to retrieval error. Error Message [Could not find key StaffGroup inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [account_safety] due to retrieval error. Error Message [Could not find key JwtAuthorizer inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [restricted_cors] due to retrieval error. Error Message [Could not find key Api inside struct at path /Resources[L:2,C:11]]
+Property traversed until [/Resources] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [restricted_cors] due to retrieval error. Error Message [Could not find key ImagesBucket inside struct at path /Resources[L:2,C:11]]
+Property traversed until [] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [restricted_cors] due to retrieval error. Error Message [Could not find key Parameters inside struct at path [L:0,C:0]]
+Property traversed until [] in data [/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml] is not compliant with [restricted_cors] due to retrieval error. Error Message [Could not find key Rules inside struct at path [L:0,C:0]]
+--
+Exit status: 19

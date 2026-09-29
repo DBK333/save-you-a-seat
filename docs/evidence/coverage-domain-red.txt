@@ -1,0 +1,905 @@
+
+> save-you-a-seat@0.1.0 test
+> vitest run src/domain/coverage.test.ts src/domain/rules.test.ts tests/contract.test.ts
+
+
+ RUN  v4.1.11 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+ ❯ src/domain/coverage.test.ts (10 tests | 2 failed) 5ms
+     × accepts Cremorne and UniMelb origins within the local support window 3ms
+     × includes the documented edges of the supported origin rectangle 0ms
+ ❯ src/domain/rules.test.ts (34 tests | 19 failed) 22ms
+     × excludes missing country from discovery without failing the valid results 8ms
+     × excludes foreign country from discovery without failing the valid results 1ms
+     × excludes unsupported area from discovery without failing the valid results 1ms
+     × excludes outside Cremorne from discovery without failing the valid results 0ms
+     × excludes nonfinite location from discovery without failing the valid results 1ms
+     × excludes outside entrance from discovery without failing the valid results 1ms
+     × excludes missing location from discovery without failing the valid results 0ms
+     × excludes missing amenities from discovery without failing the valid results 0ms
+     × excludes malformed amenities from discovery without failing the valid results 0ms
+     × excludes invalid hours from discovery without failing the valid results 1ms
+     × excludes missing name from discovery without failing the valid results 1ms
+     × excludes nonfinite capacity from discovery without failing the valid results 0ms
+     × excludes null entry from discovery without failing the valid results 0ms
+     × counts future half-hours only and finds the next available start 0ms
+     × excludes elapsed starts entirely instead of counting them as reserved 0ms
+     × ignores cancelled reservations and reservations for other rooms 0ms
+     × counts occupied blocks once and leaves the adjacent start available 0ms
+     × returns no next start when every remaining slot is reserved 0ms
+     × uses Melbourne daylight-saving time for a future date 0ms
+ ❯ tests/contract.test.ts (13 tests | 2 failed) 141ms
+     × requires the supported Australian catalog identity on facility payloads 9ms
+     × accepts a facility with no published guide and with a redacted guide 8ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 23 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/contract.test.ts > contract payload compatibility > requires the supported Australian catalog identity on facility payloads
+AssertionError: Facility: [{"instancePath":"","schemaPath":"#/additionalProperties","keyword":"additionalProperties","params":{"additionalProperty":"countryCode"},"message":"must NOT have additional properties"},{"instancePath":"","schemaPath":"#/additionalProperties","keyword":"additionalProperties","params":{"additionalProperty":"area"},"message":"must NOT have additional properties"}]: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ assertPayload tests/contract.test.ts:104:66
+    102|     diagnostics = error instanceof Error ? error.message : String(erro…
+    103|   }
+    104|   expect(valid, `${schemaName}: ${JSON.stringify(diagnostics)}`).toBe(…
+       |                                                                  ^
+    105|   expect(compiled, `${schemaName} must compile before payload validati…
+    106|     true,
+ ❯ tests/contract.test.ts:112:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/23]⎯
+
+ FAIL  tests/contract.test.ts > contract payload compatibility > accepts a facility with no published guide and with a redacted guide
+AssertionError: FacilityDetails: [{"instancePath":"/facility","schemaPath":"#/properties/facility/additionalProperties","keyword":"additionalProperties","params":{"additionalProperty":"countryCode"},"message":"must NOT have additional properties"},{"instancePath":"/facility","schemaPath":"#/properties/facility/additionalProperties","keyword":"additionalProperties","params":{"additionalProperty":"area"},"message":"must NOT have additional properties"}]: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ assertPayload tests/contract.test.ts:104:66
+    102|     diagnostics = error instanceof Error ? error.message : String(erro…
+    103|   }
+    104|   expect(valid, `${schemaName}: ${JSON.stringify(diagnostics)}`).toBe(…
+       |                                                                  ^
+    105|   expect(compiled, `${schemaName} must compile before payload validati…
+    106|     true,
+ ❯ tests/contract.test.ts:119:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/23]⎯
+
+ FAIL  src/domain/coverage.test.ts > local origin coverage > accepts Cremorne and UniMelb origins within the local support window
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/domain/coverage.test.ts:12:62
+     10| describe("local origin coverage", () => {
+     11|   it("accepts Cremorne and UniMelb origins within the local support wi…
+     12|     expect(isSupportedOrigin({ lat: -37.83, lng: 144.995 })).toBe(true…
+       |                                                              ^
+     13|     expect(isSupportedOrigin({ lat: -37.7983, lng: 144.961 })).toBe(tr…
+     14|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/23]⎯
+
+ FAIL  src/domain/coverage.test.ts > local origin coverage > includes the documented edges of the supported origin rectangle
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/domain/coverage.test.ts:17:106
+     15|
+     16|   it("includes the documented edges of the supported origin rectangle"…
+     17|     expect(isSupportedOrigin({ lat: SUPPORTED_ORIGIN_BOUNDS.north, lng…
+       |                                                                                                          ^
+     18|     expect(isSupportedOrigin({ lat: SUPPORTED_ORIGIN_BOUNDS.south, lng…
+     19|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/23]⎯
+
+ FAIL  src/domain/rules.test.ts > discovery and external walking directions > excludes missing country from discovery without failing the valid results
+AssertionError: expected [ { id: 'test-toilet', …(14) }, …(1) ] to deeply equal [ { id: 'test-toilet', …(14) } ]
+
+- Expected
++ Received
+
+@@ -26,6 +26,35 @@
+      },
+      "name": "Garden toilet",
+      "sample": true,
+      "type": "toilet",
+    },
++   {
++     "access": "Public",
++     "address": "Cremorne",
++     "amenities": [
++       "Accessible",
++       "Baby changing",
++     ],
++     "area": "cremorne",
++     "countryCode": undefined,
++     "description": "Sample",
++     "entranceLocation": {
++       "lat": -37.8302,
++       "lng": 144.9902,
++     },
++     "floor": "Ground",
++     "hours": {
++       "close": 18,
++       "open": 8,
++     },
++     "id": "test-toilet",
++     "image": "",
++     "location": {
++       "lat": -37.83,
++       "lng": 144.99,
++     },
++     "name": "Garden toilet",
++     "sample": true,
++     "type": "toilet",
++   },
+  ]
+
+ ❯ src/domain/rules.test.ts:59:22
+     57|     const search = () => filterFacilities([toilet, value as Facility],…
+     58|     expect(search).not.toThrow();
+     59|     expect(search()).toEqual([toilet]);
+       |                      ^
+     60|   });
+     61|   it("combines category, search, accessibility, capacity, and equipmen…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/23]⎯
+
+ FAIL  src/domain/rules.test.ts > discovery and external walking directions > excludes foreign country from discovery without failing the valid results
+AssertionError: expected [ { id: 'test-toilet', …(14) }, …(1) ] to deeply equal [ { id: 'test-toilet', …(14) } ]
+
+- Expected
++ Received
+
+@@ -26,6 +26,35 @@
+      },
+      "name": "Garden toilet",
+      "sample": true,
+      "type": "toilet",
+    },
++   {
++     "access": "Public",
++     "address": "Cremorne",
++     "amenities": [
++       "Accessible",
++       "Baby changing",
++     ],
++     "area": "cremorne",
++     "countryCode": "NZ",
++     "description": "Sample",
++     "entranceLocation": {
++       "lat": -37.8302,
++       "lng": 144.9902,
++     },
++     "floor": "Ground",
++     "hours": {
++       "close": 18,
++       "open": 8,
++     },
++     "id": "test-toilet",
++     "image": "",
++     "location": {
++       "lat": -37.83,
++       "lng": 144.99,
++     },
++     "name": "Garden toilet",
++     "sample": true,
++     "type": "toilet",
++   },
+  ]
+
+ ❯ src/domain/rules.test.ts:59:22
+     57|     const search = () => filterFacilities([toilet, value as Facility],…
+     58|     expect(search).not.toThrow();
+     59|     expect(search()).toEqual([toilet]);
+       |                      ^
+     60|   });
+     61|   it("combines category, search, accessibility, capacity, and equipmen…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/23]⎯
+
+ FAIL  src/domain/rules.test.ts > discovery and external walking directions > excludes unsupported area from discovery without failing the valid results
+AssertionError: expected [ { id: 'test-toilet', …(14) }, …(1) ] to deeply equal [ { id: 'test-toilet', …(14) } ]
+
+- Expected
++ Received
+
+@@ -26,6 +26,35 @@
+      },
+      "name": "Garden toilet",
+      "sample": true,
+      "type": "toilet",
+    },
++   {
++     "access": "Public",
++     "address": "Cremorne",
++     "amenities": [
++       "Accessible",
++       "Baby changing",
++     ],
++     "area": "parkville",
++     "countryCode": "AU",
++     "description": "Sample",
++     "entranceLocation": {
++       "lat": -37.8302,
++       "lng": 144.9902,
++     },
++     "floor": "Ground",
++     "hours": {
++       "close": 18,
++       "open": 8,
++     },
++     "id": "test-toilet",
++     "image": "",
++     "location": {
++       "lat": -37.83,
++       "lng": 144.99,
++     },
++     "name": "Garden toilet",
++     "sample": true,
++     "type": "toilet",
++   },
+  ]
+
+ ❯ src/domain/rules.test.ts:59:22
+     57|     const search = () => filterFacilities([toilet, value as Facility],…
+     58|     expect(search).not.toThrow();
+     59|     expect(search()).toEqual([toilet]);
+       |                      ^
+     60|   });
+     61|   it("combines category, search, accessibility, capacity, and equipmen…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/23]⎯
+
+ FAIL  src/domain/rules.test.ts > discovery and external walking directions > excludes outside Cremorne from discovery without failing the valid results
+AssertionError: expected [ { id: 'test-toilet', …(14) }, …(1) ] to deeply equal [ { id: 'test-toilet', …(14) } ]
+
+- Expected
++ Received
+
+@@ -26,6 +26,35 @@
+      },
+      "name": "Garden toilet",
+      "sample": true,
+      "type": "toilet",
+    },
++   {
++     "access": "Public",
++     "address": "Cremorne",
++     "amenities": [
++       "Accessible",
++       "Baby changing",
++     ],
++     "area": "cremorne",
++     "countryCode": "AU",
++     "description": "Sample",
++     "entranceLocation": {
++       "lat": -37.8302,
++       "lng": 144.9902,
++     },
++     "floor": "Ground",
++     "hours": {
++       "close": 18,
++       "open": 8,
++     },
++     "id": "test-toilet",
++     "image": "",
++     "location": {
++       "lat": -37.7983,
++       "lng": 144.961,
++     },
++     "name": "Garden toilet",
++     "sample": true,
++     "type": "toilet",
++   },
+  ]
+
+ ❯ src/domain/rules.test.ts:59:22
+     57|     const search = () => filterFacilities([toilet, value as Facility],…
+     58|     expect(search).not.toThrow();
+     59|     expect(search()).toEqual([toilet]);
+       |                      ^
+     60|   });
+     61|   it("combines category, search, accessibility, capacity, and equipmen…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/23]⎯
+
+ FAIL  src/domain/rules.test.ts > discovery and external walking directions > excludes nonfinite location from discovery without failing the valid results
+AssertionError: expected [ { id: 'test-toilet', …(14) }, …(1) ] to deeply equal [ { id: 'test-toilet', …(14) } ]
+
+- Expected
++ Received
+
+@@ -26,6 +26,35 @@
+      },
+      "name": "Garden toilet",
+      "sample": true,
+      "type": "toilet",
+    },
++   {
++     "access": "Public",
++     "address": "Cremorne",
++     "amenities": [
++       "Accessible",
++       "Baby changing",
++     ],
++     "area": "cremorne",
++     "countryCode": "AU",
++     "description": "Sample",
++     "entranceLocation": {
++       "lat": -37.8302,
++       "lng": 144.9902,
++     },
++     "floor": "Ground",
++     "hours": {
++       "close": 18,
++       "open": 8,
++     },
++     "id": "test-toilet",
++     "image": "",
++     "location": {
++       "lat": NaN,
++       "lng": 144.99,
++     },
++     "name": "Garden toilet",
++     "sample": true,
++     "type": "toilet",
++   },
+  ]
+
+ ❯ src/domain/rules.test.ts:59:22
+     57|     const search = () => filterFacilities([toilet, value as Facility],…
+     58|     expect(search).not.toThrow();
+     59|     expect(search()).toEqual([toilet]);
+       |                      ^
+     60|   });
+     61|   it("combines category, search, accessibility, capacity, and equipmen…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/23]⎯
+
+ FAIL  src/domain/rules.test.ts > discovery and external walking directions > excludes outside entrance from discovery without failing the valid results
+AssertionError: expected [ { id: 'test-toilet', …(14) }, …(1) ] to deeply equal [ { id: 'test-toilet', …(14) } ]
+
+- Expected
++ Received
+
+@@ -26,6 +26,35 @@
+      },
+      "name": "Garden toilet",
+      "sample": true,
+      "type": "toilet",
+    },
++   {
++     "access": "Public",
++     "address": "Cremorne",
++     "amenities": [
++       "Accessible",
++       "Baby changing",
++     ],
++     "area": "cremorne",
++     "countryCode": "AU",
++     "description": "Sample",
++     "entranceLocation": {
++       "lat": -33.86,
++       "lng": 151.21,
++     },
++     "floor": "Ground",
++     "hours": {
++       "close": 18,
++       "open": 8,
++     },
++     "id": "test-toilet",
++     "image": "",
++     "location": {
++       "lat": -37.83,
++       "lng": 144.99,
++     },
++     "name": "Garden toilet",
++     "sample": true,
++     "type": "toilet",
++   },
+  ]
+
+ ❯ src/domain/rules.test.ts:59:22
+     57|     const search = () => filterFacilities([toilet, value as Facility],…
+     58|     expect(search).not.toThrow();
+     59|     expect(search()).toEqual([toilet]);
+       |                      ^
+     60|   });
+     61|   it("combines category, search, accessibility, capacity, and equipmen…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/23]⎯
+
+ FAIL  src/domain/rules.test.ts > discovery and external walking directions > excludes missing location from discovery without failing the valid results
+AssertionError: expected [ { id: 'test-toilet', …(14) }, …(1) ] to deeply equal [ { id: 'test-toilet', …(14) } ]
+
+- Expected
++ Received
+
+@@ -26,6 +26,32 @@
+      },
+      "name": "Garden toilet",
+      "sample": true,
+      "type": "toilet",
+    },
++   {
++     "access": "Public",
++     "address": "Cremorne",
++     "amenities": [
++       "Accessible",
++       "Baby changing",
++     ],
++     "area": "cremorne",
++     "countryCode": "AU",
++     "description": "Sample",
++     "entranceLocation": {
++       "lat": -37.8302,
++       "lng": 144.9902,
++     },
++     "floor": "Ground",
++     "hours": {
++       "close": 18,
++       "open": 8,
++     },
++     "id": "test-toilet",
++     "image": "",
++     "location": undefined,
++     "name": "Garden toilet",
++     "sample": true,
++     "type": "toilet",
++   },
+  ]
+
+ ❯ src/domain/rules.test.ts:59:22
+     57|     const search = () => filterFacilities([toilet, value as Facility],…
+     58|     expect(search).not.toThrow();
+     59|     expect(search()).toEqual([toilet]);
+       |                      ^
+     60|   });
+     61|   it("combines category, search, accessibility, capacity, and equipmen…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/23]⎯
+
+ FAIL  src/domain/rules.test.ts > discovery and external walking directions > excludes missing amenities from discovery without failing the valid results
+AssertionError: expected [Function search] to not throw an error but 'TypeError: Cannot read properties of …' was thrown
+
+- Expected:
+undefined
+
++ Received:
+"TypeError: Cannot read properties of undefined (reading 'map')"
+
+ ❯ src/domain/rules.test.ts:58:24
+     56|   ])("excludes %s from discovery without failing the valid results", (…
+     57|     const search = () => filterFacilities([toilet, value as Facility],…
+     58|     expect(search).not.toThrow();
+       |                        ^
+     59|     expect(search()).toEqual([toilet]);
+     60|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/23]⎯
+
+ FAIL  src/domain/rules.test.ts > discovery and external walking directions > excludes malformed amenities from discovery without failing the valid results
+AssertionError: expected [Function search] to not throw an error but 'TypeError: amenity.toLocaleLowerCase …' was thrown
+
+- Expected:
+undefined
+
++ Received:
+"TypeError: amenity.toLocaleLowerCase is not a function"
+
+ ❯ src/domain/rules.test.ts:58:24
+     56|   ])("excludes %s from discovery without failing the valid results", (…
+     57|     const search = () => filterFacilities([toilet, value as Facility],…
+     58|     expect(search).not.toThrow();
+       |                        ^
+     59|     expect(search()).toEqual([toilet]);
+     60|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/23]⎯
+
+ FAIL  src/domain/rules.test.ts > discovery and external walking directions > excludes invalid hours from discovery without failing the valid results
+AssertionError: expected [ { id: 'test-toilet', …(14) }, …(1) ] to deeply equal [ { id: 'test-toilet', …(14) } ]
+
+- Expected
++ Received
+
+@@ -26,6 +26,35 @@
+      },
+      "name": "Garden toilet",
+      "sample": true,
+      "type": "toilet",
+    },
++   {
++     "access": "Public",
++     "address": "Cremorne",
++     "amenities": [
++       "Accessible",
++       "Baby changing",
++     ],
++     "area": "cremorne",
++     "countryCode": "AU",
++     "description": "Sample",
++     "entranceLocation": {
++       "lat": -37.8302,
++       "lng": 144.9902,
++     },
++     "floor": "Ground",
++     "hours": {
++       "close": 8,
++       "open": 20,
++     },
++     "id": "test-toilet",
++     "image": "",
++     "location": {
++       "lat": -37.83,
++       "lng": 144.99,
++     },
++     "name": "Garden toilet",
++     "sample": true,
++     "type": "toilet",
++   },
+  ]
+
+ ❯ src/domain/rules.test.ts:59:22
+     57|     const search = () => filterFacilities([toilet, value as Facility],…
+     58|     expect(search).not.toThrow();
+     59|     expect(search()).toEqual([toilet]);
+       |                      ^
+     60|   });
+     61|   it("combines category, search, accessibility, capacity, and equipmen…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/23]⎯
+
+ FAIL  src/domain/rules.test.ts > discovery and external walking directions > excludes missing name from discovery without failing the valid results
+AssertionError: expected [ { id: 'test-toilet', …(14) }, …(1) ] to deeply equal [ { id: 'test-toilet', …(14) } ]
+
+- Expected
++ Received
+
+@@ -26,6 +26,35 @@
+      },
+      "name": "Garden toilet",
+      "sample": true,
+      "type": "toilet",
+    },
++   {
++     "access": "Public",
++     "address": "Cremorne",
++     "amenities": [
++       "Accessible",
++       "Baby changing",
++     ],
++     "area": "cremorne",
++     "countryCode": "AU",
++     "description": "Sample",
++     "entranceLocation": {
++       "lat": -37.8302,
++       "lng": 144.9902,
++     },
++     "floor": "Ground",
++     "hours": {
++       "close": 18,
++       "open": 8,
++     },
++     "id": "test-toilet",
++     "image": "",
++     "location": {
++       "lat": -37.83,
++       "lng": 144.99,
++     },
++     "name": undefined,
++     "sample": true,
++     "type": "toilet",
++   },
+  ]
+
+ ❯ src/domain/rules.test.ts:59:22
+     57|     const search = () => filterFacilities([toilet, value as Facility],…
+     58|     expect(search).not.toThrow();
+     59|     expect(search()).toEqual([toilet]);
+       |                      ^
+     60|   });
+     61|   it("combines category, search, accessibility, capacity, and equipmen…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/23]⎯
+
+ FAIL  src/domain/rules.test.ts > discovery and external walking directions > excludes nonfinite capacity from discovery without failing the valid results
+AssertionError: expected [ { id: 'test-toilet', …(14) }, …(1) ] to deeply equal [ { id: 'test-toilet', …(14) } ]
+
+- Expected
++ Received
+
+@@ -26,6 +26,37 @@
+      },
+      "name": "Garden toilet",
+      "sample": true,
+      "type": "toilet",
+    },
++   {
++     "access": "Public",
++     "address": "Cremorne",
++     "amenities": [
++       "Accessible",
++       "Whiteboard",
++       "Screen",
++     ],
++     "area": "cremorne",
++     "capacity": Infinity,
++     "countryCode": "AU",
++     "description": "Sample",
++     "entranceLocation": {
++       "lat": -37.8302,
++       "lng": 144.9902,
++     },
++     "floor": "Ground",
++     "hours": {
++       "close": 18,
++       "open": 8,
++     },
++     "id": "test-room",
++     "image": "",
++     "location": {
++       "lat": -37.83,
++       "lng": 144.99,
++     },
++     "name": "Meeting studio",
++     "sample": true,
++     "type": "meeting_room",
++   },
+  ]
+
+ ❯ src/domain/rules.test.ts:59:22
+     57|     const search = () => filterFacilities([toilet, value as Facility],…
+     58|     expect(search).not.toThrow();
+     59|     expect(search()).toEqual([toilet]);
+       |                      ^
+     60|   });
+     61|   it("combines category, search, accessibility, capacity, and equipmen…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/23]⎯
+
+ FAIL  src/domain/rules.test.ts > discovery and external walking directions > excludes null entry from discovery without failing the valid results
+AssertionError: expected [Function search] to not throw an error but 'TypeError: Cannot read properties of …' was thrown
+
+- Expected:
+undefined
+
++ Received:
+"TypeError: Cannot read properties of null (reading 'amenities')"
+
+ ❯ src/domain/rules.test.ts:58:24
+     56|   ])("excludes %s from discovery without failing the valid results", (…
+     57|     const search = () => filterFacilities([toilet, value as Facility],…
+     58|     expect(search).not.toThrow();
+       |                        ^
+     59|     expect(search()).toEqual([toilet]);
+     60|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/23]⎯
+
+ FAIL  src/domain/rules.test.ts > remaining local demo room-slot summaries > counts future half-hours only and finds the next available start
+AssertionError: expected { available: +0, reserved: +0, …(2) } to deeply equal { available: 13, reserved: 2, …(2) }
+
+- Expected
++ Received
+
+  {
+-   "available": 13,
+-   "nextStart": "2026-09-29T00:30:00.000Z",
+-   "reserved": 2,
+-   "total": 15,
++   "available": 0,
++   "nextStart": null,
++   "reserved": 0,
++   "total": 0,
+  }
+
+ ❯ src/domain/rules.test.ts:120:64
+    118|   it("counts future half-hours only and finds the next available start…
+    119|     const bookings = [reservation("2026-09-29T01:00:00Z", "2026-09-29T…
+    120|     expect(roomSlotSummary(room, "2026-09-29", bookings, now)).toEqual…
+       |                                                                ^
+    121|       available: 13, reserved: 2, total: 15, nextStart: "2026-09-29T00…
+    122|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/23]⎯
+
+ FAIL  src/domain/rules.test.ts > remaining local demo room-slot summaries > excludes elapsed starts entirely instead of counting them as reserved
+AssertionError: expected { available: +0, reserved: +0, …(2) } to deeply equal { available: 1, reserved: +0, …(2) }
+
+- Expected
++ Received
+
+  {
+-   "available": 1,
+-   "nextStart": "2026-09-29T07:30:00.000Z",
++   "available": 0,
++   "nextStart": null,
+    "reserved": 0,
+-   "total": 1,
++   "total": 0,
+  }
+
+ ❯ src/domain/rules.test.ts:126:87
+    124|
+    125|   it("excludes elapsed starts entirely instead of counting them as res…
+    126|     expect(roomSlotSummary(room, "2026-09-29", [], new Date("2026-09-2…
+       |                                                                                       ^
+    127|       available: 1, reserved: 0, total: 1, nextStart: "2026-09-29T07:3…
+    128|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/23]⎯
+
+ FAIL  src/domain/rules.test.ts > remaining local demo room-slot summaries > ignores cancelled reservations and reservations for other rooms
+AssertionError: expected { available: +0, reserved: +0, …(2) } to deeply equal { available: 15, reserved: +0, …(2) }
+
+- Expected
++ Received
+
+  {
+-   "available": 15,
+-   "nextStart": "2026-09-29T00:30:00.000Z",
++   "available": 0,
++   "nextStart": null,
+    "reserved": 0,
+-   "total": 15,
++   "total": 0,
+  }
+
+ ❯ src/domain/rules.test.ts:139:64
+    137|       reservation("2026-09-29T00:30:00Z", "2026-09-29T01:30:00Z", { fa…
+    138|     ];
+    139|     expect(roomSlotSummary(room, "2026-09-29", bookings, now)).toEqual…
+       |                                                                ^
+    140|       available: 15, reserved: 0, total: 15, nextStart: "2026-09-29T00…
+    141|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/23]⎯
+
+ FAIL  src/domain/rules.test.ts > remaining local demo room-slot summaries > counts occupied blocks once and leaves the adjacent start available
+AssertionError: expected { available: +0, reserved: +0, …(2) } to deeply equal { available: 13, reserved: 2, …(2) }
+
+- Expected
++ Received
+
+  {
+-   "available": 13,
+-   "nextStart": "2026-09-29T01:30:00.000Z",
+-   "reserved": 2,
+-   "total": 15,
++   "available": 0,
++   "nextStart": null,
++   "reserved": 0,
++   "total": 0,
+  }
+
+ ❯ src/domain/rules.test.ts:146:107
+    144|   it("counts occupied blocks once and leaves the adjacent start availa…
+    145|     const booking = reservation("2026-09-29T00:30:00Z", "2026-09-29T01…
+    146|     expect(roomSlotSummary(room, "2026-09-29", [booking, { ...booking,…
+       |                                                                                                           ^
+    147|       available: 13, reserved: 2, total: 15, nextStart: "2026-09-29T01…
+    148|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[21/23]⎯
+
+ FAIL  src/domain/rules.test.ts > remaining local demo room-slot summaries > returns no next start when every remaining slot is reserved
+AssertionError: expected { available: +0, reserved: +0, …(2) } to deeply equal { available: +0, reserved: 15, …(2) }
+
+- Expected
++ Received
+
+  {
+    "available": 0,
+    "nextStart": null,
+-   "reserved": 15,
+-   "total": 15,
++   "reserved": 0,
++   "total": 0,
+  }
+
+ ❯ src/domain/rules.test.ts:153:64
+    151|   it("returns no next start when every remaining slot is reserved", ()…
+    152|     const bookings = [reservation("2026-09-29T00:30:00Z", "2026-09-29T…
+    153|     expect(roomSlotSummary(room, "2026-09-29", bookings, now)).toEqual…
+       |                                                                ^
+    154|   });
+    155|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22/23]⎯
+
+ FAIL  src/domain/rules.test.ts > remaining local demo room-slot summaries > uses Melbourne daylight-saving time for a future date
+AssertionError: expected { available: +0, reserved: +0, …(2) } to deeply equal { available: 20, reserved: +0, …(2) }
+
+- Expected
++ Received
+
+  {
+-   "available": 20,
+-   "nextStart": "2026-10-04T21:00:00.000Z",
++   "available": 0,
++   "nextStart": null,
+    "reserved": 0,
+-   "total": 20,
++   "total": 0,
+  }
+
+ ❯ src/domain/rules.test.ts:157:58
+    155|
+    156|   it("uses Melbourne daylight-saving time for a future date", () => {
+    157|     expect(roomSlotSummary(room, "2026-10-05", [], now)).toEqual({
+       |                                                          ^
+    158|       available: 20, reserved: 0, total: 20, nextStart: "2026-10-04T21…
+    159|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[23/23]⎯
+
+
+ Test Files  3 failed (3)
+      Tests  23 failed | 34 passed (57)
+   Start at  00:05:48
+   Duration  465ms (transform 86ms, setup 158ms, import 133ms, tests 168ms, environment 378ms)
+
+
+> save-you-a-seat@0.1.0 test
+> vitest run tests/contract.test.ts
+
+
+ RUN  v4.1.11 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+ ❯ tests/contract.test.ts (13 tests | 1 failed) 185ms
+     × validates every shared request/response example against its schema 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/contract.test.ts > contract payload compatibility > validates every shared request/response example against its schema
+AssertionError: expected [ 'bookingRequest', …(4) ] to deeply equal [ 'bookingRequest', …(3) ]
+
+- Expected
++ Received
+
+  [
+    "bookingRequest",
+    "bookingResponse",
+    "conflict",
++   "facility",
+    "publicGuide",
+  ]
+
+ ❯ tests/contract.test.ts:145:41
+    143|       publicGuide: "PublicGuide",
+    144|     };
+    145|     expect(Object.keys(schemas).sort()).toEqual(Object.keys(examples).…
+       |                                         ^
+    146|     for (const [key, schema] of Object.entries(schemas))
+    147|       await assertPayload(schema, examples[key]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 12 passed (13)
+   Start at  00:07:27
+   Duration  566ms (transform 43ms, setup 47ms, import 86ms, tests 185ms, environment 179ms)
+

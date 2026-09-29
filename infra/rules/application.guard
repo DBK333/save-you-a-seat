@@ -1,0 +1,105 @@
+rule application_resources_exist {
+  Resources.FacilitiesTable.Type == 'AWS::DynamoDB::Table'
+  Resources.BookingsTable.Type == 'AWS::DynamoDB::Table'
+  Resources.CommunityTable.Type == 'AWS::DynamoDB::Table'
+  Resources.UserPool.Type == 'AWS::Cognito::UserPool'
+  Resources.UserPoolClient.Type == 'AWS::Cognito::UserPoolClient'
+  Resources.StaffGroup.Type == 'AWS::Cognito::UserPoolGroup'
+  Resources.ApiFunction.Type == 'AWS::Lambda::Function'
+  Resources.Api.Type == 'AWS::ApiGatewayV2::Api'
+  Resources.JwtAuthorizer.Type == 'AWS::ApiGatewayV2::Authorizer'
+  Resources.ApiLogGroup.Type == 'AWS::Logs::LogGroup'
+  Resources.FunctionLogGroup.Type == 'AWS::Logs::LogGroup'
+  Resources.FunctionErrorsAlarm.Type == 'AWS::CloudWatch::Alarm'
+  Outputs.ApiUrl exists
+  Outputs.UserPoolId exists
+  Outputs.UserPoolClientId exists
+  Outputs.ImagesBucketName exists
+}
+rule durable_tables {
+  let tables = Resources.*[ Type == 'AWS::DynamoDB::Table' ]
+  %tables !empty
+  %tables {
+    DeletionPolicy == 'Retain'
+    UpdateReplacePolicy == 'Retain'
+    Properties.BillingMode == 'PAY_PER_REQUEST'
+    Properties.PointInTimeRecoverySpecification.PointInTimeRecoveryEnabled == true
+  }
+}
+rule account_safety {
+  Resources.UserPool.Properties.AutoVerifiedAttributes == ['email']
+  Resources.UserPoolClient.Properties.GenerateSecret == false
+  Resources.StaffGroup.Properties.GroupName == 'staff'
+  Resources.JwtAuthorizer.Properties.AuthorizerType == 'JWT'
+}
+rule routes_protected {
+  let routes = Resources.*[ Type == 'AWS::ApiGatewayV2::Route' ]
+  %routes !empty
+  %routes[ Properties.RouteKey NOT IN ['GET /facilities', 'GET /facilities/{id}', 'GET /rooms/{id}/availability'] ] {
+    Properties.AuthorizationType == 'JWT'
+    Properties.AuthorizerId.Ref == 'JwtAuthorizer'
+    Properties.AuthorizationScopes == ['aws.cognito.signin.user.admin']
+  }
+}
+rule known_routes_present {
+  Resources.CreateBookingRoute.Properties.RouteKey == 'POST /bookings'
+  Resources.MyBookingsRoute.Properties.RouteKey == 'GET /me/bookings'
+  Resources.CancelBookingRoute.Properties.RouteKey == 'DELETE /bookings/{id}'
+  Resources.StaffReportsRoute.Properties.RouteKey == 'GET /staff/reports'
+  Resources.StaffDecisionRoute.Properties.RouteKey == 'POST /staff/reports/{id}/decision'
+}
+rule scoped_execution_permissions {
+  Resources.FunctionRole.Properties.Policies[*].PolicyDocument.Statement[*] {
+    Effect == 'Allow'
+    Resource[*] IN [
+      { 'Fn::GetAtt': ['FunctionLogGroup', 'Arn'] },
+      { 'Fn::GetAtt': ['FacilitiesTable', 'Arn'] },
+      { 'Fn::Sub': '${FacilitiesTable.Arn}/index/*' },
+      { 'Fn::GetAtt': ['BookingsTable', 'Arn'] },
+      { 'Fn::Sub': '${BookingsTable.Arn}/index/*' },
+      { 'Fn::GetAtt': ['CommunityTable', 'Arn'] },
+      { 'Fn::Sub': '${CommunityTable.Arn}/index/*' },
+      { 'Fn::Sub': '${ImagesBucket.Arn}/temporary/*' },
+      { 'Fn::Sub': '${ImagesBucket.Arn}/finalized/*' }
+    ]
+    Action[*] IN [
+      'logs:CreateLogStream', 'logs:PutLogEvents',
+      'dynamodb:GetItem', 'dynamodb:PutItem', 'dynamodb:UpdateItem',
+      'dynamodb:DeleteItem', 'dynamodb:Query', 'dynamodb:BatchGetItem',
+      'dynamodb:ConditionCheckItem', 's3:GetObject', 's3:GetObjectVersion',
+      's3:PutObject', 's3:DeleteObject'
+    ]
+  }
+  Resources.FunctionRole.Properties.ManagedPolicyArns !exists
+}
+rule restricted_cors {
+  Resources.Api.Properties.CorsConfiguration.AllowOrigins == [{ 'Ref': 'FrontendOrigin' }]
+  Resources.ImagesBucket.Properties.CorsConfiguration.CorsRules[*].AllowedOrigins == [{ 'Ref': 'FrontendOrigin' }]
+  Parameters.FrontendOrigin.AllowedPattern exists
+  Rules.LocalhostOnlyInDev.RuleCondition == { 'Fn::Equals': [{ 'Ref': 'FrontendOrigin' }, 'http://localhost:5173'] }
+  Rules.LocalhostOnlyInDev.Assertions !empty
+  Rules.LocalhostOnlyInDev.Assertions[0].Assert == { 'Fn::Equals': [{ 'Ref': 'Environment' }, 'dev'] }
+}
+rule immutable_python_package {
+  Resources.ApiFunction.Properties.Runtime == 'python3.13'
+  Resources.ApiFunction.Properties.Architectures == ['arm64']
+  Resources.ApiFunction.Properties.Handler == 'run.sh'
+  Resources.ApiFunction.Properties.Code.S3Bucket.Ref == 'BackendArtifactBucket'
+  Resources.ApiFunction.Properties.Code.S3Key.Ref == 'BackendArtifactKey'
+  Resources.ApiFunction.Properties.Code.S3ObjectVersion.Ref == 'BackendArtifactVersion'
+  Resources.ApiFunction.Properties.Layers == [{ 'Ref': 'WebAdapterLayerArn' }]
+}
+
+# Frontend OAC permissions belong only to bootstrap; media remains available
+# through the application's scoped IAM role and authorized signed URLs.
+rule private_images_bucket_policy {
+  Resources.ImagesBucket.Type == 'AWS::S3::Bucket'
+  Resources.ImagesBucketPolicy.Type == 'AWS::S3::BucketPolicy'
+  Resources.ImagesBucketPolicy.Properties.Bucket.Ref == 'ImagesBucket'
+  Resources.ImagesBucketPolicy.Properties.PolicyDocument.Statement !empty
+  Resources.ImagesBucketPolicy.Properties.PolicyDocument.Statement[ Sid == 'RequireTLS' ].Resource == [
+    { 'Fn::GetAtt': ['ImagesBucket', 'Arn'] }, { 'Fn::Sub': '${ImagesBucket.Arn}/*' }
+  ]
+  let policies = Resources.*[ Type == 'AWS::S3::BucketPolicy' ]
+  %policies.Properties.PolicyDocument.Statement[*].Effect == 'Deny'
+}

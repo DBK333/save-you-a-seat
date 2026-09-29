@@ -1,0 +1,13 @@
+
+> save-you-a-seat@0.1.0 test
+> vitest run src/services/demo.test.ts tests/contract.test.ts src/domain/coverage.test.ts src/domain/rules.test.ts
+
+
+ RUN  v4.1.11 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+
+ Test Files  4 passed (4)
+      Tests  95 passed (95)
+   Start at  00:10:21
+   Duration  751ms (transform 179ms, setup 338ms, import 309ms, tests 302ms, environment 1.15s)
+

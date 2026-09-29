@@ -1,0 +1,69 @@
+UTC: 2026-09-29T07:26:41.779330+00:00
+Stage: GREEN after infrastructure implementation
+SHA256 infra/bootstrap.yaml: 063f45290c028df98ef82e9407ef70f6fa288a885749bf04049f9307d5882fb3
+SHA256 infra/application.yaml: b670cb3184dc7b63585a88dee7e74c181783b9714f3b29825a38e82b7c98f2e2
+$ bash scripts/validate-infra.sh
+cfn-lint 1.48.0
+cfn-guard 3.2.0
+Test Case #1
+Name: private bucket passes
+  No Test expectation was set for Rule https_bucket_policy
+  No Test expectation was set for Rule environment_and_region_output
+  PASS Rules:
+    private_encrypted_retained_buckets: Expected = PASS
+
+Test Case #2
+Name: public bucket fails
+  No Test expectation was set for Rule https_bucket_policy
+  No Test expectation was set for Rule environment_and_region_output
+  PASS Rules:
+    private_encrypted_retained_buckets: Expected = FAIL
+
+Test Case #3
+Name: missing resources fail instead of skipping
+  PASS Rules:
+    private_encrypted_retained_buckets: Expected = FAIL
+    environment_and_region_output: Expected = FAIL
+    https_bucket_policy: Expected = FAIL
+
+/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml Status = PASS
+PASS rules
+common.guard/private_encrypted_retained_buckets    PASS
+common.guard/https_bucket_policy                   PASS
+common.guard/environment_and_region_output         PASS
+---
+/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml Status = PASS
+PASS rules
+bootstrap.guard/bootstrap_resources_exist    PASS
+---
+/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml Status = PASS
+PASS rules
+common.guard/private_encrypted_retained_buckets    PASS
+common.guard/https_bucket_policy                   PASS
+common.guard/environment_and_region_output         PASS
+---
+/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml Status = PASS
+PASS rules
+application.guard/application_resources_exist     PASS
+application.guard/durable_tables                  PASS
+application.guard/account_safety                  PASS
+application.guard/routes_protected                PASS
+application.guard/known_routes_present            PASS
+application.guard/scoped_execution_permissions    PASS
+application.guard/restricted_cors                 PASS
+application.guard/immutable_python_package        PASS
+---
+test_complete_templates_pass (test_policies.Policies.test_complete_templates_pass) ... ok
+test_contract_routes_match_infrastructure (test_policies.Policies.test_contract_routes_match_infrastructure) ... ok
+test_empty_resources_fail_instead_of_skip (test_policies.Policies.test_empty_resources_fail_instead_of_skip) ... ok
+test_every_required_resource_is_required (test_policies.Policies.test_every_required_resource_is_required) ... ok
+test_native_guard_unit_fixtures (test_policies.Policies.test_native_guard_unit_fixtures) ... ok
+test_only_discovery_routes_are_public (test_policies.Policies.test_only_discovery_routes_are_public) ... ok
+test_required_outputs_do_not_disappear (test_policies.Policies.test_required_outputs_do_not_disappear) ... ok
+test_security_regressions_fail (test_policies.Policies.test_security_regressions_fail) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 1.581s
+
+OK
+Exit status: 0

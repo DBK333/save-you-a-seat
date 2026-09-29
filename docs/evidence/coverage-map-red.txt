@@ -1,0 +1,45 @@
+
+> save-you-a-seat@0.1.0 test
+> vitest run --run tests/coverage-map.test.tsx
+
+
+ RUN  v4.1.11 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+ ❯ tests/coverage-map.test.tsx (1 test | 1 failed) 18ms
+   × restricts the Google viewport to Australia and rejects out-of-coverage origin clicks 17ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/coverage-map.test.tsx > restricts the Google viewport to Australia and rejects out-of-coverage origin clicks
+AssertionError: expected undefined to deeply equal { …(2) }
+
+- Expected:
+{
+  "latLngBounds": {
+    "east": 154,
+    "north": -10,
+    "south": -44,
+    "west": 112,
+  },
+  "strictBounds": true,
+}
+
++ Received:
+undefined
+
+ ❯ tests/coverage-map.test.tsx:23:32
+     21|   const view = render(<MapCanvas facilities={[]} selectedId={null} onS…
+     22|   await waitFor(() => expect(options).toBeDefined());
+     23|   expect(options?.restriction).toEqual({ latLngBounds: { north: -10, s…
+       |                                ^
+     24|   act(() => click?.({ latLng: { toJSON: () => ({ lat: 51.5, lng: -0.1 …
+     25|   expect(choose).not.toHaveBeenCalled();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  00:04:42
+   Duration  293ms (transform 35ms, setup 43ms, import 68ms, tests 18ms, environment 107ms)
+

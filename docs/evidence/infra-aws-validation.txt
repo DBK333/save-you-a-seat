@@ -1,0 +1,69 @@
+AWS read-only CloudFormation ValidateTemplate evidence — 2026-09-29
+Region: ap-southeast-2
+No stack, change set, bucket, deployment, or cloud data was created or modified.
+
+Command:
+AWS_EC2_METADATA_DISABLED=true aws --region ap-southeast-2 --no-cli-pager cloudformation validate-template --template-body file://infra/bootstrap.yaml --output json
+Exit status: 0
+Response:
+{
+    "Parameters": [
+        {
+            "ParameterKey": "Environment",
+            "DefaultValue": "dev",
+            "NoEcho": false
+        }
+    ],
+    "Description": "SYAS artifact storage and static Amplify hosting (no backend deployment)."
+}
+
+Command:
+AWS_EC2_METADATA_DISABLED=true aws --region ap-southeast-2 --no-cli-pager cloudformation validate-template --template-body file://infra/application.yaml --output json
+Exit status: 0
+Response:
+{
+    "Parameters": [
+        {
+            "ParameterKey": "BackendArtifactBucket",
+            "NoEcho": false
+        },
+        {
+            "ParameterKey": "BackendArtifactVersion",
+            "NoEcho": false
+        },
+        {
+            "ParameterKey": "Environment",
+            "DefaultValue": "dev",
+            "NoEcho": false
+        },
+        {
+            "ParameterKey": "WebAdapterLayerArn",
+            "DefaultValue": "arn:aws:lambda:ap-southeast-2:753240598075:layer:LambdaAdapterLayerArm64:30",
+            "NoEcho": false,
+            "Description": "Version-pinned official arm64 layer; must be in the deployment region."
+        },
+        {
+            "ParameterKey": "BackendArtifactKey",
+            "NoEcho": false
+        },
+        {
+            "ParameterKey": "FrontendOrigin",
+            "NoEcho": false
+        },
+        {
+            "ParameterKey": "AlarmTopicArn",
+            "DefaultValue": "",
+            "NoEcho": false,
+            "Description": "Optional existing SNS topic for alarm notifications; alarms still exist without it."
+        }
+    ],
+    "Description": "SYAS future Python API infrastructure. Requires a real versioned backend artifact.",
+    "Capabilities": [
+        "CAPABILITY_IAM"
+    ],
+    "CapabilitiesReason": "The following resource(s) require capabilities: [AWS::IAM::Role]"
+}
+
+Limits: ValidateTemplate does not execute a change set, verify deployment
+permissions, test the future Python artifact, check email delivery, or establish
+cloud acceptance. Stack creation/update and cloud integration remain unrun.

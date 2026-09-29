@@ -1,0 +1,12 @@
+
+> save-you-a-seat@0.1.0 test:e2e
+> playwright test --grep photo guide
+
+
+Running 1 test using 1 worker
+
+(node:48511) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [desktop-chromium] › tests/e2e/journeys.spec.ts:201:1 › photo guide gets two other confirmations, remains visible after report, then staff removes it (2.1s)
+
+  1 passed (2.4s)

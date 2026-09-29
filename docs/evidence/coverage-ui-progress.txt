@@ -1,0 +1,547 @@
+
+> save-you-a-seat@0.1.0 test
+> vitest run --run tests/coverage-ui.test.tsx tests/coverage-map.test.tsx
+
+
+ RUN  v4.1.11 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+(node:10272) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ❯ tests/coverage-ui.test.tsx (4 tests | 2 failed) 214ms
+   × gives guests access to room status and booking sites from Explore 77ms
+   × shows remaining demo half-hour blocks and refreshes after booking and cancellation 15ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/coverage-ui.test.tsx > gives guests access to room status and booking sites from Explore
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name "University of Melbourne"
+
+Here are the accessible roles:
+
+  heading:
+
+  Name "A little more room, please.":
+  [36m<h1 />[39m
+
+  Name "Room availability .":
+  [36m<h1 />[39m
+
+  Name "Your room options":
+  [36m<h2 />[39m
+
+  Name "The Green Room":
+  [36m<h2 />[39m
+
+  Name "Studio 12":
+  [36m<h2 />[39m
+
+  Name "The Little Boardroom":
+  [36m<h2 />[39m
+
+  Name "The Workshop":
+  [36m<h2 />[39m
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"muted"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"slot-explanation"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"room-status-meta"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"next-slot"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"room-status-meta"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"next-slot"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"room-status-meta"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"next-slot"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"room-status-meta"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"next-slot"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"room-source-note"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  [36m<header[39m
+    [33mclass[39m=[32m"site-header"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  link:
+
+  Name "SYAS home":
+  [36m<a[39m
+    [33maria-label[39m=[32m"SYAS home"[39m
+    [33mclass[39m=[32m"brand"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/"[39m
+  [36m/>[39m
+
+  Name "Explore":
+  [36m<a[39m
+    [33mclass[39m=[32m""[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/"[39m
+  [36m/>[39m
+
+  Name "My bookings":
+  [36m<a[39m
+    [33mclass[39m=[32m""[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/bookings"[39m
+  [36m/>[39m
+
+  Name "Room availability":
+  [36m<a[39m
+    [33maria-current[39m=[32m"page"[39m
+    [33mclass[39m=[32m"active"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/rooms"[39m
+  [36m/>[39m
+
+  Name "Community confirmations 1":
+  [36m<a[39m
+    [33mclass[39m=[32m""[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/community"[39m
+  [36m/>[39m
+
+  Name "Log in":
+  [36m<a[39m
+    [33mclass[39m=[32m"header-login"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/login"[39m
+  [36m/>[39m
+
+  Name "Sign up":
+  [36m<a[39m
+    [33mclass[39m=[32m"button primary header-signup"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/register"[39m
+  [36m/>[39m
+
+  Name "Back to Explore":
+  [36m<a[39m
+    [33mclass[39m=[32m"text-link room-back"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/?type=meeting_room"[39m
+  [36m/>[39m
+
+  Name "View room & reserve demo":
+  [36m<a[39m
+    [33mclass[39m=[32m"button secondary full"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/?place=room-01"[39m
+  [36m/>[39m
+
+  Name "View room & reserve demo":
+  [36m<a[39m
+    [33mclass[39m=[32m"button secondary full"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/?place=room-02"[39m
+  [36m/>[39m
+
+  Name "View room & reserve demo":
+  [36m<a[39m
+    [33mclass[39m=[32m"button secondary full"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/?place=room-03"[39m
+  [36m/>[39m
+
+  Name "View room & reserve demo":
+  [36m<a[39m
+    [33mclass[39m=[32m"button secondary full"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/?place=room-04"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Main navigation":
+  [36m<nav[39m
+    [33maria-label[39m=[32m"Main navigation"[39m
+    [33mclass[39m=[32m"main-nav"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  [36m<main[39m
+    [33mclass[39m=[32m"page room-availability-page"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  button:
+
+  Name "Cremorne Demo room slots":
+  [36m<button[39m
+    [33maria-pressed[39m=[32m"true"[39m
+  [36m/>[39m
+
+  Name "University of Melbourne Official booking sites":
+  [36m<button[39m
+    [33maria-pressed[39m=[32m"false"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  region:
+
+  Name "Demo availability summary":
+  [36m<section[39m
+    [33maria-label[39m=[32m"Demo availability summary"[39m
+    [33mclass[39m=[32m"slot-overview"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  strong:
+
+  Name "":
+  [36m<strong />[39m
+
+  Name "":
+  [36m<strong />[39m
+
+  Name "":
+  [36m<strong />[39m
+
+  Name "":
+  [36m<strong />[39m
+
+  Name "":
+  [36m<strong />[39m
+
+  Name "":
+  [36m<strong />[39m
+
+  Name "":
+  [36m<strong />[39m
+
+  --------------------------------------------------
+  article:
+
+  Name "The Green Room":
+  [36m<article[39m
+    [33maria-label[39m=[32m"The Green Room"[39m
+    [33mclass[39m=[32m"room-status-card"[39m
+  [36m/>[39m
+
+  Name "Studio 12":
+  [36m<article[39m
+    [33maria-label[39m=[32m"Studio 12"[39m
+    [33mclass[39m=[32m"room-status-card"[39m
+  [36m/>[39m
+
+  Name "The Little Boardroom":
+  [36m<article[39m
+    [33maria-label[39m=[32m"The Little Boardroom"[39m
+    [33mclass[39m=[32m"room-status-card"[39m
+  [36m/>[39m
+
+  Name "The Workshop":
+  [36m<article[39m
+    [33maria-label[39m=[32m"The Workshop"[39m
+    [33mclass[39m=[32m"room-status-card"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  img:
+
+  Name "Illustration of a fictional demo room":
+  [36m<img[39m
+    [33malt[39m=[32m"Illustration of a fictional demo room"[39m
+    [33msrc[39m=[32m"/images/green-room.svg"[39m
+  [36m/>[39m
+
+  Name "Illustration of a fictional demo room":
+  [36m<img[39m
+    [33malt[39m=[32m"Illustration of a fictional demo room"[39m
+    [33msrc[39m=[32m"/images/studio.svg"[39m
+  [36m/>[39m
+
+  Name "Illustration of a fictional demo room":
+  [36m<img[39m
+    [33malt[39m=[32m"Illustration of a fictional demo room"[39m
+    [33msrc[39m=[32m"/images/boardroom.svg"[39m
+  [36m/>[39m
+
+  Name "Illustration of a fictional demo room":
+  [36m<img[39m
+    [33malt[39m=[32m"Illustration of a fictional demo room"[39m
+    [33msrc[39m=[32m"/images/studio.svg"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"desktop-notice"[39m
+    [36m>[39m
+      [36m<span[39m
+        [33mclass[39m=[32m"brand-mark"[39m
+      [36m>[39m
+        [36m<svg[39m
+          [33maria-hidden[39m=[32m"true"[39m
+          [33mclass[39m=[32m"lucide lucide-armchair"[39m
+          [33mfill[39m=[32m"none"[39m
+          [33mheight[39m=[32m"25"[39m
+          [33mstroke[39m=[32m"currentColor"[39m
+          [33mstroke-linecap[39m=[32m"round"[39m
+          [33mstroke-linejoin[39m=[32m"round"[39m
+          [33mstroke-width[39m=[32m"2"[39m
+          [33mviewBox[39m=[32m"0 0 24 24"[39m
+          [33mwidth[39m=[32m"25"[39m
+          [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+        [36m>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"[39m
+          [36m/>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"[39m
+          [36m/>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M5 18v2"[39m
+          [36m/>[39m
+          [36m<path[39m
+            [33md[39m=[32m"M19 18v2"[39m
+          [36m/>[39m
+        [36m</svg>[39m
+      [36m</span>[39m
+      [36m<svg[39m
+        [33maria-hidden[39m=[32m"true"[39m
+        [33mclass[39m=[32m"lucide lucide-monitor"[39m
+        [33mfill[39m=[32m"none"[39m
+        [33mheight[39m=[32m"40"[39m
+        [33mstroke[39m=[32m"currentColor"[39m
+        [33mstroke-linecap[39m=[32m"round"[39m
+        [33mstroke-linejoin[39m=[32m"round"[39m
+        [33mstroke-width[39m=[32m"2"[39m
+        [33mviewBox[39m=[32m"0 0 24 24"[39m
+        [33mwidth[39m=[32m"40"[39m
+        [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+      [36m>[39m
+        [36m<rect[39m
+          [33mheight[39m=[32m"14"[39m
+          [33mrx[39m=[32m"2"[39m
+          [33mwidth[39m=[32m"20"[39m
+          [33mx[39m=[32m"2"[39m
+          [33my[39m=[32m"3"[39m
+        [36m/>[39m
+        [36m<line[39m
+          [33mx1[39m=[32m"8"[39m
+          [33mx2[39m=[32m"16"[39m
+          [33my1[39m=[32m"21"[39m
+          [33my2[39m=[32m"21"[39m
+        [36m/>[39m
+        [36m<line[39m
+          [33mx1[39m=[32m"12"[39m
+          [33mx2[39m=[32m"12"[39m
+          [33my1[39m=[32m"17"[39m
+          [33my2[39m=[32m"21"[39m
+        [36m/>[39m
+      [36m</svg>[39m
+      [36m<h1>[39m
+        [0mA little more room, please.[0m
+      [36m</h1>[39m
+      [36m<p>[39m
+        [0mSYAS is a desktop web experience for now. Open it in a window at least 1,000 pixels wide.[0m
+      [36m</p>[39m
+    [36m</div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"app-shell"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"site-header"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"SYAS home"[39m
+          [33mclass[39m=[32m"brand"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"brand-mark"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-armchair"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"23"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"23"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M5 18v2"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M19 18v2"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</span>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"brand-wordmark"[39m
+          [36m>[39m
+            [0msyas[0m
+            [36m<span>[39m
+              [0msave you a seat[0m
+            [36m</span>[39m
+          [36m</span>[39m
+        [36m</a>[39m
+        [36m<nav[39m
+          [33maria-label[39m=[32m"Main navigation"[39m
+          [33mclass[39m=[32m"main-nav"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m""[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [0mExplore[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m""[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/bookings"[39m
+          [36m>[39m
+            [0mMy bookings[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33maria-current[39m=[32m"page"[39m
+            [33mclass[39m=[32m"active"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/rooms"[39m
+          [36m>[39m
+            [0mRoom availability[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m""[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/community"[39m
+          [36m>[39m
+            [0mCommunity confirmations[0m
+            [36m<span[39m
+              [33mclass[39m=[32m"nav-count"[39m
+            [36m>[39m
+              [0m1[0m
+            [36m</span>[39m
+          [36m</a>[39m
+        [36m</nav>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"header-account"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"header-login"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/login"[39m
+          [36m>[39m
+            [0mLog in[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"button primary header-signup"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/register"[39m
+          [36m>[39m
+            [0mSign up[0m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-arrow-up-right"[39m
+      ...
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ tests/coverage-ui.test.tsx:35:17
+     33|   fireEvent.click(screen.getByRole("link", { name: /Room availability …
+     34|   expect(screen.getByRole("heading", { name: /Room availability/i })).…
+     35|   expect(screen.getByRole("button", { name: "University of Melbourne",…
+       |                 ^
+     36| });
+     37|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/coverage-ui.test.tsx > shows remaining demo half-hour blocks and refreshes after booking and cancellation
+DomainError: Choose an existing demo account.
+ ❯ fail src/services/demo.ts:37:9
+     35| const id = (prefix: string) => `${prefix}-${crypto.randomUUID()}`;
+     36| function fail(message: string, code = "VALIDATION_ERROR", status = 422…
+     37|   throw new DomainError(code, message, status);
+       |         ^
+     38| }
+     39| function freeze<T>(value: T): T {
+ ❯ DemoService.login src/services/demo.ts:179:7
+ ❯ tests/coverage-ui.test.tsx:45:13
+ ❯ node_modules/@testing-library/react/dist/act-compat.js:47:24
+ ❯ process.env.NODE_ENV.exports.act node_modules/react/cjs/react.development.js:890:22
+ ❯ node_modules/@testing-library/react/dist/act-compat.js:46:25
+ ❯ tests/coverage-ui.test.tsx:44:3
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  2 failed | 3 passed (5)
+   Start at  00:07:51
+   Duration  606ms (transform 137ms, setup 93ms, import 248ms, tests 255ms, environment 232ms)
+

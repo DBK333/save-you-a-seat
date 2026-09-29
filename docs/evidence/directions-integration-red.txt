@@ -1,0 +1,518 @@
+
+> save-you-a-seat@0.1.0 test
+> vitest run tests/directions-integration.test.tsx
+
+
+ RUN  v4.1.11 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+ ❯ tests/directions-integration.test.tsx (4 tests | 3 failed) 109ms
+     × uses a community-published entrance instead of the facility's default pin 44ms
+     × keeps the published entrance while a new location awaits confirmations 6ms
+     × keeps approximate straight-line distance visible after nearest-toilet selection 52ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/directions-integration.test.tsx > public walking directions follow the published entrance guide > uses a community-published entrance instead of the facility's default pin
+AssertionError: expected '-37.82565,144.99372' to be '-37.82571,144.99366' // Object.is equality
+
+Expected: "-37.82571,144.99366"
+Received: "-37.82565,144.99372"
+
+ ❯ tests/directions-integration.test.tsx:64:59
+     62|     publishEntrance();
+     63|     renderDetails();
+     64|     expect(walkingLink().searchParams.get("destination")).toBe("-37.82…
+       |                                                           ^
+     65|     expect(walkingLink().searchParams.get("travelmode")).toBe("walking…
+     66|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/directions-integration.test.tsx > public walking directions follow the published entrance guide > keeps the published entrance while a new location awaits confirmations
+AssertionError: expected '-37.82565,144.99372' to be '-37.82571,144.99366' // Object.is equality
+
+Expected: "-37.82571,144.99366"
+Received: "-37.82565,144.99372"
+
+ ❯ tests/directions-integration.test.tsx:73:59
+     71|     service.logout();
+     72|     renderDetails();
+     73|     expect(walkingLink().searchParams.get("destination")).toBe("-37.82…
+       |                                                           ^
+     74|     expect(walkingLink().searchParams.get("destination")).not.toBe("-3…
+     75|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/directions-integration.test.tsx > public walking directions follow the published entrance guide > keeps approximate straight-line distance visible after nearest-toilet selection
+TestingLibraryElementError: Unable to find an element with the text: /110 m.*approximate straight-line distance/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mclass[39m=[32m"explore-layout"[39m
+    [36m>[39m
+      [36m<aside[39m
+        [33mclass[39m=[32m"results-panel"[39m
+      [36m>[39m
+        [36m<article[39m
+          [33mclass[39m=[32m"place-detail"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"detail-cover"[39m
+          [36m>[39m
+            [36m<img[39m
+              [33malt[39m=[32m"Illustration of Swan Street amenities; a fictional sample venue"[39m
+              [33msrc[39m=[32m"/images/amenities.svg"[39m
+            [36m/>[39m
+            [36m<span[39m
+              [33mclass[39m=[32m"badge sample-badge"[39m
+            [36m>[39m
+              [0mSAMPLE PLACE[0m
+            [36m</span>[39m
+            [36m<button[39m
+              [33maria-label[39m=[32m"Close place details"[39m
+              [33mclass[39m=[32m"detail-close icon-button"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-x"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"18"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"18"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M18 6 6 18"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"m6 6 12 12"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+            [36m<span[39m
+              [33mclass[39m=[32m"cover-category"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-toilet"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"14"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"14"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M7 12h13a1 1 0 0 1 1 1 5 5 0 0 1-5 5h-.598a.5.5 0 0 0-.424.765l1.544 2.47a.5.5 0 0 1-.424.765H5.402a.5.5 0 0 1-.424-.765L7 18"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M8 18a5 5 0 0 1-5-5V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+              [0m [0m
+              [0mToilet[0m
+            [36m</span>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"detail-body"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mSwan Street amenities[0m
+            [36m</h2>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"detail-address"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-map-pin"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"14"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"14"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"[39m
+                [36m/>[39m
+                [36m<circle[39m
+                  [33mcx[39m=[32m"12"[39m
+                  [33mcy[39m=[32m"10"[39m
+                  [33mr[39m=[32m"3"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+              [0mSwan Street, Cremorne VIC[0m
+            [36m</p>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"detail-description"[39m
+            [36m>[39m
+              [0mA sample street-level toilet with a step-free entrance. Look for the entrance guide before you head out.[0m
+            [36m</p>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"amenity-tags"[39m
+            [36m>[39m
+              [36m<span>[39m
+                [36m<svg[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"lucide lucide-accessibility"[39m
+                  [33mfill[39m=[32m"none"[39m
+                  [33mheight[39m=[32m"12"[39m
+                  [33mstroke[39m=[32m"currentColor"[39m
+                  [33mstroke-linecap[39m=[32m"round"[39m
+                  [33mstroke-linejoin[39m=[32m"round"[39m
+                  [33mstroke-width[39m=[32m"2"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                  [33mwidth[39m=[32m"12"[39m
+                  [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<circle[39m
+                    [33mcx[39m=[32m"16"[39m
+                    [33mcy[39m=[32m"4"[39m
+                    [33mr[39m=[32m"1"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"m18 19 1-7-6 1"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"m5 8 3-3 5.5 3-2.36 3.5"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M4.24 14.5a5 5 0 0 0 6.88 6"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M13.76 17.5a5 5 0 0 0-6.88-6"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+                [0m [0m
+                [0mAccessible[0m
+              [36m</span>[39m
+              [36m<span>[39m
+                [0m [0m
+                [0mGender neutral[0m
+              [36m</span>[39m
+              [36m<span>[39m
+                [0m [0m
+                [0mBaby change[0m
+              [36m</span>[39m
+              [36m<span>[39m
+                [0m [0m
+                [0mFree entry[0m
+              [36m</span>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"detail-facts"[39m
+            [36m>[39m
+              [36m<div>[39m
+                [36m<svg[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"lucide lucide-door-open"[39m
+                  [33mfill[39m=[32m"none"[39m
+                  [33mheight[39m=[32m"17"[39m
+                  [33mstroke[39m=[32m"currentColor"[39m
+                  [33mstroke-linecap[39m=[32m"round"[39m
+                  [33mstroke-linejoin[39m=[32m"round"[39m
+                  [33mstroke-width[39m=[32m"2"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                  [33mwidth[39m=[32m"17"[39m
+                  [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M11 20H2"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M11 4.562v16.157a1 1 0 0 0 1.242.97L19 20V5.562a2 2 0 0 0-1.515-1.94l-4-1A2 2 0 0 0 11 4.561z"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M11 4H8a2 2 0 0 0-2 2v14"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M14 12h.01"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M22 20h-3"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+                [36m<span>[39m
+                  [36m<strong>[39m
+                    [0mGround floor[0m
+                  [36m</strong>[39m
+                  [36m<small>[39m
+                    [0mSample public access · no purchase required[0m
+                  [36m</small>[39m
+                [36m</span>[39m
+              [36m</div>[39m
+              [36m<div>[39m
+                [36m<svg[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"lucide lucide-clock3 lucide-clock-3"[39m
+                  [33mfill[39m=[32m"none"[39m
+                  [33mheight[39m=[32m"17"[39m
+                  [33mstroke[39m=[32m"currentColor"[39m
+                  [33mstroke-linecap[39m=[32m"round"[39m
+                  [33mstroke-linejoin[39m=[32m"round"[39m
+                  [33mstroke-width[39m=[32m"2"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                  [33mwidth[39m=[32m"17"[39m
+                  [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<circle[39m
+                    [33mcx[39m=[32m"12"[39m
+                    [33mcy[39m=[32m"12"[39m
+                    [33mr[39m=[32m"10"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M12 6v6h4"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+                [36m<span>[39m
+                  [36m<strong>[39m
+                    [0m07[0m
+                    [0m:00 –[0m
+                    [0m [0m
+                    [0m22[0m
+                    [0m:00[0m
+                  [36m</strong>[39m
+                  [36m<small>[39m
+                    [0mSample daily hours · Melbourne time[0m
+                  [36m</small>[39m
+                [36m</span>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"button primary full"[39m
+              [33mhref[39m=[32m"https://www.google.com/maps/dir/?api=1&destination=-37.82565%2C144.99372&travelmode=walking&origin=-37.8245%2C144.9938"[39m
+              [33mrel[39m=[32m"noreferrer"[39m
+              [33mtarget[39m=[32m"_blank"[39m
+            [36m>[39m
+              [0mWalk there in Google Maps[0m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-arrow-up-right"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"17"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"17"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M7 7h10v10"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M7 17 17 7"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</a>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"fine-print"[39m
+            [36m>[39m
+              [0mOpens Google Maps · route to the sample location[0m
+            [36m</p>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"detail-section-heading"[39m
+            [36m>[39m
+              [36m<h3>[39m
+                [36m<svg[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"lucide lucide-camera"[39m
+                  [33mfill[39m=[32m"none"[39m
+                  [33mheight[39m=[32m"17"[39m
+                  [33mstroke[39m=[32m"currentColor"[39m
+                  [33mstroke-linecap[39m=[32m"round"[39m
+                  [33mstroke-linejoin[39m=[32m"round"[39m
+                  [33mstroke-width[39m=[32m"2"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                  [33mwidth[39m=[32m"17"[39m
+                  [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"[39m
+                  [36m/>[39m
+                  [36m<circle[39m
+                    [33mcx[39m=[32m"12"[39m
+                    [33mcy[39m=[32m"13"[39m
+                    [33mr[39m=[32m"3"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+                [0mThe way in[0m
+              [36m</h3>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"verified-label"[39m
+              [36m>[39m
+                [36m<svg[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"lucide lucide-shield-check"[39m
+                  [33mfill[39m=[32m"none"[39m
+                  [33mheight[39m=[32m"13"[39m
+                  [33mstroke[39m=[32m"currentColor"[39m
+                  [33mstroke-linecap[39m=[32m"round"[39m
+                  [33mstroke-linejoin[39m=[32m"round"[39m
+                  [33mstroke-width[39m=[32m"2"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                  [33mwidth[39m=[32m"13"[39m
+                  [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"m9 12 2 2 4-4"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+                [0mCommunity checked[0m
+              [36m</span>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"entrance-guide"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"guide-title-row"[39m
+              [36m>[39m
+                [36m<strong>[39m
+                  [0mFrom the street to the door[0m
+                [36m</strong>[39m
+                [36m<button[39m
+                  [33maria-label[39m=[32m"Report this guide"[39m
+                  [33mclass[39m=[32m"icon-button"[39m
+                [36m>[39m
+                  [36m<svg[39m
+                    [33maria-hidden[39m=[32m"true"[39m
+                    [33mclass[39m=[32m"lucide lucide-flag"[39m
+                    [33mfill[39m=[32m"none"[39m
+                    [33mheight[39m=[32m"15"[39m
+                    [33mstroke[39m=[32m"currentColor"[39m
+                    [33mstroke-linecap[39m=[32m"round"[39m
+                    [33mstroke-linejoin[39m=[32m"round"[39m
+                    [33mstroke-width[39m=[32m"2"[39m
+                    [33mviewBox[39m=[32m"0 0 24 24"[39m
+                    [33mwidth[39m=[32m"15"[39m
+                    [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                  [36m>[39m
+                    [36m<path[39m
+                      [33md[39m=[32m"M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528"[39m
+                    [36m/>[39m
+                  [36m</svg>[39m
+                [36m</button>[39m
+              [36m</div>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"muted small"[39m
+              [36m>[39m
+                [0m3[0m
+                [0m distinct accounts confirmed this version.[0m
+              [36m</p>[39m
+              [36m<ol[39m
+                [33mclass[39m=[32m"guide-steps"[39m
+              [36m>[39m
+                [36m<li>[39m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"step-number"[39m
+                  [36m>[39m
+                    [0m1[0m
+                  [36m</span>[39m
+                  [36m<div>[39m
+                    [36m<img[39m
+                      [33malt[39m=[32m"Sample illustration of a street entrance, not a photograph of a real venue"[39m
+                      [33msrc[39m=[32m"/images/entrance.svg"[39m
+                    [36m/>[39m
+                    [36m<p>[39m
+                      [0mFind the street-facing entrance. This illustration demonstrates the photo guide format.[0m
+                    [36m</p>[39m
+                  [36m</div>[39m
+                [36m</li>[39m
+                [36m<li>[39m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"step-number"[39m
+                  [36m>[39m
+                    [0m2[0m
+                  [36m</span>[39m
+                  [36m<div>[39m
+                    [36m<img[39m
+                      [33malt[39m=[32m"Sample illustration of an indoor corridor and facilities sign"[39m
+                      [33msrc[39m=[32m"/images/corridor.svg"[39m
+                    [36m/>[39m
+                    [36m<p>[39m
+                      [0mHead through the lobby and follow the facilities sign on the left. Sample directions only.[0m
+                    [36m</p>[39m
+                  [36m</div>[39m
+                [36m</li>[39m
+              [36m</ol>[39m
+            [36m</div>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"button secondary full"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/guides/new?facility=toilet-01"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-plus"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"16"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"16"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M5 12h14"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M12 5v14"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+              [0mAdd another entrance guide[0m
+            [36m</a>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"fine-print"[39m
+            [36m>[39m
+              [0mPublished after you and two other verified accounts confirm.[0m
+            [36m</p>[39m
+          [36m</div>[39m
+        [36m</article>[39m
+      [36m</aside>[39m
+      [36m<section[39m
+        [33maria-label[39m=[32m"Cremorne places map"[39m
+        [33mclass[39m=[32m"map-stage"[39m
+      [36m/>[39m
+      [0m [0m
+    [36m</main>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ tests/directions-integration.test.tsx:95:19
+     93|     await userEvent.click(screen.getByRole("button", { name: "Find nea…
+     94|     expect(await screen.findByRole("heading", { name: facility.name })…
+     95|     expect(screen.getByText(/110 m.*approximate straight-line distance…
+       |                   ^
+     96|     expect(walkingLink().searchParams.get("origin")).toBe(`${origin.la…
+     97|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 1 passed (4)
+   Start at  17:42:39
+   Duration  671ms (transform 81ms, setup 86ms, import 168ms, tests 109ms, environment 241ms)
+

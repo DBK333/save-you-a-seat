@@ -1,0 +1,37 @@
+
+> save-you-a-seat@0.1.0 test
+> vitest run tests/storage-boundary.test.ts
+
+
+ RUN  v4.1.11 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+ ❯ tests/storage-boundary.test.ts (1 test | 1 failed) 50ms
+   × keeps the demo directory available when browser storage access is denied 49ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/storage-boundary.test.ts > keeps the demo directory available when browser storage access is denied
+AssertionError: promise rejected "DOMException{ stack: 'SecurityError:…', …(1) }" instead of resolving
+ ❯ tests/storage-boundary.test.ts:5:48
+      3|  vi.resetModules();
+      4|  vi.spyOn(window,'localStorage','get').mockImplementation(()=>{throw n…
+      5|  await expect(import('../src/services/index')).resolves.toHaveProperty…
+       |                                                ^
+      6| });
+      7|
+
+Caused by: SecurityError: Storage denied
+ ❯ tests/storage-boundary.test.ts:4:70
+ ❯ src/services/index.ts:5:77
+ ❯ tests/storage-boundary.test.ts:5:2
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { code: 18, INDEX_SIZE_ERR: 1, DOMSTRING_SIZE_ERR: 2, HIERARCHY_REQUEST_ERR: 3, WRONG_DOCUMENT_ERR: 4, INVALID_CHARACTER_ERR: 5, NO_DATA_ALLOWED_ERR: 6, NO_MODIFICATION_ALLOWED_ERR: 7, NOT_FOUND_ERR: 8, NOT_SUPPORTED_ERR: 9, INUSE_ATTRIBUTE_ERR: 10, INVALID_STATE_ERR: 11, SYNTAX_ERR: 12, INVALID_MODIFICATION_ERR: 13, NAMESPACE_ERR: 14, INVALID_ACCESS_ERR: 15, VALIDATION_ERR: 16, TYPE_MISMATCH_ERR: 17, SECURITY_ERR: 18, NETWORK_ERR: 19, ABORT_ERR: 20, URL_MISMATCH_ERR: 21, QUOTA_EXCEEDED_ERR: 22, TIMEOUT_ERR: 23, INVALID_NODE_TYPE_ERR: 24, DATA_CLONE_ERR: 25 }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  17:28:47
+   Duration  396ms (transform 45ms, setup 77ms, import 3ms, tests 50ms, environment 204ms)
+

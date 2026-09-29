@@ -1,0 +1,55 @@
+
+> save-you-a-seat@0.1.0 test:e2e
+> playwright test
+
+
+Running 7 tests using 1 worker
+
+(node:47928) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [desktop-chromium] › tests/e2e/journeys.spec.ts:8:1 › guest can discover a place and open walking directions to its entrance (1.9s)
+  ✓  2 [desktop-chromium] › tests/e2e/journeys.spec.ts:20:1 › ordinary user cannot enter staff moderation (757ms)
+  ✓  3 [desktop-chromium] › tests/e2e/journeys.spec.ts:27:1 › desktop views remain legible without horizontal overflow (1.6s)
+  ✓  4 [desktop-chromium] › tests/e2e/journeys.spec.ts:43:1 › nearest toilet uses explicit location and provides a manual fallback (1.1s)
+  ✓  5 [desktop-chromium] › tests/e2e/journeys.spec.ts:60:1 › registration verification and recovery are explicitly local demo flows (1.0s)
+  ✘  6 [desktop-chromium] › tests/e2e/journeys.spec.ts:85:1 › a member can reserve a room and cancel the browser-local reservation (30.1s)
+(node:47977) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  7 [desktop-chromium] › tests/e2e/journeys.spec.ts:105:1 › photo guide gets two other confirmations, remains visible after report, then staff removes it (2.1s)
+
+
+  1) [desktop-chromium] › tests/e2e/journeys.spec.ts:85:1 › a member can reserve a room and cancel the browser-local reservation 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.selectOption: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Duration', { exact: true })
+
+
+      88 |  await page.getByRole('button',{name:'Reserve this room'}).click();
+      89 |  await page.getByLabel('Date',{exact:true}).fill('2026-10-01');
+    > 90 |  await page.getByLabel('Duration',{exact:true}).selectOption('60');
+         |                                                 ^
+      91 |  const time=page.getByLabel('Start time');
+      92 |  const first=await time.locator('option:not([disabled])').first().getAttribute('value');
+      93 |  await time.selectOption(first!);
+        at /Users/dorn/Desktop/local programming/Projects/FEITHack/tests/e2e/journeys.spec.ts:90:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/journeys-a-member-can-rese-f14fe-e-browser-local-reservation-desktop-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/journeys-a-member-can-rese-f14fe-e-browser-local-reservation-desktop-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/journeys-a-member-can-rese-f14fe-e-browser-local-reservation-desktop-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/journeys-a-member-can-rese-f14fe-e-browser-local-reservation-desktop-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [desktop-chromium] › tests/e2e/journeys.spec.ts:85:1 › a member can reserve a room and cancel the browser-local reservation 
+  6 passed (39.6s)

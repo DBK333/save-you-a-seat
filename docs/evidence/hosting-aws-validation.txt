@@ -1,0 +1,67 @@
+AWS read-only ValidateTemplate record
+Recorded UTC: 2026-09-29T13:47:13.021413+00:00
+Command: AWS_EC2_METADATA_DISABLED=true python3 scripts/cloud.py validate
+Region: ap-southeast-2
+Exit status: 0
+No AWS resources created or modified. These responses do not prove stack deployment.
+infra/bootstrap.yaml SHA256: cd54d66168c93d4ce12962558814a6270e622edc18e386d43e6862ada582e4b0
+infra/application.yaml SHA256: b670cb3184dc7b63585a88dee7e74c181783b9714f3b29825a38e82b7c98f2e2
+
+{
+  "Parameters": [
+    {
+      "ParameterKey": "Environment",
+      "DefaultValue": "dev",
+      "NoEcho": false
+    },
+    {
+      "ParameterKey": "FrontendMaxTTL",
+      "DefaultValue": "31536000",
+      "NoEcho": false,
+      "Description": "Maximum edge cache lifetime in seconds; object Cache-Control decides actual freshness."
+    }
+  ],
+  "Description": "SYAS artifact storage and private S3 frontend with CloudFront hosting (no backend deployment)."
+}
+{
+  "Parameters": [
+    {
+      "ParameterKey": "BackendArtifactBucket",
+      "NoEcho": false
+    },
+    {
+      "ParameterKey": "BackendArtifactVersion",
+      "NoEcho": false
+    },
+    {
+      "ParameterKey": "Environment",
+      "DefaultValue": "dev",
+      "NoEcho": false
+    },
+    {
+      "ParameterKey": "WebAdapterLayerArn",
+      "DefaultValue": "arn:aws:lambda:ap-southeast-2:753240598075:layer:LambdaAdapterLayerArm64:30",
+      "NoEcho": false,
+      "Description": "Version-pinned official arm64 layer; must be in the deployment region."
+    },
+    {
+      "ParameterKey": "BackendArtifactKey",
+      "NoEcho": false
+    },
+    {
+      "ParameterKey": "FrontendOrigin",
+      "NoEcho": false
+    },
+    {
+      "ParameterKey": "AlarmTopicArn",
+      "DefaultValue": "",
+      "NoEcho": false,
+      "Description": "Optional existing SNS topic for alarm notifications; alarms still exist without it."
+    }
+  ],
+  "Description": "SYAS future Python API infrastructure. Requires a real versioned backend artifact.",
+  "Capabilities": [
+    "CAPABILITY_IAM"
+  ],
+  "CapabilitiesReason": "The following resource(s) require capabilities: [AWS::IAM::Role]"
+}

@@ -1,0 +1,9 @@
+PASS: 20 documented shell blocks parse in both bash and zsh; local links and anchors resolve
+PASS: key prompt creates/updates safely, preserves other settings, rejects invalid input and symlinks, restricts file permissions, keeps key out of printed output
+PASS: separate production key file does not override unrelated settings or alter the development file
+PASS: ignore rules protect all eight private/generated paths; example template and sources remain trackable
+PASS: documented bootstrap CREATE helper runs in local dry-run mode; no AWS request made
+NOT RUN: actual key setup, AWS authentication, stack creation, publishing, stack deletion, retained-data deletion
+769f8e68e18fee46dbabe3fa150ab1d8c765c2ae1899213c924f701e10b6eb7f .gitignore
+98492b8d6b89f5854f73d37a63d2178d54d1dcfc219e81e1065825ffaea4e8f3 README.md
+69bf4316a5a96aed2aeccd8de5caf884b9e6cf6d15317c69fffebd457968226f docs/infrastructure.md

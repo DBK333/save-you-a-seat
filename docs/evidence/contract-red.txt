@@ -1,0 +1,60 @@
+UTC: 2026-09-29T07:39:35.997998+00:00
+Contract behavioral RED before nullable/limit repair. Includes actual payload validation using Ajv and ajv-formats.
+$ npx vitest run tests/contract.test.ts
+
+ RUN  v4.1.11 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+ ❯ tests/contract.test.ts (12 tests | 2 failed) 143ms
+     × accepts a facility with no published guide and with a redacted guide 8ms
+     × matches the report and moderation text bounds enforced by the demo 7ms
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 10 passed (12)
+   Start at  17:39:35
+   Duration  595ms (transform 42ms, setup 80ms, import 89ms, tests 143ms, environment 220ms)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/contract.test.ts > contract payload compatibility > accepts a facility with no published guide and with a redacted guide
+AssertionError: FacilityDetails: "\"nullable\" cannot be used without \"type\"": expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ assertPayload tests/contract.test.ts:92:66
+     90|     diagnostics = error instanceof Error ? error.message : String(erro…
+     91|   }
+     92|   expect(valid, `${schemaName}: ${JSON.stringify(diagnostics)}`).toBe(…
+       |                                                                  ^
+     93|   expect(compiled, `${schemaName} must compile before payload validati…
+     94| }
+ ❯ tests/contract.test.ts:98:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/contract.test.ts > contract payload compatibility > matches the report and moderation text bounds enforced by the demo
+AssertionError: ReportInput: null: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ assertPayload tests/contract.test.ts:92:66
+     90|     diagnostics = error instanceof Error ? error.message : String(erro…
+     91|   }
+     92|   expect(valid, `${schemaName}: ${JSON.stringify(diagnostics)}`).toBe(…
+       |                                                                  ^
+     93|   expect(compiled, `${schemaName} must compile before payload validati…
+     94| }
+ ❯ tests/contract.test.ts:151:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+Exit status: 1

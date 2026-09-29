@@ -1,0 +1,517 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: SYAS future Python API infrastructure. Requires a real versioned backend artifact.
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+    AllowedValues: [dev, test, prod]
+  FrontendOrigin:
+    Type: String
+    AllowedPattern: '^https://[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+(:443)?$|^http://localhost:5173$'
+    ConstraintDescription: An HTTPS origin without trailing slash, or http://localhost:5173 in dev only.
+  BackendArtifactBucket:
+    Type: String
+    MinLength: 3
+  BackendArtifactKey:
+    Type: String
+    AllowedPattern: '^backend/[a-f0-9]{64}\.zip$'
+  BackendArtifactVersion:
+    Type: String
+    MinLength: 1
+    AllowedPattern: '^(?!null$).+$'
+  WebAdapterLayerArn:
+    Type: String
+    Default: arn:aws:lambda:ap-southeast-2:753240598075:layer:LambdaAdapterLayerArm64:30
+    AllowedPattern: '^arn:aws:lambda:[a-z0-9-]+:753240598075:layer:LambdaAdapterLayerArm64:[1-9][0-9]*$'
+    Description: Version-pinned official arm64 layer; must be in the deployment region.
+  AlarmTopicArn:
+    Type: String
+    Default: ''
+    AllowedPattern: '^$|^arn:aws:sns:[a-z0-9-]+:[0-9]{12}:.+$'
+    Description: Optional existing SNS topic for alarm notifications; alarms still exist without it.
+Rules:
+  LocalhostOnlyInDev:
+    RuleCondition: {Fn::Equals: [{Ref: FrontendOrigin}, 'http://localhost:5173']}
+    Assertions:
+      - Assert: {Fn::Equals: [{Ref: Environment}, dev]}
+        AssertDescription: Localhost is allowed only in a development environment.
+Conditions:
+  HasAlarmTopic: {Fn::Not: [{Fn::Equals: [{Ref: AlarmTopicArn}, '']}]}
+Resources:
+  UserPool:
+    Type: AWS::Cognito::UserPool
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      UserPoolName: {Fn::Sub: 'syas-${Environment}-${AWS::StackName}'}
+      UsernameAttributes: [email]
+      AutoVerifiedAttributes: [email]
+      AccountRecoverySetting:
+        RecoveryMechanisms: [{Name: verified_email, Priority: 1}]
+      UserAttributeUpdateSettings:
+        AttributesRequireVerificationBeforeUpdate: [email]
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 12
+          RequireLowercase: true
+          RequireUppercase: true
+          RequireNumbers: true
+          RequireSymbols: true
+      Schema:
+        - Name: email
+          Required: true
+          Mutable: true
+  UserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: {Ref: UserPool}
+      GenerateSecret: false
+      PreventUserExistenceErrors: ENABLED
+      EnableTokenRevocation: true
+      ExplicitAuthFlows: [ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH]
+      AccessTokenValidity: 1
+      IdTokenValidity: 1
+      RefreshTokenValidity: 7
+      TokenValidityUnits: {AccessToken: hours, IdToken: hours, RefreshToken: days}
+      ReadAttributes: [email, email_verified, name]
+      WriteAttributes: [email, name]
+  StaffGroup:
+    Type: AWS::Cognito::UserPoolGroup
+    Properties:
+      UserPoolId: {Ref: UserPool}
+      GroupName: staff
+      Description: Administratively assigned moderators. Enforced again by the Python API.
+  FacilitiesTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      PointInTimeRecoverySpecification: {PointInTimeRecoveryEnabled: true}
+      SSESpecification: {SSEEnabled: true}
+      AttributeDefinitions:
+        - {AttributeName: pk, AttributeType: S}
+        - {AttributeName: sk, AttributeType: S}
+        - {AttributeName: gsi1pk, AttributeType: S}
+        - {AttributeName: gsi1sk, AttributeType: S}
+      KeySchema: [{AttributeName: pk, KeyType: HASH}, {AttributeName: sk, KeyType: RANGE}]
+      GlobalSecondaryIndexes:
+        - IndexName: CategoryIndex
+          KeySchema: [{AttributeName: gsi1pk, KeyType: HASH}, {AttributeName: gsi1sk, KeyType: RANGE}]
+          Projection: {ProjectionType: ALL}
+  BookingsTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      PointInTimeRecoverySpecification: {PointInTimeRecoveryEnabled: true}
+      SSESpecification: {SSEEnabled: true}
+      AttributeDefinitions:
+        - {AttributeName: pk, AttributeType: S}
+        - {AttributeName: sk, AttributeType: S}
+        - {AttributeName: gsi1pk, AttributeType: S}
+        - {AttributeName: gsi1sk, AttributeType: S}
+      KeySchema: [{AttributeName: pk, KeyType: HASH}, {AttributeName: sk, KeyType: RANGE}]
+      GlobalSecondaryIndexes:
+        - IndexName: UserBookingsIndex
+          KeySchema: [{AttributeName: gsi1pk, KeyType: HASH}, {AttributeName: gsi1sk, KeyType: RANGE}]
+          Projection: {ProjectionType: ALL}
+  CommunityTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      PointInTimeRecoverySpecification: {PointInTimeRecoveryEnabled: true}
+      SSESpecification: {SSEEnabled: true}
+      AttributeDefinitions:
+        - {AttributeName: pk, AttributeType: S}
+        - {AttributeName: sk, AttributeType: S}
+        - {AttributeName: gsi1pk, AttributeType: S}
+        - {AttributeName: gsi1sk, AttributeType: S}
+      KeySchema: [{AttributeName: pk, KeyType: HASH}, {AttributeName: sk, KeyType: RANGE}]
+      GlobalSecondaryIndexes:
+        - IndexName: ReviewQueueIndex
+          KeySchema: [{AttributeName: gsi1pk, KeyType: HASH}, {AttributeName: gsi1sk, KeyType: RANGE}]
+          Projection: {ProjectionType: ALL}
+  ImagesBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      OwnershipControls:
+        Rules: [{ObjectOwnership: BucketOwnerEnforced}]
+      VersioningConfiguration: {Status: Enabled}
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault: {SSEAlgorithm: AES256}
+      CorsConfiguration:
+        CorsRules:
+          - AllowedOrigins: [{Ref: FrontendOrigin}]
+            AllowedMethods: [GET, POST]
+            AllowedHeaders: [content-type]
+            ExposedHeaders: [ETag]
+            MaxAge: 300
+      LifecycleConfiguration:
+        Rules:
+          - Id: ExpireTemporaryUploads
+            Status: Enabled
+            Prefix: temporary/
+            ExpirationInDays: 1
+            NoncurrentVersionExpiration: {NoncurrentDays: 1}
+            AbortIncompleteMultipartUpload: {DaysAfterInitiation: 1}
+  ImagesBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: {Ref: ImagesBucket}
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: RequireTLS
+            Effect: Deny
+            Principal: '*'
+            Action: 's3:*'
+            Resource:
+              - {Fn::GetAtt: [ImagesBucket, Arn]}
+              - {Fn::Sub: '${ImagesBucket.Arn}/*'}
+            Condition:
+              Bool: {'aws:SecureTransport': 'false'}
+  FunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: {Fn::Sub: '/aws/lambda/${AWS::StackName}-api'}
+      RetentionInDays: 30
+  ApiLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      RetentionInDays: 30
+  FunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: {Service: lambda.amazonaws.com}
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: ApplicationResources
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Sid: Logs
+                Effect: Allow
+                Action: [logs:CreateLogStream, logs:PutLogEvents]
+                Resource: [{Fn::GetAtt: [FunctionLogGroup, Arn]}]
+              - Sid: Database
+                Effect: Allow
+                Action: [dynamodb:GetItem, dynamodb:PutItem, dynamodb:UpdateItem, dynamodb:DeleteItem, dynamodb:Query, dynamodb:BatchGetItem, dynamodb:ConditionCheckItem]
+                Resource:
+                  - {Fn::GetAtt: [FacilitiesTable, Arn]}
+                  - {Fn::Sub: '${FacilitiesTable.Arn}/index/*'}
+                  - {Fn::GetAtt: [BookingsTable, Arn]}
+                  - {Fn::Sub: '${BookingsTable.Arn}/index/*'}
+                  - {Fn::GetAtt: [CommunityTable, Arn]}
+                  - {Fn::Sub: '${CommunityTable.Arn}/index/*'}
+              - Sid: TemporaryImages
+                Effect: Allow
+                Action: [s3:GetObject, s3:GetObjectVersion, s3:PutObject, s3:DeleteObject]
+                Resource: [{Fn::Sub: '${ImagesBucket.Arn}/temporary/*'}]
+              - Sid: FinalImages
+                Effect: Allow
+                Action: [s3:GetObject, s3:GetObjectVersion, s3:PutObject]
+                Resource: [{Fn::Sub: '${ImagesBucket.Arn}/finalized/*'}]
+  ApiFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: {Fn::Sub: '${AWS::StackName}-api'}
+      Runtime: python3.13
+      Architectures: [arm64]
+      Handler: run.sh
+      Role: {Fn::GetAtt: [FunctionRole, Arn]}
+      MemorySize: 512
+      Timeout: 28
+      Code:
+        S3Bucket: {Ref: BackendArtifactBucket}
+        S3Key: {Ref: BackendArtifactKey}
+        S3ObjectVersion: {Ref: BackendArtifactVersion}
+      Layers: [{Ref: WebAdapterLayerArn}]
+      Environment:
+        Variables:
+          AWS_LAMBDA_EXEC_WRAPPER: /opt/bootstrap
+          AWS_LWA_PORT: '8080'
+          AWS_LWA_READINESS_CHECK_PATH: /health
+          AWS_LWA_READINESS_CHECK_HEALTHY_STATUS: '200'
+          AWS_LWA_ERROR_STATUS_CODES: '500,502-504'
+          SYAS_ENVIRONMENT: {Ref: Environment}
+          SYAS_FRONTEND_ORIGIN: {Ref: FrontendOrigin}
+          SYAS_FACILITIES_TABLE: {Ref: FacilitiesTable}
+          SYAS_BOOKINGS_TABLE: {Ref: BookingsTable}
+          SYAS_COMMUNITY_TABLE: {Ref: CommunityTable}
+          SYAS_IMAGES_BUCKET: {Ref: ImagesBucket}
+          SYAS_USER_POOL_ID: {Ref: UserPool}
+          SYAS_CLIENT_ID: {Ref: UserPoolClient}
+          SYAS_TIMEZONE: Australia/Melbourne
+  Api:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: {Fn::Sub: 'syas-${Environment}-${AWS::StackName}'}
+      ProtocolType: HTTP
+      CorsConfiguration:
+        AllowOrigins: [{Ref: FrontendOrigin}]
+        AllowMethods: [GET, POST, PATCH, DELETE, OPTIONS]
+        AllowHeaders: [authorization, content-type, idempotency-key]
+        MaxAge: 300
+  JwtAuthorizer:
+    Type: AWS::ApiGatewayV2::Authorizer
+    Properties:
+      ApiId: {Ref: Api}
+      AuthorizerType: JWT
+      IdentitySource: ['$request.header.Authorization']
+      Name: CognitoAccessToken
+      JwtConfiguration:
+        Audience: [{Ref: UserPoolClient}]
+        Issuer: {Fn::Sub: 'https://cognito-idp.${AWS::Region}.${AWS::URLSuffix}/${UserPool}'}
+  LambdaIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: {Ref: Api}
+      IntegrationType: AWS_PROXY
+      IntegrationUri: {Fn::GetAtt: [ApiFunction, Arn]}
+      PayloadFormatVersion: '2.0'
+      TimeoutInMillis: 29000
+  InvokeApiPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: {Ref: ApiFunction}
+      Principal: apigateway.amazonaws.com
+      SourceArn: {Fn::Sub: 'arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${Api}/*/*/*'}
+      SourceAccount: {Ref: 'AWS::AccountId'}
+  ApiStage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: {Ref: Api}
+      StageName: '$default'
+      AutoDeploy: true
+      DefaultRouteSettings:
+        ThrottlingBurstLimit: 50
+        ThrottlingRateLimit: 25
+        DetailedMetricsEnabled: true
+      AccessLogSettings:
+        DestinationArn: {Fn::GetAtt: [ApiLogGroup, Arn]}
+        Format: '{"requestId":"$context.requestId","route":"$context.routeKey","status":"$context.status","latency":"$context.responseLatency","integrationError":"$context.integrationErrorMessage"}'
+  FunctionErrorsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: API Lambda failures. Logs must not contain tokens, passwords, or image bytes.
+      Namespace: AWS/Lambda
+      MetricName: Errors
+      Dimensions: [{Name: FunctionName, Value: {Ref: ApiFunction}}]
+      Statistic: Sum
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: {Fn::If: [HasAlarmTopic, [{Ref: AlarmTopicArn}], {Ref: 'AWS::NoValue'}]}
+  ApiErrorsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      Namespace: AWS/ApiGateway
+      MetricName: 5xx
+      Dimensions: [{Name: ApiId, Value: {Ref: Api}}]
+      Statistic: Sum
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 5
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: {Fn::If: [HasAlarmTopic, [{Ref: AlarmTopicArn}], {Ref: 'AWS::NoValue'}]}
+  ApiLatencyAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      Namespace: AWS/ApiGateway
+      MetricName: Latency
+      Dimensions: [{Name: ApiId, Value: {Ref: Api}}]
+      ExtendedStatistic: p95
+      Period: 300
+      EvaluationPeriods: 2
+      Threshold: 2000
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: {Fn::If: [HasAlarmTopic, [{Ref: AlarmTopicArn}], {Ref: 'AWS::NoValue'}]}
+  FacilitiesRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: {Ref: Api}
+      RouteKey: "GET /facilities"
+      Target: {Fn::Sub: "integrations/${LambdaIntegration}"}
+      AuthorizationType: NONE
+  FacilityRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: {Ref: Api}
+      RouteKey: "GET /facilities/{id}"
+      Target: {Fn::Sub: "integrations/${LambdaIntegration}"}
+      AuthorizationType: NONE
+  AvailabilityRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: {Ref: Api}
+      RouteKey: "GET /rooms/{id}/availability"
+      Target: {Fn::Sub: "integrations/${LambdaIntegration}"}
+      AuthorizationType: NONE
+  CreateBookingRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: {Ref: Api}
+      RouteKey: "POST /bookings"
+      Target: {Fn::Sub: "integrations/${LambdaIntegration}"}
+      AuthorizationType: JWT
+      AuthorizerId: {Ref: JwtAuthorizer}
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+  MyBookingsRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: {Ref: Api}
+      RouteKey: "GET /me/bookings"
+      Target: {Fn::Sub: "integrations/${LambdaIntegration}"}
+      AuthorizationType: JWT
+      AuthorizerId: {Ref: JwtAuthorizer}
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+  CancelBookingRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: {Ref: Api}
+      RouteKey: "DELETE /bookings/{id}"
+      Target: {Fn::Sub: "integrations/${LambdaIntegration}"}
+      AuthorizationType: JWT
+      AuthorizerId: {Ref: JwtAuthorizer}
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+  CreateGuideRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: {Ref: Api}
+      RouteKey: "POST /guides"
+      Target: {Fn::Sub: "integrations/${LambdaIntegration}"}
+      AuthorizationType: JWT
+      AuthorizerId: {Ref: JwtAuthorizer}
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+  EditGuideRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: {Ref: Api}
+      RouteKey: "PATCH /guides/{id}"
+      Target: {Fn::Sub: "integrations/${LambdaIntegration}"}
+      AuthorizationType: JWT
+      AuthorizerId: {Ref: JwtAuthorizer}
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+  SubmitGuideRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: {Ref: Api}
+      RouteKey: "POST /guides/{id}/submit"
+      Target: {Fn::Sub: "integrations/${LambdaIntegration}"}
+      AuthorizationType: JWT
+      AuthorizerId: {Ref: JwtAuthorizer}
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+  PendingGuidesRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: {Ref: Api}
+      RouteKey: "GET /guides"
+      Target: {Fn::Sub: "integrations/${LambdaIntegration}"}
+      AuthorizationType: JWT
+      AuthorizerId: {Ref: JwtAuthorizer}
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+  ConfirmGuideRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: {Ref: Api}
+      RouteKey: "POST /guides/{id}/confirm"
+      Target: {Fn::Sub: "integrations/${LambdaIntegration}"}
+      AuthorizationType: JWT
+      AuthorizerId: {Ref: JwtAuthorizer}
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+  UploadRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: {Ref: Api}
+      RouteKey: "POST /media/uploads"
+      Target: {Fn::Sub: "integrations/${LambdaIntegration}"}
+      AuthorizationType: JWT
+      AuthorizerId: {Ref: JwtAuthorizer}
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+  FinalizeUploadRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: {Ref: Api}
+      RouteKey: "POST /media/uploads/{id}/complete"
+      Target: {Fn::Sub: "integrations/${LambdaIntegration}"}
+      AuthorizationType: JWT
+      AuthorizerId: {Ref: JwtAuthorizer}
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+  CreateReportRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: {Ref: Api}
+      RouteKey: "POST /guides/{id}/reports"
+      Target: {Fn::Sub: "integrations/${LambdaIntegration}"}
+      AuthorizationType: JWT
+      AuthorizerId: {Ref: JwtAuthorizer}
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+  StaffReportsRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: {Ref: Api}
+      RouteKey: "GET /staff/reports"
+      Target: {Fn::Sub: "integrations/${LambdaIntegration}"}
+      AuthorizationType: JWT
+      AuthorizerId: {Ref: JwtAuthorizer}
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+  StaffDecisionRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: {Ref: Api}
+      RouteKey: "POST /staff/reports/{id}/decision"
+      Target: {Fn::Sub: "integrations/${LambdaIntegration}"}
+      AuthorizationType: JWT
+      AuthorizerId: {Ref: JwtAuthorizer}
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+  MediaRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: {Ref: Api}
+      RouteKey: "GET /media/{id}"
+      Target: {Fn::Sub: "integrations/${LambdaIntegration}"}
+      AuthorizationType: JWT
+      AuthorizerId: {Ref: JwtAuthorizer}
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+Outputs:
+  Region:
+    Value: {Ref: 'AWS::Region'}
+  ApiUrl:
+    Value: {Fn::GetAtt: [Api, ApiEndpoint]}
+  UserPoolId:
+    Value: {Ref: UserPool}
+  UserPoolClientId:
+    Value: {Ref: UserPoolClient}
+  ImagesBucketName:
+    Value: {Ref: ImagesBucket}
+  FacilitiesTableName:
+    Value: {Ref: FacilitiesTable}
+  BookingsTableName:
+    Value: {Ref: BookingsTable}
+  CommunityTableName:
+    Value: {Ref: CommunityTable}
+  FunctionName:
+    Value: {Ref: ApiFunction}
+  FrontendOrigin:
+    Value: {Ref: FrontendOrigin}

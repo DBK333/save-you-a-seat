@@ -1,0 +1,19 @@
+UTC: 2026-09-29T07:39:58.185635+00:00
+Scope: OpenAPI document and JSON payload shape/format validation only; no HTTP API or AWS backend conformance claimed.
+Contract SHA256: 9bb49789e453d4a7f877a9562a628a712e367e51a308204b3996e12f5ad141b4
+$ npx vitest run tests/contract.test.ts
+
+ RUN  v4.1.11 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+
+ Test Files  1 passed (1)
+      Tests  12 passed (12)
+   Start at  17:39:57
+   Duration  650ms (transform 49ms, setup 93ms, import 100ms, tests 159ms, environment 228ms)
+
+
+Exit status: 0
+
+TypeScript check after the typed OpenAPI schema-view adjustment:
+$ npx tsc -b
+Exit status: 0

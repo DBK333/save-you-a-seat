@@ -1,0 +1,15 @@
+
+> save-you-a-seat@0.1.0 test
+> vitest run
+
+
+ RUN  v4.1.11 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+(node:49349) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+ Test Files  7 passed (7)
+      Tests  65 passed (65)
+   Start at  17:44:33
+   Duration  1.05s (transform 444ms, setup 776ms, import 1.03s, tests 793ms, environment 2.57s)
+

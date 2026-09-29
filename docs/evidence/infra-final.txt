@@ -1,0 +1,67 @@
+
+> save-you-a-seat@0.1.0 test:infra
+> bash scripts/validate-infra.sh
+
+cfn-lint 1.48.0
+cfn-guard 3.2.0
+Test Case #1
+Name: private bucket passes
+  No Test expectation was set for Rule environment_and_region_output
+  No Test expectation was set for Rule https_bucket_policy
+  PASS Rules:
+    private_encrypted_retained_buckets: Expected = PASS
+
+Test Case #2
+Name: public bucket fails
+  No Test expectation was set for Rule https_bucket_policy
+  No Test expectation was set for Rule environment_and_region_output
+  PASS Rules:
+    private_encrypted_retained_buckets: Expected = FAIL
+
+Test Case #3
+Name: missing resources fail instead of skipping
+  PASS Rules:
+    https_bucket_policy: Expected = FAIL
+    private_encrypted_retained_buckets: Expected = FAIL
+    environment_and_region_output: Expected = FAIL
+
+/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml Status = PASS
+PASS rules
+common.guard/private_encrypted_retained_buckets    PASS
+common.guard/https_bucket_policy                   PASS
+common.guard/environment_and_region_output         PASS
+---
+/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/bootstrap.yaml Status = PASS
+PASS rules
+bootstrap.guard/bootstrap_resources_exist    PASS
+---
+/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml Status = PASS
+PASS rules
+common.guard/private_encrypted_retained_buckets    PASS
+common.guard/https_bucket_policy                   PASS
+common.guard/environment_and_region_output         PASS
+---
+/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/application.yaml Status = PASS
+PASS rules
+application.guard/application_resources_exist     PASS
+application.guard/durable_tables                  PASS
+application.guard/account_safety                  PASS
+application.guard/routes_protected                PASS
+application.guard/known_routes_present            PASS
+application.guard/scoped_execution_permissions    PASS
+application.guard/restricted_cors                 PASS
+application.guard/immutable_python_package        PASS
+---
+test_complete_templates_pass (test_policies.Policies.test_complete_templates_pass) ... ok
+test_contract_routes_match_infrastructure (test_policies.Policies.test_contract_routes_match_infrastructure) ... ok
+test_empty_resources_fail_instead_of_skip (test_policies.Policies.test_empty_resources_fail_instead_of_skip) ... ok
+test_every_required_resource_is_required (test_policies.Policies.test_every_required_resource_is_required) ... ok
+test_native_guard_unit_fixtures (test_policies.Policies.test_native_guard_unit_fixtures) ... ok
+test_only_discovery_routes_are_public (test_policies.Policies.test_only_discovery_routes_are_public) ... ok
+test_required_outputs_do_not_disappear (test_policies.Policies.test_required_outputs_do_not_disappear) ... ok
+test_security_regressions_fail (test_policies.Policies.test_security_regressions_fail) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 1.447s
+
+OK

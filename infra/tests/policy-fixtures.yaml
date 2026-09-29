@@ -1,0 +1,78 @@
+- name: private bucket passes
+  input:
+    Resources:
+      Example:
+        Type: AWS::S3::Bucket
+        DeletionPolicy: Retain
+        UpdateReplacePolicy: Retain
+        Properties:
+          PublicAccessBlockConfiguration:
+            BlockPublicAcls: true
+            BlockPublicPolicy: true
+            IgnorePublicAcls: true
+            RestrictPublicBuckets: true
+          VersioningConfiguration: { Status: Enabled }
+          BucketEncryption:
+            ServerSideEncryptionConfiguration:
+              - ServerSideEncryptionByDefault: { SSEAlgorithm: AES256 }
+  expectations:
+    rules: { private_encrypted_retained_buckets: PASS }
+- name: public bucket fails
+  input:
+    Resources:
+      Example:
+        Type: AWS::S3::Bucket
+        Properties:
+          PublicAccessBlockConfiguration: { BlockPublicAcls: false }
+  expectations:
+    rules: { private_encrypted_retained_buckets: FAIL }
+- name: missing resources fail instead of skipping
+  input: { Resources: {} }
+  expectations:
+    rules:
+      private_encrypted_retained_buckets: FAIL
+      https_bucket_policy: FAIL
+      environment_and_region_output: FAIL
+- name: TLS denial may coexist with scoped origin access
+  input:
+    Resources:
+      FrontendPolicy:
+        Type: AWS::S3::BucketPolicy
+        Properties:
+          PolicyDocument:
+            Statement:
+              - Sid: RequireTLS
+                Effect: Deny
+                Principal: '*'
+                Action: 's3:*'
+                Condition: { Bool: { 'aws:SecureTransport': 'false' } }
+              - Sid: AllowDistributionRead
+                Effect: Allow
+                Principal: { Service: cloudfront.amazonaws.com }
+                Action: s3:GetObject
+  expectations:
+    rules: { https_bucket_policy: PASS }
+- name: one compliant bucket policy cannot cover another without TLS denial
+  input:
+    Resources:
+      ArtifactsPolicy:
+        Type: AWS::S3::BucketPolicy
+        Properties:
+          PolicyDocument:
+            Statement:
+              - Sid: RequireTLS
+                Effect: Deny
+                Principal: '*'
+                Action: 's3:*'
+                Condition: { Bool: { 'aws:SecureTransport': 'false' } }
+      FrontendPolicy:
+        Type: AWS::S3::BucketPolicy
+        Properties:
+          PolicyDocument:
+            Statement:
+              - Sid: AllowDistributionRead
+                Effect: Allow
+                Principal: { Service: cloudfront.amazonaws.com }
+                Action: s3:GetObject
+  expectations:
+    rules: { https_bucket_policy: FAIL }

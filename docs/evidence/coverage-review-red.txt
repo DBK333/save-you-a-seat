@@ -1,0 +1,55 @@
+
+> save-you-a-seat@0.1.0 test
+> vitest run --run tests/coverage-ui.test.tsx
+
+
+ RUN  v4.1.11 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+(node:11340) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ❯ tests/coverage-ui.test.tsx (6 tests | 2 failed) 262ms
+   × keeps the chosen availability date through room details, login and reservation 54ms
+   × removes expired booking starts and refreshes Open now as the clock advances 28ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/coverage-ui.test.tsx > keeps the chosen availability date through room details, login and reservation
+Error: expect(element).toHaveValue(2026-10-01)
+
+Expected the element to have value:
+  2026-10-01
+Received:
+  2026-09-30
+ ❯ tests/coverage-ui.test.tsx:110:41
+    108|   fireEvent.click(screen.getByRole("button", { name: /Continue as Alex…
+    109|   fireEvent.click(screen.getByRole("button", { name: "Reserve this roo…
+    110|   expect(screen.getByLabelText("Date")).toHaveValue("2026-10-01");
+       |                                         ^
+    111| });
+    112|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/coverage-ui.test.tsx > removes expired booking starts and refreshes Open now as the clock advances
+Error: expect(element).toBeDisabled()
+
+Received element is not disabled:
+  <option
+  value="2026-09-30T22:00:00.000Z"
+/>
+ ❯ tests/coverage-ui.test.tsx:126:17
+    124|     vi.advanceTimersByTime(30_000);
+    125|   });
+    126|   expect(first).toBeDisabled();
+       |                 ^
+    127|   fireEvent.click(screen.getByRole("button", { name: "Close dialog" })…
+    128|   fireEvent.click(screen.getByRole("button", { name: "Close place deta…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 4 passed (6)
+   Start at  00:13:55
+   Duration  627ms (transform 108ms, setup 43ms, import 165ms, tests 262ms, environment 104ms)
+

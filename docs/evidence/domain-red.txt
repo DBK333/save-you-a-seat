@@ -1,0 +1,753 @@
+
+> save-you-a-seat@0.1.0 test
+> vitest run src/domain/rules.test.ts src/services/demo.test.ts
+
+
+ RUN  v3.2.7 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+ ❯ src/domain/rules.test.ts (10 tests | 9 failed) 8ms
+   × discovery and external walking directions > combines category, search, accessibility, capacity, and equipment filters 4ms
+     → expected [ { id: 'test-toilet', …(12) }, …(1) ] to deeply equal [ { id: 'test-room', …(13) } ]
+   × discovery and external walking directions > checks open-now using Melbourne local time and exclusive closing time 1ms
+     → expected [ { id: 'test-toilet', …(12) } ] to deeply equal []
+   × discovery and external walking directions > measures geographic proximity and handles identical points 0ms
+     → expected +0 to be close to 111195, received difference is 111195, but expected 5
+   × discovery and external walking directions > opens walking directions targeting the entrance and optional origin 1ms
+     → expected '/maps/search/' to be '/maps/dir/' // Object.is equality
+   × Melbourne calendar and availability > uses the local calendar date at a UTC day boundary 0ms
+     → expected '2026-09-29' to be '2026-09-30' // Object.is equality
+   × Melbourne calendar and availability > converts standard and daylight local times to UTC 0ms
+     → expected '2026-09-30T10:00:00.000Z' to be '2026-09-30T00:00:00.000Z' // Object.is equality
+   × Melbourne calendar and availability > rejects nonexistent or ambiguous daylight-saving times and invalid dates 1ms
+     → expected [Function] to throw an error
+   × Melbourne calendar and availability > formats UTC dates as Melbourne local time 0ms
+     → expected '2026-09-30T00:00:00.000Z' to contain '10:00'
+   × Melbourne calendar and availability > returns half-hour openings, disallows past slots, and leaves cancelled slots free 0ms
+     → expected [] to have a length of 20 but got +0
+   ✓ Melbourne calendar and availability > exposes no booking slots for toilets or outside the next fourteen local dates 0ms
+ ❯ src/services/demo.test.ts (28 tests | 28 failed) 1016ms
+   × demo identities and external store > switches accounts, emits changes, keeps snapshots stable, and logs out 3ms
+     → expected null to be 'user-jamie' // Object.is equality
+   × demo identities and external store > rejects unknown accounts and creates only unverified ordinary accounts without passwords 1ms
+     → expected [Function] to throw an error
+   × demo identities and external store > requires the explicit demo verification code and allows generic recovery 0ms
+     → expected [Function] to throw an error
+   × demo identities and external store > guests cannot mutate guides, upload media, reserve, or report 0ms
+     → expected [Function] to throw an error
+   × demo identities and external store > persists local state, rejects corrupt storage safely, and clears a demo on reset 1ms
+     → expected +0 to be 1 // Object.is equality
+   × demo identities and external store > leaves state intact if persistence runs out of quota 0ms
+     → expected [Function] to throw an error
+   × demo identities and external store > does not expose writable snapshots 0ms
+     → expected [Function] to throw an error
+   × image uploads > decodes an image and associates immutable content with its uploader 1ms
+     → expected "spy" to be called at least once
+   × image uploads > rejects unsupported, oversized, empty, disguised and undecodable files 2ms
+     → promise resolved "{ id: '', ownerId: '', image: '', …(3) }" instead of rejecting
+   × image uploads > does not attach an upload after the uploading account changes 1002ms
+     → expected undefined to be defined
+   × guide authoring and community publication > saves ordered steps and starts immutable submission with author confirmation 1ms
+     → expected 'draft' to be 'pending' // Object.is equality
+   × guide authoring and community publication > requires complete photos and captions at submission and limits steps 0ms
+     → expected [Function] to throw an error
+   × guide authoring and community publication > rejects foreign media, unowned edits and forged image content 0ms
+     → expected [Function] to throw an error
+   × guide authoring and community publication > requires verified accounts, counts each person once and publishes at three 0ms
+     → expected [] to have a length of 1 but got +0
+   × guide authoring and community publication > keeps an old published version until its independent revision qualifies 0ms
+     → expected [] to deeply equal [ 'user-alex' ]
+   × guide authoring and community publication > cannot move a revision to another facility 0ms
+     → expected [Function] to throw an error
+   × reporting and staff decisions > keeps a reported guide published and rejects nonstaff moderation 0ms
+     → expected 'draft' to be 'published' // Object.is equality
+   × reporting and staff decisions > dismisses a report with a staff decision while keeping the guide visible 1ms
+     → expected { id: 'report-0', …(6) } to match object { status: 'dismissed', …(1) }
+(6 matching properties omitted from actual)
+   × reporting and staff decisions > removes all guide versions and blocks late confirmation or revisions from restoring it 0ms
+     → expected [] to include 'guide-0'
+   × room reservations > creates a booking and an exact retry returns it without duplicate slots 0ms
+     → expected { id: '', facilityId: 'room-01', …(6) } to match object { userId: 'user-alex', …(3) }
+(4 matching properties omitted from actual)
+   × room reservations > rejects overlapping requests entirely but allows adjacent bookings 0ms
+     → expected [Function] to throw an error
+   × room reservations > rejects invalid duration 0 0ms
+     → expected [Function] to throw an error
+   × room reservations > rejects invalid duration 15 0ms
+     → expected [Function] to throw an error
+   × room reservations > rejects invalid duration 45 0ms
+     → expected [Function] to throw an error
+   × room reservations > rejects invalid duration 150 0ms
+     → expected [Function] to throw an error
+   × room reservations > rejects past, misaligned, after-hours and excessive-horizon reservations 0ms
+     → expected [Function] to throw an error
+   × room reservations > enforces cancellation ownership and time while retries cannot erase a later reservation 0ms
+     → expected [Function] to throw an error
+   × room reservations > keeps elapsed duration accurate across the Melbourne spring clock change 0ms
+     → expected '2026-10-05T10:00:00.000Z' to be '2026-10-04T23:00:00.000Z' // Object.is equality
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 37 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/services/demo.test.ts > demo identities and external store > switches accounts, emits changes, keeps snapshots stable, and logs out
+AssertionError: expected null to be 'user-jamie' // Object.is equality
+
+- Expected: 
+"user-jamie"
+
++ Received: 
+null
+
+ ❯ src/services/demo.test.ts:41:64
+     39|   const s = service({ currentUserId: null }); const listener = vi.fn()…
+     40|   const initial = s.getSnapshot(); expect(s.getSnapshot()).toBe(initia…
+     41|   s.login('user-jamie'); expect(s.getSnapshot().currentUserId).toBe('u…
+       |                                                                ^
+     42|   off(); s.logout(); expect(s.getSnapshot().currentUserId).toBeNull();…
+     43|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/37]⎯
+
+ FAIL  src/services/demo.test.ts > demo identities and external store > rejects unknown accounts and creates only unverified ordinary accounts without passwords
+AssertionError: expected [Function] to throw an error
+
+- Expected: 
+null
+
++ Received: 
+undefined
+
+ ❯ src/services/demo.test.ts:45:57
+     43|  });
+     44|  it('rejects unknown accounts and creates only unverified ordinary acc…
+     45|   const s = service(); expect(() => s.login('unknown')).toThrow(/accou…
+       |                                                         ^
+     46|   const account = s.register('Pat', 'PAT@Example.test');
+     47|   expect(account).toMatchObject({ email: 'pat@example.test', role: 'us…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/37]⎯
+
+ FAIL  src/services/demo.test.ts > demo identities and external store > requires the explicit demo verification code and allows generic recovery
+AssertionError: expected [Function] to throw an error
+
+- Expected: 
+null
+
++ Received: 
+undefined
+
+ ❯ src/services/demo.test.ts:54:76
+     52|  });
+     53|  it('requires the explicit demo verification code and allows generic r…
+     54|   const s = service(); expect(() => s.verify('new@example.test', 'wron…
+       |                                                                            ^
+     55|   s.verify('new@example.test', '314159'); expect(s.getSnapshot().users…
+     56|   expect(() => s.recover('absent@example.test')).not.toThrow();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/37]⎯
+
+ FAIL  src/services/demo.test.ts > demo identities and external store > guests cannot mutate guides, upload media, reserve, or report
+AssertionError: expected [Function] to throw an error
+
+- Expected: 
+null
+
++ Received: 
+undefined
+
+ ❯ src/services/demo.test.ts:60:38
+     58|  it('guests cannot mutate guides, upload media, reserve, or report', a…
+     59|   const s = service({ currentUserId: null });
+     60|   expect(() => s.saveDraft(input())).toThrow(/sign in/i);
+       |                                      ^
+     61|   expect(() => s.book(bookingInput())).toThrow(/sign in/i);
+     62|   expect(() => s.reportGuide('no-guide', 'Incorrect', '')).toThrow(/si…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/37]⎯
+
+ FAIL  src/services/demo.test.ts > demo identities and external store > persists local state, rejects corrupt storage safely, and clears a demo on reset
+AssertionError: expected +0 to be 1 // Object.is equality
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ src/services/demo.test.ts:67:54
+     65|  it('persists local state, rejects corrupt storage safely, and clears …
+     66|   const s = new DemoService({ storage: localStorage, now: () => now, s…
+     67|   s.login('user-jamie'); expect(localStorage.length).toBe(1);
+       |                                                      ^
+     68|   expect(new DemoService({ storage: localStorage }).getSnapshot().curr…
+     69|   const key = localStorage.key(0)!; localStorage.setItem(key, '{bad js…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/37]⎯
+
+ FAIL  src/services/demo.test.ts > demo identities and external store > leaves state intact if persistence runs out of quota
+AssertionError: expected [Function] to throw an error
+
+- Expected: 
+null
+
++ Received: 
+undefined
+
+ ❯ src/services/demo.test.ts:76:38
+     74|   const storage = { getItem: () => null, setItem: () => { throw new DO…
+     75|   const s = new DemoService({ storage, seed: { users, currentUserId: n…
+     76|   expect(() => s.login('user-alex')).toThrow(/storage/i); expect(s.get…
+       |                                      ^
+     77|  });
+     78|  it('does not expose writable snapshots', () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/37]⎯
+
+ FAIL  src/services/demo.test.ts > demo identities and external store > does not expose writable snapshots
+AssertionError: expected [Function] to throw an error
+ ❯ src/services/demo.test.ts:79:88
+     77|  });
+     78|  it('does not expose writable snapshots', () => {
+     79|   const s = service(); expect(() => { s.getSnapshot().blockedGuides.pu…
+       |                                                                                        ^
+     80|  });
+     81| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/37]⎯
+
+ FAIL  src/services/demo.test.ts > image uploads > decodes an image and associates immutable content with its uploader
+AssertionError: expected "spy" to be called at least once
+ ❯ src/services/demo.test.ts:88:18
+     86|   const decode = vi.fn().mockResolvedValue({ width: 100, height: 100, …
+     87|   const s = service(); const result = await s.upload(png());
+     88|   expect(decode).toHaveBeenCalled(); expect(result.ownerId).toBe('user…
+       |                  ^
+     89|  });
+     90|  it('rejects unsupported, oversized, empty, disguised and undecodable …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/37]⎯
+
+ FAIL  src/services/demo.test.ts > image uploads > rejects unsupported, oversized, empty, disguised and undecodable files
+AssertionError: promise resolved "{ id: '', ownerId: '', image: '', …(3) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "filename": "door.svg",
++   "id": "",
++   "image": "",
++   "mime": "image/svg+xml",
++   "ownerId": "",
++   "size": 3,
+  }
+
+ ❯ src/services/demo.test.ts:92:82
+     90|  it('rejects unsupported, oversized, empty, disguised and undecodable …
+     91|   const s = service();
+     92|   await expect(s.upload(new File(['svg'], 'door.svg', { type: 'image/s…
+       |                                                                                  ^
+     93|   await expect(s.upload(new File([new Uint8Array(5 * 1024 * 1024 + 1)]…
+     94|   await expect(s.upload(new File([], 'empty.png', { type: 'image/png' …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/37]⎯
+
+ FAIL  src/services/demo.test.ts > image uploads > does not attach an upload after the uploading account changes
+AssertionError: expected undefined to be defined
+ ❯ src/services/demo.test.ts:104:48
+    102|   vi.stubGlobal('createImageBitmap', vi.fn().mockImplementation(() => …
+    103|   const s = service(); const upload = s.upload(png());
+    104|   await vi.waitFor(() => expect(resolveDecode).toBeDefined());
+       |                                                ^
+    105|   s.login('user-jamie'); resolveDecode({ width: 100, height: 100, clos…
+    106|   await expect(upload).rejects.toThrow(/account|sign in/i);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/37]⎯
+
+ FAIL  src/services/demo.test.ts > guide authoring and community publication > saves ordered steps and starts immutable submission with author confirmation
+AssertionError: expected 'draft' to be 'pending' // Object.is equality
+
+Expected: "pending"
+Received: "draft"
+
+ ❯ src/services/demo.test.ts:114:71
+    112|   const s = service(); const draft = s.saveDraft({ ...input(), steps: …
+    113|   expect(draft.status).toBe('draft'); expect(draft.steps.map(step => s…
+    114|   const submitted = s.submitGuide(draft.id); expect(submitted.status).…
+       |                                                                       ^
+    115|   expect(() => s.saveDraft(input(), draft.id)).toThrow(/submitted|immu…
+    116|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/37]⎯
+
+ FAIL  src/services/demo.test.ts > guide authoring and community publication > requires complete photos and captions at submission and limits steps
+AssertionError: expected [Function] to throw an error
+
+- Expected: 
+null
+
++ Received: 
+undefined
+
+ ❯ src/services/demo.test.ts:119:41
+    117|  it('requires complete photos and captions at submission and limits st…
+    118|   const s = service(); const draft = s.saveDraft({ ...input(), steps: …
+    119|   expect(() => s.submitGuide(draft.id)).toThrow(/caption|instruction/i…
+       |                                         ^
+    120|   expect(() => s.saveDraft({ ...input(), steps: Array.from({ length: 6…
+    121|   expect(() => s.submitGuide(s.saveDraft({ ...input(), steps: [] }).id…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/37]⎯
+
+ FAIL  src/services/demo.test.ts > guide authoring and community publication > rejects foreign media, unowned edits and forged image content
+AssertionError: expected [Function] to throw an error
+
+- Expected: 
+null
+
++ Received: 
+undefined
+
+ ❯ src/services/demo.test.ts:125:48
+    123|  it('rejects foreign media, unowned edits and forged image content', (…
+    124|   const s = service(); const draft = s.saveDraft(input()); s.login('us…
+    125|   expect(() => s.saveDraft(input(), draft.id)).toThrow(/own|permission…
+       |                                                ^
+    126|   expect(() => s.saveDraft(input())).toThrow(/image|photo|own/i);
+    127|   s.login('user-alex'); expect(() => s.saveDraft({ ...input(), steps: …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/37]⎯
+
+ FAIL  src/services/demo.test.ts > guide authoring and community publication > requires verified accounts, counts each person once and publishes at three
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ src/services/demo.test.ts:131:77
+    129|  it('requires verified accounts, counts each person once and publishes…
+    130|   const s = service(); const guide = pending(s);
+    131|   s.confirmGuide(guide.id); expect(s.getSnapshot().guides[0].confirmat…
+       |                                                                             ^
+    132|   s.login('unverified'); expect(() => s.confirmGuide(guide.id)).toThro…
+    133|   s.login('user-jamie'); s.confirmGuide(guide.id); s.confirmGuide(guid…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/37]⎯
+
+ FAIL  src/services/demo.test.ts > guide authoring and community publication > keeps an old published version until its independent revision qualifies
+AssertionError: expected [] to deeply equal [ 'user-alex' ]
+
+- Expected
++ Received
+
+- [
+-   "user-alex",
+- ]
++ []
+
+ ❯ src/services/demo.test.ts:139:33
+    137|   const s = service(); const first = published(s); s.login('user-alex'…
+    138|   const revised = s.submitGuide(s.saveDraft({ ...input(), guideId: fir…
+    139|   expect(revised.confirmations).toEqual(['user-alex']); expect(s.getSn…
+       |                                 ^
+    140|   s.login('user-jamie'); s.confirmGuide(revised.id); s.login('user-sam…
+    141|   expect(s.getSnapshot().guides.find(g => g.id === first.id)?.status).…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/37]⎯
+
+ FAIL  src/services/demo.test.ts > guide authoring and community publication > cannot move a revision to another facility
+AssertionError: expected [Function] to throw an error
+
+- Expected: 
+null
+
++ Received: 
+undefined
+
+ ❯ src/services/demo.test.ts:146:92
+    144|  it('cannot move a revision to another facility', () => {
+    145|   const s = service(); const first = published(s); s.login('user-alex'…
+    146|   expect(() => s.saveDraft({ ...input(), guideId: first.guideId, facil…
+       |                                                                                            ^
+    147|  });
+    148| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/37]⎯
+
+ FAIL  src/services/demo.test.ts > reporting and staff decisions > keeps a reported guide published and rejects nonstaff moderation
+AssertionError: expected 'draft' to be 'published' // Object.is equality
+
+Expected: "published"
+Received: "draft"
+
+ ❯ src/services/demo.test.ts:153:44
+    151|  it('keeps a reported guide published and rejects nonstaff moderation'…
+    152|   const s = service(); const guide = published(s); s.reportGuide(guide…
+    153|   expect(s.getSnapshot().guides[0].status).toBe('published'); expect(s…
+       |                                            ^
+    154|   expect(() => s.moderate(s.getSnapshot().reports[0].id, 'remove', 'Ch…
+    155|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/37]⎯
+
+ FAIL  src/services/demo.test.ts > reporting and staff decisions > dismisses a report with a staff decision while keeping the guide visible
+AssertionError: expected { id: 'report-0', …(6) } to match object { status: 'dismissed', …(1) }
+(6 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "decision": {
+-     "action": "dismiss",
+-     "staffId": "staff-taylor",
+-   },
+-   "status": "dismissed",
++   "status": "open",
+  }
+
+ ❯ src/services/demo.test.ts:159:38
+    157|   const s = service(); const guide = published(s); s.reportGuide(guide…
+    158|   s.moderate(s.getSnapshot().reports[0].id, 'dismiss', 'Entrance verif…
+    159|   expect(s.getSnapshot().reports[0]).toMatchObject({ status: 'dismisse…
+       |                                      ^
+    160|   expect(s.getSnapshot().guides[0].status).toBe('published');
+    161|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/37]⎯
+
+ FAIL  src/services/demo.test.ts > reporting and staff decisions > removes all guide versions and blocks late confirmation or revisions from restoring it
+AssertionError: expected [] to include 'guide-0'
+ ❯ src/services/demo.test.ts:165:41
+    163|   const s = service(); const guide = published(s); s.login('user-alex'…
+    164|   s.reportGuide(guide.id, 'Private entrance', ''); s.login('staff-tayl…
+    165|   expect(s.getSnapshot().blockedGuides).toContain(guide.guideId); expe…
+       |                                         ^
+    166|   s.login('user-jamie'); expect(() => s.confirmGuide(revision.id)).toT…
+    167|   s.login('user-alex'); expect(() => s.saveDraft({ ...input(), guideId…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/37]⎯
+
+ FAIL  src/services/demo.test.ts > room reservations > creates a booking and an exact retry returns it without duplicate slots
+AssertionError: expected { id: '', facilityId: 'room-01', …(6) } to match object { userId: 'user-alex', …(3) }
+(4 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "end": "2026-09-30T01:00:00.000Z",
+-   "start": "2026-09-30T00:00:00.000Z",
++   "end": "2026-09-30T10:00:00.000Z",
++   "start": "2026-09-30T10:00:00.000Z",
+    "status": "confirmed",
+-   "userId": "user-alex",
++   "userId": "",
+  }
+
+ ❯ src/services/demo.test.ts:175:19
+    173|  it('creates a booking and an exact retry returns it without duplicate…
+    174|   const s = service(); const booking = s.book(bookingInput());
+    175|   expect(booking).toMatchObject({ userId: 'user-alex', status: 'confir…
+       |                   ^
+    176|   expect(s.book(bookingInput()).id).toBe(booking.id); expect(s.getSnap…
+    177|   expect(() => s.book({ ...bookingInput(), duration: 30 })).toThrow(/r…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/37]⎯
+
+ FAIL  src/services/demo.test.ts > room reservations > rejects overlapping requests entirely but allows adjacent bookings
+AssertionError: expected [Function] to throw an error
+
+- Expected: 
+null
+
++ Received: 
+undefined
+
+ ❯ src/services/demo.test.ts:181:112
+    179|  it('rejects overlapping requests entirely but allows adjacent booking…
+    180|   const s = service(); s.book(bookingInput()); s.login('user-jamie');
+    181|   expect(() => s.book({ ...bookingInput('other'), start: bookingStart(…
+       |                                                                                                                ^
+    182|   expect(s.getSnapshot().bookings).toHaveLength(1);
+    183|   expect(s.book({ ...bookingInput('adjacent'), start: bookingStart('20…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[21/37]⎯
+
+ FAIL  src/services/demo.test.ts > room reservations > rejects invalid duration 0
+ FAIL  src/services/demo.test.ts > room reservations > rejects invalid duration 15
+ FAIL  src/services/demo.test.ts > room reservations > rejects invalid duration 45
+ FAIL  src/services/demo.test.ts > room reservations > rejects invalid duration 150
+AssertionError: expected [Function] to throw an error
+
+- Expected: 
+null
+
++ Received: 
+undefined
+
+ ❯ src/services/demo.test.ts:185:135
+    183|   expect(s.book({ ...bookingInput('adjacent'), start: bookingStart('20…
+    184|  });
+    185|  it.each([0, 15, 45, 150])('rejects invalid duration %i', duration => …
+       |                                                                                                                                       ^
+    186|  it('rejects past, misaligned, after-hours and excessive-horizon reser…
+    187|   const s = service();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22/37]⎯
+
+ FAIL  src/services/demo.test.ts > room reservations > rejects past, misaligned, after-hours and excessive-horizon reservations
+AssertionError: expected [Function] to throw an error
+ ❯ src/services/demo.test.ts:188:209
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[23/37]⎯
+
+ FAIL  src/services/demo.test.ts > room reservations > enforces cancellation ownership and time while retries cannot erase a later reservation
+AssertionError: expected [Function] to throw an error
+
+- Expected: 
+null
+
++ Received: 
+undefined
+
+ ❯ src/services/demo.test.ts:193:46
+    191|  it('enforces cancellation ownership and time while retries cannot era…
+    192|   const s = service(); const original = s.book(bookingInput()); s.logi…
+    193|   expect(() => s.cancelBooking(original.id)).toThrow(/own|permission/i…
+       |                                              ^
+    194|   s.login('user-alex'); s.cancelBooking(original.id); const later = s.…
+    195|   expect(s.getSnapshot().bookings.find(b => b.id === later.id)?.status…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[24/37]⎯
+
+ FAIL  src/services/demo.test.ts > room reservations > keeps elapsed duration accurate across the Melbourne spring clock change
+AssertionError: expected '2026-10-05T10:00:00.000Z' to be '2026-10-04T23:00:00.000Z' // Object.is equality
+
+Expected: "2026-10-04T23:00:00.000Z"
+Received: "2026-10-05T10:00:00.000Z"
+
+ ❯ src/services/demo.test.ts:200:24
+    198|  it('keeps elapsed duration accurate across the Melbourne spring clock…
+    199|   const s = service(); const result = s.book({ ...bookingInput('dst'),…
+    200|   expect(result.start).toBe('2026-10-04T23:00:00.000Z'); expect(Date.p…
+       |                        ^
+    201|  });
+    202| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[25/37]⎯
+
+ FAIL  src/domain/rules.test.ts > discovery and external walking directions > combines category, search, accessibility, capacity, and equipment filters
+AssertionError: expected [ { id: 'test-toilet', …(12) }, …(1) ] to deeply equal [ { id: 'test-room', …(13) } ]
+
+- Expected
++ Received
+
+@@ -2,10 +2,37 @@
+    {
+      "access": "Public",
+      "address": "Cremorne",
+      "amenities": [
+        "Accessible",
++       "Baby changing",
++     ],
++     "description": "Sample",
++     "entranceLocation": {
++       "lat": -37.8302,
++       "lng": 144.9902,
++     },
++     "floor": "Ground",
++     "hours": {
++       "close": 18,
++       "open": 8,
++     },
++     "id": "test-toilet",
++     "image": "",
++     "location": {
++       "lat": -37.83,
++       "lng": 144.99,
++     },
++     "name": "Garden toilet",
++     "sample": true,
++     "type": "toilet",
++   },
++   {
++     "access": "Public",
++     "address": "Cremorne",
++     "amenities": [
++       "Accessible",
+        "Whiteboard",
+        "Screen",
+      ],
+      "capacity": 8,
+      "description": "Sample",
+
+ ❯ src/domain/rules.test.ts:11:148
+      9| describe('discovery and external walking directions', () => {
+     10|  it('combines category, search, accessibility, capacity, and equipment…
+     11|   expect(filterFacilities([toilet, room], { type: 'meeting_room', quer…
+       |                                                                                                                                                    ^
+     12|   expect(filterFacilities([toilet, room], { capacity: 10 }, now)).toEq…
+     13|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[26/37]⎯
+
+ FAIL  src/domain/rules.test.ts > discovery and external walking directions > checks open-now using Melbourne local time and exclusive closing time
+AssertionError: expected [ { id: 'test-toilet', …(12) } ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "access": "Public",
++     "address": "Cremorne",
++     "amenities": [
++       "Accessible",
++       "Baby changing",
++     ],
++     "description": "Sample",
++     "entranceLocation": {
++       "lat": -37.8302,
++       "lng": 144.9902,
++     },
++     "floor": "Ground",
++     "hours": {
++       "close": 18,
++       "open": 8,
++     },
++     "id": "test-toilet",
++     "image": "",
++     "location": {
++       "lat": -37.83,
++       "lng": 144.99,
++     },
++     "name": "Garden toilet",
++     "sample": true,
++     "type": "toilet",
++   },
++ ]
+
+ ❯ src/domain/rules.test.ts:15:91
+     13|  });
+     14|  it('checks open-now using Melbourne local time and exclusive closing …
+     15|   expect(filterFacilities([toilet], { openNow: true }, new Date('2026-…
+       |                                                                                           ^
+     16|   expect(filterFacilities([toilet], { openNow: true }, now)).toEqual([…
+     17|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[27/37]⎯
+
+ FAIL  src/domain/rules.test.ts > discovery and external walking directions > measures geographic proximity and handles identical points
+AssertionError: expected +0 to be close to 111195, received difference is 111195, but expected 5
+ ❯ src/domain/rules.test.ts:19:66
+     17|  });
+     18|  it('measures geographic proximity and handles identical points', () =…
+     19|   expect(distanceMeters({ lat: 0, lng: 0 }, { lat: 0, lng: 1 })).toBeC…
+       |                                                                  ^
+     20|   expect(distanceMeters(toilet.location, toilet.location)).toBe(0);
+     21|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[28/37]⎯
+
+ FAIL  src/domain/rules.test.ts > discovery and external walking directions > opens walking directions targeting the entrance and optional origin
+AssertionError: expected '/maps/search/' to be '/maps/dir/' // Object.is equality
+
+Expected: "/maps/dir/"
+Received: "/maps/search/"
+
+ ❯ src/domain/rules.test.ts:24:24
+     22|  it('opens walking directions targeting the entrance and optional orig…
+     23|   const url = new URL(walkingUrl(toilet, { lat: -37.82, lng: 144.98 })…
+     24|   expect(url.pathname).toBe('/maps/dir/');
+       |                        ^
+     25|   expect(url.searchParams.get('destination')).toBe('-37.8302,144.9902'…
+     26|   expect(url.searchParams.get('origin')).toBe('-37.82,144.98');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[29/37]⎯
+
+ FAIL  src/domain/rules.test.ts > Melbourne calendar and availability > uses the local calendar date at a UTC day boundary
+AssertionError: expected '2026-09-29' to be '2026-09-30' // Object.is equality
+
+Expected: "2026-09-30"
+Received: "2026-09-29"
+
+ ❯ src/domain/rules.test.ts:36:59
+     34| describe('Melbourne calendar and availability', () => {
+     35|  it('uses the local calendar date at a UTC day boundary', () => {
+     36|   expect(melbourneDate(new Date('2026-09-29T15:00:00Z'))).toBe('2026-0…
+       |                                                           ^
+     37|  });
+     38|  it('converts standard and daylight local times to UTC', () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[30/37]⎯
+
+ FAIL  src/domain/rules.test.ts > Melbourne calendar and availability > converts standard and daylight local times to UTC
+AssertionError: expected '2026-09-30T10:00:00.000Z' to be '2026-09-30T00:00:00.000Z' // Object.is equality
+
+Expected: "2026-09-30T00:00:00.000Z"
+Received: "2026-09-30T10:00:00.000Z"
+
+ ❯ src/domain/rules.test.ts:39:47
+     37|  });
+     38|  it('converts standard and daylight local times to UTC', () => {
+     39|   expect(bookingStart('2026-09-30', '10:00')).toBe('2026-09-30T00:00:0…
+       |                                               ^
+     40|   expect(bookingStart('2026-10-05', '10:00')).toBe('2026-10-04T23:00:0…
+     41|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[31/37]⎯
+
+ FAIL  src/domain/rules.test.ts > Melbourne calendar and availability > rejects nonexistent or ambiguous daylight-saving times and invalid dates
+AssertionError: expected [Function] to throw an error
+ ❯ src/domain/rules.test.ts:43:53
+     41|  });
+     42|  it('rejects nonexistent or ambiguous daylight-saving times and invali…
+     43|   expect(() => bookingStart('2026-10-04', '02:30')).toThrow();
+       |                                                     ^
+     44|   expect(() => bookingStart('2026-04-05', '02:30')).toThrow();
+     45|   expect(() => bookingStart('2026-02-30', '10:00')).toThrow();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[32/37]⎯
+
+ FAIL  src/domain/rules.test.ts > Melbourne calendar and availability > formats UTC dates as Melbourne local time
+AssertionError: expected '2026-09-30T00:00:00.000Z' to contain '10:00'
+
+Expected: "10:00"
+Received: "2026-09-30T00:00:00.000Z"
+
+ ❯ src/domain/rules.test.ts:48:51
+     46|  });
+     47|  it('formats UTC dates as Melbourne local time', () => {
+     48|   expect(formatLocal('2026-09-30T00:00:00.000Z')).toContain('10:00');
+       |                                                   ^
+     49|   expect(formatLocal('2026-10-04T23:00:00.000Z')).toContain('10:00');
+     50|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[33/37]⎯
+
+ FAIL  src/domain/rules.test.ts > Melbourne calendar and availability > returns half-hour openings, disallows past slots, and leaves cancelled slots free
+AssertionError: expected [] to have a length of 20 but got +0
+
+- Expected
++ Received
+
+- 20
++ 0
+
+ ❯ src/domain/rules.test.ts:54:17
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[34/37]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  37 failed | 1 passed (38)
+   Start at  17:18:19
+   Duration  1.53s (transform 39ms, setup 166ms, collect 39ms, tests 1.02s, environment 485ms, prepare 74ms)
+

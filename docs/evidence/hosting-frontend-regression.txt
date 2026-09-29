@@ -1,0 +1,37 @@
+
+> save-you-a-seat@0.1.0 check
+> npm run build && npm test
+
+
+> save-you-a-seat@0.1.0 build
+> tsc -b && vite build
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 1768 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.97 kB │ gzip:   0.52 kB
+dist/assets/index-DeXa9NZW.css   40.26 kB │ gzip:   9.76 kB
+dist/assets/index-Cm7XA4YS.js   501.90 kB │ gzip: 154.14 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 995ms
+
+> save-you-a-seat@0.1.0 test
+> vitest run
+
+
+ RUN  v4.1.11 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+(node:8784) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+ Test Files  7 passed (7)
+      Tests  65 passed (65)
+   Start at  23:45:26
+   Duration  894ms (transform 535ms, setup 700ms, import 980ms, tests 735ms, environment 2.06s)
+

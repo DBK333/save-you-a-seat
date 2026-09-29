@@ -1,0 +1,231 @@
+UTC: 2026-09-29T13:43:02.079259+00:00
+RED: preserve private image/artifact policy scope while enabling frontend OAC.
+$ .tools/infra/venv/bin/python -m unittest discover -s infra/tests -p test_bucket_policy_scopes.py -v
+test_artifact_policy_cannot_target_frontend_bucket_instead (test_bucket_policy_scopes.BucketPolicyScopes.test_artifact_policy_cannot_target_frontend_bucket_instead) ... FAIL
+test_images_policy_cannot_be_missing_or_have_the_wrong_type (test_bucket_policy_scopes.BucketPolicyScopes.test_images_policy_cannot_be_missing_or_have_the_wrong_type) ... ok
+test_images_policy_must_attach_to_images_bucket_and_cover_all_objects (test_bucket_policy_scopes.BucketPolicyScopes.test_images_policy_must_attach_to_images_bucket_and_cover_all_objects) ... 
+  test_images_policy_must_attach_to_images_bucket_and_cover_all_objects (test_bucket_policy_scopes.BucketPolicyScopes.test_images_policy_must_attach_to_images_bucket_and_cover_all_objects) (bucket='unrelated-existing-bucket') ... FAIL
+  test_images_policy_must_attach_to_images_bucket_and_cover_all_objects (test_bucket_policy_scopes.BucketPolicyScopes.test_images_policy_must_attach_to_images_bucket_and_cover_all_objects) (bucket={'Ref': 'FacilitiesTable'}) ... FAIL
+  test_images_policy_must_attach_to_images_bucket_and_cover_all_objects (test_bucket_policy_scopes.BucketPolicyScopes.test_images_policy_must_attach_to_images_bucket_and_cover_all_objects) (resources=[]) ... FAIL
+  test_images_policy_must_attach_to_images_bucket_and_cover_all_objects (test_bucket_policy_scopes.BucketPolicyScopes.test_images_policy_must_attach_to_images_bucket_and_cover_all_objects) (resources=[{'Fn::GetAtt': ['ImagesBucket', 'Arn']}]) ... FAIL
+  test_images_policy_must_attach_to_images_bucket_and_cover_all_objects (test_bucket_policy_scopes.BucketPolicyScopes.test_images_policy_must_attach_to_images_bucket_and_cover_all_objects) (resources=[{'Fn::Sub': '${ImagesBucket.Arn}/temporary/*'}]) ... FAIL
+test_images_policy_rejects_a_specific_unrelated_account_grant (test_bucket_policy_scopes.BucketPolicyScopes.test_images_policy_rejects_a_specific_unrelated_account_grant) ... FAIL
+
+======================================================================
+FAIL: test_artifact_policy_cannot_target_frontend_bucket_instead (test_bucket_policy_scopes.BucketPolicyScopes.test_artifact_policy_cannot_target_frontend_bucket_instead)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/tests/test_bucket_policy_scopes.py", line 48, in test_artifact_policy_cannot_target_frontend_bucket_instead
+    self.check(data, 19, 'bootstrap')
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/tests/test_policies.py", line 29, in check
+    self.assertEqual(result.returncode, expected, result.stdout + result.stderr)
+AssertionError: 0 != 19 : [
+  {
+    "name": "/private/var/folders/bh/m55y8zrn0bq8pq8b7h0v0w7w0000gn/T/tmpq4jqd0ho/fixture.json",
+    "metadata": {},
+    "status": "PASS",
+    "not_compliant": [],
+    "not_applicable": [],
+    "compliant": [
+      "bootstrap_resources_exist",
+      "cache_control_and_https",
+      "environment_and_region_output",
+      "https_bucket_policy",
+      "private_encrypted_retained_buckets",
+      "restricted_frontend_origin_access"
+    ]
+  }
+]
+
+======================================================================
+FAIL: test_images_policy_must_attach_to_images_bucket_and_cover_all_objects (test_bucket_policy_scopes.BucketPolicyScopes.test_images_policy_must_attach_to_images_bucket_and_cover_all_objects) (bucket='unrelated-existing-bucket')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/tests/test_bucket_policy_scopes.py", line 29, in test_images_policy_must_attach_to_images_bucket_and_cover_all_objects
+    self.check(data, 19)
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/tests/test_policies.py", line 29, in check
+    self.assertEqual(result.returncode, expected, result.stdout + result.stderr)
+AssertionError: 0 != 19 : [
+  {
+    "name": "/private/var/folders/bh/m55y8zrn0bq8pq8b7h0v0w7w0000gn/T/tmplpimy52g/fixture.json",
+    "metadata": {},
+    "status": "PASS",
+    "not_compliant": [],
+    "not_applicable": [],
+    "compliant": [
+      "account_safety",
+      "application_resources_exist",
+      "durable_tables",
+      "environment_and_region_output",
+      "https_bucket_policy",
+      "immutable_python_package",
+      "known_routes_present",
+      "private_encrypted_retained_buckets",
+      "restricted_cors",
+      "routes_protected",
+      "scoped_execution_permissions"
+    ]
+  }
+]
+
+======================================================================
+FAIL: test_images_policy_must_attach_to_images_bucket_and_cover_all_objects (test_bucket_policy_scopes.BucketPolicyScopes.test_images_policy_must_attach_to_images_bucket_and_cover_all_objects) (bucket={'Ref': 'FacilitiesTable'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/tests/test_bucket_policy_scopes.py", line 29, in test_images_policy_must_attach_to_images_bucket_and_cover_all_objects
+    self.check(data, 19)
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/tests/test_policies.py", line 29, in check
+    self.assertEqual(result.returncode, expected, result.stdout + result.stderr)
+AssertionError: 0 != 19 : [
+  {
+    "name": "/private/var/folders/bh/m55y8zrn0bq8pq8b7h0v0w7w0000gn/T/tmpch4j4_w4/fixture.json",
+    "metadata": {},
+    "status": "PASS",
+    "not_compliant": [],
+    "not_applicable": [],
+    "compliant": [
+      "account_safety",
+      "application_resources_exist",
+      "durable_tables",
+      "environment_and_region_output",
+      "https_bucket_policy",
+      "immutable_python_package",
+      "known_routes_present",
+      "private_encrypted_retained_buckets",
+      "restricted_cors",
+      "routes_protected",
+      "scoped_execution_permissions"
+    ]
+  }
+]
+
+======================================================================
+FAIL: test_images_policy_must_attach_to_images_bucket_and_cover_all_objects (test_bucket_policy_scopes.BucketPolicyScopes.test_images_policy_must_attach_to_images_bucket_and_cover_all_objects) (resources=[])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/tests/test_bucket_policy_scopes.py", line 35, in test_images_policy_must_attach_to_images_bucket_and_cover_all_objects
+    self.check(data, 19)
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/tests/test_policies.py", line 29, in check
+    self.assertEqual(result.returncode, expected, result.stdout + result.stderr)
+AssertionError: 0 != 19 : [
+  {
+    "name": "/private/var/folders/bh/m55y8zrn0bq8pq8b7h0v0w7w0000gn/T/tmpsf0h6mws/fixture.json",
+    "metadata": {},
+    "status": "PASS",
+    "not_compliant": [],
+    "not_applicable": [],
+    "compliant": [
+      "account_safety",
+      "application_resources_exist",
+      "durable_tables",
+      "environment_and_region_output",
+      "https_bucket_policy",
+      "immutable_python_package",
+      "known_routes_present",
+      "private_encrypted_retained_buckets",
+      "restricted_cors",
+      "routes_protected",
+      "scoped_execution_permissions"
+    ]
+  }
+]
+
+======================================================================
+FAIL: test_images_policy_must_attach_to_images_bucket_and_cover_all_objects (test_bucket_policy_scopes.BucketPolicyScopes.test_images_policy_must_attach_to_images_bucket_and_cover_all_objects) (resources=[{'Fn::GetAtt': ['ImagesBucket', 'Arn']}])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/tests/test_bucket_policy_scopes.py", line 35, in test_images_policy_must_attach_to_images_bucket_and_cover_all_objects
+    self.check(data, 19)
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/tests/test_policies.py", line 29, in check
+    self.assertEqual(result.returncode, expected, result.stdout + result.stderr)
+AssertionError: 0 != 19 : [
+  {
+    "name": "/private/var/folders/bh/m55y8zrn0bq8pq8b7h0v0w7w0000gn/T/tmph104fdjf/fixture.json",
+    "metadata": {},
+    "status": "PASS",
+    "not_compliant": [],
+    "not_applicable": [],
+    "compliant": [
+      "account_safety",
+      "application_resources_exist",
+      "durable_tables",
+      "environment_and_region_output",
+      "https_bucket_policy",
+      "immutable_python_package",
+      "known_routes_present",
+      "private_encrypted_retained_buckets",
+      "restricted_cors",
+      "routes_protected",
+      "scoped_execution_permissions"
+    ]
+  }
+]
+
+======================================================================
+FAIL: test_images_policy_must_attach_to_images_bucket_and_cover_all_objects (test_bucket_policy_scopes.BucketPolicyScopes.test_images_policy_must_attach_to_images_bucket_and_cover_all_objects) (resources=[{'Fn::Sub': '${ImagesBucket.Arn}/temporary/*'}])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/tests/test_bucket_policy_scopes.py", line 35, in test_images_policy_must_attach_to_images_bucket_and_cover_all_objects
+    self.check(data, 19)
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/tests/test_policies.py", line 29, in check
+    self.assertEqual(result.returncode, expected, result.stdout + result.stderr)
+AssertionError: 0 != 19 : [
+  {
+    "name": "/private/var/folders/bh/m55y8zrn0bq8pq8b7h0v0w7w0000gn/T/tmp0yxza1_y/fixture.json",
+    "metadata": {},
+    "status": "PASS",
+    "not_compliant": [],
+    "not_applicable": [],
+    "compliant": [
+      "account_safety",
+      "application_resources_exist",
+      "durable_tables",
+      "environment_and_region_output",
+      "https_bucket_policy",
+      "immutable_python_package",
+      "known_routes_present",
+      "private_encrypted_retained_buckets",
+      "restricted_cors",
+      "routes_protected",
+      "scoped_execution_permissions"
+    ]
+  }
+]
+
+======================================================================
+FAIL: test_images_policy_rejects_a_specific_unrelated_account_grant (test_bucket_policy_scopes.BucketPolicyScopes.test_images_policy_rejects_a_specific_unrelated_account_grant)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/tests/test_bucket_policy_scopes.py", line 21, in test_images_policy_rejects_a_specific_unrelated_account_grant
+    self.check(data, 19)
+  File "/Users/dorn/Desktop/local programming/Projects/FEITHack/infra/tests/test_policies.py", line 29, in check
+    self.assertEqual(result.returncode, expected, result.stdout + result.stderr)
+AssertionError: 0 != 19 : [
+  {
+    "name": "/private/var/folders/bh/m55y8zrn0bq8pq8b7h0v0w7w0000gn/T/tmpmr9ht9ow/fixture.json",
+    "metadata": {},
+    "status": "PASS",
+    "not_compliant": [],
+    "not_applicable": [],
+    "compliant": [
+      "account_safety",
+      "application_resources_exist",
+      "durable_tables",
+      "environment_and_region_output",
+      "https_bucket_policy",
+      "immutable_python_package",
+      "known_routes_present",
+      "private_encrypted_retained_buckets",
+      "restricted_cors",
+      "routes_protected",
+      "scoped_execution_permissions"
+    ]
+  }
+]
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.206s
+
+FAILED (failures=7)
+
+Exit: 1

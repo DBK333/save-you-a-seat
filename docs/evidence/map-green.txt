@@ -1,0 +1,14 @@
+
+> save-you-a-seat@0.1.0 test
+> vitest run tests/map.test.tsx
+
+
+ RUN  v3.2.7 /Users/dorn/Desktop/local programming/Projects/FEITHack
+
+ ✓ tests/map.test.tsx (5 tests) 43ms
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  17:21:08
+   Duration  571ms (transform 36ms, setup 73ms, collect 73ms, tests 43ms, environment 201ms, prepare 36ms)
+

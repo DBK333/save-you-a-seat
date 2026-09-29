@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+.aws/
+*.tsbuildinfo
+.venv/
+__pycache__/
+test-results/
+playwright-report/
+output/playwright/
+.tools/
+infra/.artifacts/

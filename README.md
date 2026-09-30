@@ -2,6 +2,10 @@
 
 A desktop demonstration for finding toilets, reserving sample meeting rooms, and sharing photo entrance guides around **Cremorne, Melbourne**, with official **University of Melbourne** booking links. The current directory and supported use area are in Australia.
 
+**Live demo:** [Save You A Seat](https://bit.ly/saveyouaseat) · [Direct CloudFront link](https://d2eyu8jz564gfw.cloudfront.net/)
+
+Demo data is stored in your browser; it is not shared through a backend.
+
 ## Run locally
 
 Requires Node.js 22.12 or newer and npm.

@@ -40,6 +40,8 @@ All map listings and Cremorne room cards are fictional sample facilities at appr
 
 Australia-only scope means a curated directory and supported location area, not IP blocking. Local facilities must carry `AU` / `cremorne` metadata and valid Cremorne coordinates. A chosen starting location must be within the supported Melbourne window covering Cremorne and Parkville; unsupported locations lead to manual location selection. The Google viewport uses an Australian bounding rectangle, which is not an exact country border.
 
+We added the University of Melbourne example because visiting Cremorne to verify facilities in person is difficult for the team. Using the university lets us demonstrate the concept in a familiar, accessible setting while Cremorne remains the intended precinct.
+
 University links are official services, not invented local room listings. Start with Parkville in the provider's location selector; university-wide sites also cover other campuses. DiBS requires a university account, and teaching-space access has staff/club eligibility rules. Library busyness counts people, not free seats or reservable rooms. See [provider sources and availability limits](docs/domain-notes.md#official-university-booking-links).
 
 ## Test and build
